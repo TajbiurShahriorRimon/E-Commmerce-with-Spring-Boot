@@ -1,26 +1,28 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Header from './components/Header';
+import UserRegistration from './components/Forms/UserRegistration';
+import {BrowserRouter as Router,Outlet,Route, Routes} from "react-router-dom";
+import RegOption from './components/RegOption';
+import MainRoutes from './Routes';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* <Header name="asif" bck="red" pad={30}/>
+      <Header name="rimon" bck="yellow" pad={50}/>
+      
+      <Header name="rifat" bck="red" pad={10}/>
+      <h1>This is my react project</h1> */}
+      
+      {/*<UserRegistration></UserRegistration>*/}
+      <Router >
+      <MainRoutes></MainRoutes>
+      <Outlet/>
+      </Router>
     </div>
-  );
+  )
+  
 }
 
 export default App;
