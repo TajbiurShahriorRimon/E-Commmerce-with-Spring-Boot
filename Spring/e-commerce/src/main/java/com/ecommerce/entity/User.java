@@ -5,17 +5,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sysUser")
+@Table(name="customer")
 public class User {
 	
 	@Id
-	private String name;
 	private String mail;
+	private String name;
 	private String phone;
 	private String address;
 	private String type;
 	private String gender;
 	private String status;
+	
 	
 	
 	
