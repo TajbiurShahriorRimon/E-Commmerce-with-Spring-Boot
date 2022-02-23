@@ -3,15 +3,29 @@ package com.ecommerce.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name="customer")
 public class User {
 	
 	@Id
+	@NotEmpty(message="Mail cannot be empty")
+	@Email(message="Email must be valid")
 	private String mail;
+	
+	@NotEmpty
+	@Size(min=4,message="Name must have at least 4 characters")
 	private String name;
+	
+	@Size(min=11,message="Invalid phone number")
 	private String phone;
+	
+	@NotEmpty(message="Address cannot be empty")
+	
 	private String address;
 	private String type;
 	private String gender;

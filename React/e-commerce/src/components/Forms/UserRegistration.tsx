@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 //import '../../App.css';
-import {Button,Form,FormGroup,Label,Container,Input,Row,Col,Card,CardBody,ButtonGroup} from "reactstrap";
+import {Button,Form,FormGroup,Label,Container,Input,Row,Col,FormFeedback} from "reactstrap";
 import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
+/* TODO
+
+1) Response message misbehaves somtimes
+ */
 
 
 
 
+function UserRegistration(props:any){
 
-function UserRegistration(){
+    
     useEffect(()=>{
 
     },[]);
@@ -21,10 +26,14 @@ function UserRegistration(){
         phone:"",
         address:"",
         gender:""
+        
     });
 
     var formData= new FormData();
-    
+    var mailError: string="";
+    //number of inputs in the form excluding gender as it has a default value
+    var numberOfInputs: number=4;
+   
     const handleForm=(e:any)=>{
         console.log(user);
         
@@ -41,11 +50,24 @@ function UserRegistration(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                    console.log(response);
+                    console.log(response.data.mail);
                     alert("Success");
             },(error)=>{
-                console.log(error);
-                alert("Error");
+                console.log(error.response.data.mail);
+                
+                let res:string[]=Object.values(error.response.data);
+                let errorMsg:string="";
+
+                for(let i=0;i<=3;i++){
+                    errorMsg+=res[i];
+                    errorMsg+="\n"
+                }
+                
+                  alert(errorMsg);
+                
+                
+                
+                
             }
         );
     };
@@ -58,7 +80,7 @@ function UserRegistration(){
                             <Label className="form-label my-2" for="mail">
                                 Email
                             </Label>
-                            <Input
+                            <Input 
                                 id="userEmail"
                                 name="mail"
                                 placeholder="Enter Your Mail Id"
@@ -68,6 +90,15 @@ function UserRegistration(){
                                     setUser({...user,mail:e.target.value})
                                 }}
                             />
+                            
+                            
+                              
+                                
+                            
+                            
+                                                   
+                            
+
 
                             {/* <Label className='form-label my-2' for="userPassword">
                                 Password

@@ -2,8 +2,12 @@ package com.ecommerce.controller;
 
 import java.sql.DriverManager;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +34,8 @@ public class UserController {
 		}
 		
 		@PostMapping(value="/uReg",consumes=MediaType.APPLICATION_JSON_VALUE)
-		public User addUser(@RequestBody User user) {
-			return this.userservice.addUser(user);
+		public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
+			user= this.userservice.addUser(user);
+			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 	}
