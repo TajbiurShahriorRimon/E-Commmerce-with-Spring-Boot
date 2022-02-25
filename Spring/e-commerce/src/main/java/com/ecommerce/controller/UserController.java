@@ -1,6 +1,6 @@
 package com.ecommerce.controller;
 
-import java.sql.DriverManager;
+//import java.sql.DriverManager;
 
 import javax.validation.Valid;
 
