@@ -14,7 +14,7 @@ import axios from 'axios';
 
 
 
-function UserRegistration(){
+function UserRegistration(props:any){
 
     
     useEffect(()=>{
