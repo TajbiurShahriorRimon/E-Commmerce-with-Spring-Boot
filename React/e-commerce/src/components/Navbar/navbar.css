@@ -42,10 +42,10 @@ form
 }
 
 .search-box{
-    height: 40px;
-    border-radius: 30px;
-    background: #e67e22;
-    padding: 10px 10px;
+    width: 50%;
+    position: relative;
+    display: flex;
+    padding-left:  20%;
 }
 
 .nav-body{
@@ -81,25 +81,27 @@ img{
 
 .search-btn{
     
-    float: right;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:  white;
+    width: 40px;
+  height: 36px;
+  border: 1px solid #e67e22;
+  background: #e67e22;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
     
 }
 
 .search-bar{
-    color:white;
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    font-size: 16px;
-    line-height: 14px;
+    width: 50%;
+  border: 3px solid #e67e22;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
 }
 
 ::placeholder { /* Microsoft Edge */
