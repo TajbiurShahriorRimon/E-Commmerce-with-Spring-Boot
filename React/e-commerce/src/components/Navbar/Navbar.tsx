@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Col, Input, Nav, NavbarToggler, Row} from "reactstrap";
 import  "./navbar.css";
-import icon from "./images/search.svg";
+import icon from "./images/search2.svg";
 
 
 
@@ -15,7 +15,8 @@ function Navbar(){
     return(
         <div>
             
-           <div className='nav-body md'>
+            <div className='nav-body' 
+            >
                 <h5> Dokan</h5>
                 <div className='search-box'>
                     <input className='search-bar' type='text' placeholder='Type to search'></input>
