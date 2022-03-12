@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="customer")
+@Table(name="user_table")
 public class User {
 	
 	@Id
