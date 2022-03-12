@@ -10,7 +10,7 @@ function MainRoutes(){
         <div>
             <Routes>
                 
-                    <Route path="/" element={<Home/>}/>
+                    <Route path="/" element={<RegOption/>}/>
                     <Route path="/uReg" element={<UserRegistration/>}/>
             </Routes>
         </div>
