@@ -5,11 +5,13 @@ import { Button,ListGroup,ListGroupItem } from 'reactstrap';
 function RegOption(){
     return(
         <div className='text-center'>
-            <ListGroup>
-                <ListGroupItem className='position-absolute top-50 start-50 translate-middle w-50 bg-primary text-light ' tag="a" href="/uReg" to="/uReg" action>
-                    User Registration
-                </ListGroupItem>
-            </ListGroup>
+            
+
+            <div className="list-group position-absolute top-50 start-50 w-50">
+                
+                <a href="/uReg" className="list-group-item list-group-item-action translate-middle bg-primary text-light">User Registration</a>
+                <a href="/uReg" className="list-group-item list-group-item-action translate-middle bg-primary text-light">Vendor Registration</a>
+            </div>
         </div>
     )
 
