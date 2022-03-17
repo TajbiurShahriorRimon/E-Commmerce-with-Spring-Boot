@@ -149,6 +149,58 @@ export default function VendorRegistration(){
                                 <option selected value="male">Male</option>
                                 <option value="femal">Female</option>
                             </select>
+                            
+
+                            <Label className='form-label my-2' for="userPhone">
+                               Shop Phone
+                            </Label>
+                            <Input
+                                id="userPhone"
+                                name="userPhone"
+                                placeholder="Phone Number"
+                                type="text"
+                                className='form-control'
+                                onChange={(e)=>{
+                                    setUser({...user,phone:e.target.value})
+                                }}
+                            />
+
+                            <Label className='form-label my-2' for="Name">
+                                Shop Name
+                            </Label>
+                            <Input
+                                id="userName"
+                                name="Name"
+                                type="text"
+                                className='form-control'
+                                onChange={(e)=>{
+                                    setUser({...user,name:e.target.value})
+                                }}
+                            />
+
+                            <Label className='form-label my-2' for="userPhone">
+                               Shop Registration Number
+                            </Label>
+                            <Input
+                                id="userPhone"
+                                name="userPhone"
+                                placeholder="Phone Number"
+                                type="text"
+                                className='form-control'
+                                onChange={(e)=>{
+                                    setUser({...user,phone:e.target.value})
+                                }}
+                            />
+
+                            <Label className='form-label my-2' for="userPhone">
+                              Shop  Address
+                            </Label>
+                            <textarea className="form-control styleTextarea"  id="userAddress" 
+                             onChange={(e)=>{
+                                setUser({...user,address:e.target.value})
+                            }}
+                            ></textarea>
+
                             <Button className='my-2 w-100' type='submit' color='primary'>Submit</Button>
                     </Form>
                    
