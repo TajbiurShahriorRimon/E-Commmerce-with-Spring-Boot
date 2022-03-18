@@ -11,6 +11,7 @@ export default function VendorRegistration(){
     useEffect(()=>{
 
     },[]);
+
     const [user,setUser]=useState({
         name:"",
         mail:"",
@@ -20,16 +21,25 @@ export default function VendorRegistration(){
         
     });
 
+    const [vendor,setVendor]=useState({
+        
+        shopPhone:"",
+        shopAddress:"",
+        regNumber:"",
+        shopName:""
+        
+    });
+
     var formData= new FormData();
     var mailError: string="";
     //number of inputs in the form excluding gender as it has a default value
     var numberOfInputs: number=4;
    
     const handleForm=(e:any)=>{
-        console.log(user);
+        console.log(vendor);
         
         
-        postDataToServer(JSON.stringify(user));
+        postDataToServer(JSON.stringify(vendor));
         e.preventDefault();
     }
 
@@ -41,15 +51,13 @@ export default function VendorRegistration(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                    console.log(response.data.mail);
                     alert("Success");
             },(error)=>{
-                console.log(error.response.data.mail);
                 
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
 
-                for(let i=0;i<=3;i++){
+                for(let i=0;i<res.length;i++){
                     errorMsg+=res[i];
                     errorMsg+="\n"
                 }
@@ -151,56 +159,56 @@ export default function VendorRegistration(){
                             </select>
                             
 
-                            <Label className='form-label my-2' for="userPhone">
+                            <Label className='form-label my-2' for="shopPhone">
                                Shop Phone
                             </Label>
                             <Input
-                                id="userPhone"
-                                name="userPhone"
+                                id="shopPhone"
+                                name="shopPhone"
                                 placeholder="Phone Number"
                                 type="text"
                                 className='form-control'
                                 onChange={(e)=>{
-                                    setUser({...user,phone:e.target.value})
+                                    setVendor({...vendor,shopPhone:e.target.value})
                                 }}
                             />
 
-                            <Label className='form-label my-2' for="Name">
+                            <Label className='form-label my-2' for="shopName">
                                 Shop Name
                             </Label>
                             <Input
-                                id="userName"
-                                name="Name"
+                                id="shopName"
+                                name="shopName"
                                 type="text"
                                 className='form-control'
                                 onChange={(e)=>{
-                                    setUser({...user,name:e.target.value})
+                                    setVendor({...vendor,shopName:e.target.value})
                                 }}
                             />
 
-                            <Label className='form-label my-2' for="userPhone">
+                            <Label className='form-label my-2' for="regNumber">
                                Shop Registration Number
                             </Label>
                             <Input
-                                id="userPhone"
-                                name="userPhone"
+                                id="regNumber"
+                                name="regNumber"
                                 placeholder="Phone Number"
                                 type="text"
                                 className='form-control'
                                 onChange={(e)=>{
-                                    setUser({...user,phone:e.target.value})
+                                    setVendor({...vendor,regNumber:e.target.value})
                                 }}
                             />
 
-                            <Label className='form-label my-2' for="userPhone">
+                            <Label className='form-label my-2' for="shopAddress">
                               Shop  Address
                             </Label>
-                            <textarea className="form-control styleTextarea"  id="userAddress" 
+                            <textarea className="form-control styleTextarea"  id="shopAddress" 
                              onChange={(e)=>{
-                                setUser({...user,address:e.target.value})
+                                setVendor({...vendor,shopAddress:e.target.value})
                             }}
                             ></textarea>
-
+                            <input type="hidden" id="type" name="type" value="vendor"></input>
                             <Button className='my-2 w-100' type='submit' color='primary'>Submit</Button>
                     </Form>
                    
