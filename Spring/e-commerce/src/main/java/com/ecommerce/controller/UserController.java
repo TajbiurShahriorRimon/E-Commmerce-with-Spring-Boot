@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entity.User;
+import com.ecommerce.entity.Vendor;
 import com.ecommerce.service.UserService;
+import com.ecommerce.service.VendorService;
 
 @RestController
 public class UserController {
@@ -23,6 +25,7 @@ public class UserController {
 	
 		@Autowired
 		private UserService userservice;
+		
 		
 		@GetMapping("/userHome/{userId}")
 		public User userHome(@PathVariable String userId) {
@@ -36,6 +39,9 @@ public class UserController {
 		@PostMapping(value="/uReg",consumes=MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
 			user= this.userservice.addUser(user);
+			/*if(user.getType().equals("vendor")) {
+				user=this.vendorservice.addVendor((Vendor)user);
+			}*/
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 	}
