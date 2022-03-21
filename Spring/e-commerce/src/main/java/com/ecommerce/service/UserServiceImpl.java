@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
 		user.setStatus();
-		user.setType();
+		//user.setType();
 		userDao.save(user);
 		return user;
 	} 

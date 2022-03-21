@@ -2,7 +2,8 @@ import React from 'react';
 import {Routes,Route} from "react-router-dom";
 import App from './App';
 import UserRegistration from './components/Forms/UserRegistration';
-import VendorRegistration from './components/Forms/VendorRegistration';
+import VendorRegistrationShop from './components/Forms/VendorRegistrationShop';
+import VendorRegistrationUser from './components/Forms/VendorRegistrationUser';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Pages/Home';
 import RegOption from './components/RegOption';
@@ -13,7 +14,9 @@ function MainRoutes(){
                 
                     <Route path="/" element={<RegOption/>}/>
                     <Route path="/uReg" element={<UserRegistration/>}/>
-                    <Route path="/uVendorReg" element={<VendorRegistration/>}/>
+                    <Route path="/uVendorReg" element={<VendorRegistrationUser/>}/>
+                    <Route path="/sVendorReg" element={<VendorRegistrationShop/>}/>
+                    <Route path="/sVendorReg/:mail" element={<VendorRegistrationShop/>}/>
             </Routes>
         </div>
     )
