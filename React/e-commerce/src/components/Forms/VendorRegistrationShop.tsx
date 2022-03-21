@@ -4,6 +4,9 @@ import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
+
 
 export default function VendorRegistrationShop(){
 
@@ -14,7 +17,7 @@ export default function VendorRegistrationShop(){
 
   
     const [vendor,setVendor]=useState({
-        
+        mail:"",
         shopPhone:"",
         shopAddress:"",
         regNumber:"",
@@ -22,6 +25,11 @@ export default function VendorRegistrationShop(){
         
     });
 
+    type VendorParams={
+        mail:string;
+    };
+    
+    const { mail } = useParams<VendorParams>();
     
     //number of inputs in the form excluding gender as it has a default value
     var numberOfInputs: number=4;
@@ -29,13 +37,14 @@ export default function VendorRegistrationShop(){
     const handleForm=(e:any)=>{
         console.log(vendor);
         
-        
+        vendor.mail=mail!;
         postDataToServer(JSON.stringify(vendor));
         e.preventDefault();
     }
 
     //function to post data on server
     const postDataToServer=(data:any)=>{
+        alert(mail);
         axios.post(`${base_url}uVendorReg`,data,{
             headers: {
                 'Content-Type': 'application/json',

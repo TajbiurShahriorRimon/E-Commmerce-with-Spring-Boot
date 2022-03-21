@@ -4,7 +4,7 @@ import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { NavigateOptions, useNavigate } from 'react-router-dom';
 
 export default function VendorRegistrationUser(){
 
@@ -28,14 +28,14 @@ export default function VendorRegistrationUser(){
     const navigate = useNavigate();
 
     var formData= new FormData();
-    var mailError: string="";
+    var mailParam:string;
     //number of inputs in the form excluding gender as it has a default value
     var numberOfInputs: number=4;
    
     const handleForm=(e:any)=>{
         console.log(user);
         
-        
+        mailParam= user.mail;
         postDataToServer(JSON.stringify(user));
         e.preventDefault();
     }
@@ -48,7 +48,7 @@ export default function VendorRegistrationUser(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                navigate('/sVendorReg');
+                navigate(`/sVendorReg/${mailParam}`);
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);

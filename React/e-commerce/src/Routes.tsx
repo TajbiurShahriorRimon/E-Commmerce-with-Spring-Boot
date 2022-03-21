@@ -16,6 +16,7 @@ function MainRoutes(){
                     <Route path="/uReg" element={<UserRegistration/>}/>
                     <Route path="/uVendorReg" element={<VendorRegistrationUser/>}/>
                     <Route path="/sVendorReg" element={<VendorRegistrationShop/>}/>
+                    <Route path="/sVendorReg/:mail" element={<VendorRegistrationShop/>}/>
             </Routes>
         </div>
     )
