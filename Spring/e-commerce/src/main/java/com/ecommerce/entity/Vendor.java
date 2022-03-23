@@ -13,9 +13,9 @@ public class Vendor {
 	
 
 	@Id
-	private String email;
+	private String mail;
 	@NotEmpty
-	@Size(min=4,message="This must have at least 4 characters")
+	@Size(min=4,message="Registration number must have at least 4 characters")
 	private String registrationNumber;
 	@Size(min=11,message="Invalid phone number")
 	private String shopPhone;
@@ -27,10 +27,10 @@ public class Vendor {
 	
 	
 	public String getMail() {
-		return email;
+		return mail;
 	}
 	public void setMail(String mail) {
-		this.email = mail;
+		this.mail = mail;
 	}
 	public String getRegistrationNumber() {
 		return registrationNumber;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Routes,Route} from "react-router-dom";
 import App from './App';
+import UserPassword from './components/Forms/UserPassword';
 import UserRegistration from './components/Forms/UserRegistration';
 import VendorRegistrationShop from './components/Forms/VendorRegistrationShop';
 import VendorRegistrationUser from './components/Forms/VendorRegistrationUser';
@@ -12,7 +13,7 @@ function MainRoutes(){
         <div>
             <Routes>
                 
-                    <Route path="/" element={<RegOption/>}/>
+                    <Route path="/" element={<UserPassword/>}/>
                     <Route path="/uReg" element={<UserRegistration/>}/>
                     <Route path="/uVendorReg" element={<VendorRegistrationUser/>}/>
                     <Route path="/sVendorReg" element={<VendorRegistrationShop/>}/>
