@@ -20,7 +20,7 @@ export default function VendorRegistrationShop(){
         mail:"",
         shopPhone:"",
         shopAddress:"",
-        regNumber:"",
+        registrationNumber:"",
         shopName:""
         
     });
@@ -35,16 +35,18 @@ export default function VendorRegistrationShop(){
     var numberOfInputs: number=4;
    
     const handleForm=(e:any)=>{
-        console.log(vendor);
+       ;
         
         vendor.mail=mail!;
+
+        
         postDataToServer(JSON.stringify(vendor));
         e.preventDefault();
     }
 
     //function to post data on server
     const postDataToServer=(data:any)=>{
-        alert(mail);
+        
         axios.post(`${base_url}uVendorReg`,data,{
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +118,7 @@ export default function VendorRegistrationShop(){
                                 type="text"
                                 className='form-control'
                                 onChange={(e)=>{
-                                    setVendor({...vendor,regNumber:e.target.value})
+                                    setVendor({...vendor,registrationNumber:e.target.value})
                                 }}
                             />
 
@@ -128,7 +130,7 @@ export default function VendorRegistrationShop(){
                                 setVendor({...vendor,shopAddress:e.target.value})
                             }}
                             ></textarea>
-                            <input type="hidden" id="type" name="type" value="vendor"></input>
+                            
                             <Button className='my-2 w-100' type='submit' color='primary'>Submit</Button>
                     </Form>
                    
