@@ -24,7 +24,7 @@ export default function UserPassword(){
                                 Password
                             </Label>
                             <Input type="password" id="pass" name="password"
-                               placeholder='At least 8 characters' minlength="8" required
+                               placeholder='At least 5 characters' minlength="8" required
                             />
                             <Label className='form-label my-2' for="confirmPass">
                                 Confirm Password

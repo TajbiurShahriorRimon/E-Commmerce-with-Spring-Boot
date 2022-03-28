@@ -15,7 +15,7 @@ public class VendorServiceImpl implements VendorService{
 	public Vendor addVendor(Vendor vendor) {
 		// TODO Auto-generated method stub
 		vendorDao.save(vendor);
-		return null;
+		return vendor;
 	}
 
 }
