@@ -4,7 +4,7 @@ import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 
@@ -24,6 +24,8 @@ export default function VendorRegistrationShop(){
         shopName:""
         
     });
+
+    const navigate = useNavigate();
 
     type VendorParams={
         mail:string;
@@ -53,7 +55,7 @@ export default function VendorRegistrationShop(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                    alert("Success");
+                navigate(`/sLoginReg/${vendor.mail}`);
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);

@@ -28,6 +28,7 @@ export default function VendorRegistrationUser(){
     const navigate = useNavigate();
 
     var formData= new FormData();
+    //mail address received through parameter from user reg page
     var mailParam:string;
     //number of inputs in the form excluding gender as it has a default value
     var numberOfInputs: number=4;
