@@ -13,11 +13,12 @@ function MainRoutes(){
         <div>
             <Routes>
                 
-                    <Route path="/" element={<UserPassword/>}/>
+                    <Route path="/" element={<VendorRegistrationUser/>}/>
                     <Route path="/uReg" element={<UserRegistration/>}/>
                     <Route path="/uVendorReg" element={<VendorRegistrationUser/>}/>
                     <Route path="/sVendorReg" element={<VendorRegistrationShop/>}/>
                     <Route path="/sVendorReg/:mail" element={<VendorRegistrationShop/>}/>
+                    <Route path="/sLoginReg/:mail" element={<UserPassword/>}/>
             </Routes>
         </div>
     )
