@@ -24,3 +24,4 @@ yarn-error.log*
 _gsdata_
 
 .idea
+React/e-commerce/package-lock.json
