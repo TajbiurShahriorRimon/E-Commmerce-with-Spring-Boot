@@ -12,6 +12,7 @@ import Vendor from './components/Pages/Vendor';
 import RegOption from './components/RegOption';
 import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
+import Customer from "./components/Pages/Customer";
 function MainRoutes(){
     return(
         <div>
@@ -25,6 +26,7 @@ function MainRoutes(){
                     <Route path="/sLoginReg/:mail" element={<UserPassword/>}/>
                     <Route path="/vProfile" element={<VendorProfile/>}/>
                     <Route path="/vShopInfo" element={<VendorShopInfo/>}/>
+                    <Route path="/customer/index" element={<Customer/>}/>
             </Routes>
         </div>
     )
