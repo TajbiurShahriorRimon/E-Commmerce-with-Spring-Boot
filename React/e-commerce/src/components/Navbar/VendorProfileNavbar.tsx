@@ -16,7 +16,7 @@ function VendorProfileNavbar(){
             
             <div className='nav-body' 
             >
-                <h5> Vendor</h5>
+                <a href="/vHome" className='link'>Vendor</a>
                 <nav>
                     <ul className='nav-links'>
                         <li><a href='/vProfile' >Profile</a></li>

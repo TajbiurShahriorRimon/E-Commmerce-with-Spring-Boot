@@ -25,6 +25,7 @@ function MainRoutes(){
                     <Route path="/sLoginReg/:mail" element={<UserPassword/>}/>
                     <Route path="/vProfile" element={<VendorProfile/>}/>
                     <Route path="/vShopInfo" element={<VendorShopInfo/>}/>
+                    <Route path="/vHome" element={<Vendor/>}/>
             </Routes>
         </div>
     )
