@@ -7,7 +7,7 @@ class CustomerHome extends Component<any, any>{
         var imagePath = "https://www.w3schools.com/html/img_girl.jpg";
         return (
             <div>
-                <Container>
+                <div className="container">
                     <Carousel>
                         <Carousel.Item>
                             <img
@@ -51,66 +51,9 @@ class CustomerHome extends Component<any, any>{
                             </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>
-                    
-                    <CardGroup>
-                        <Card style={{ width: '18rem' }} className="box">
-                            <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                            <Card.Body>
-                                <Card.Title>Card title</Card.Title>
-                                <Card.Text>
-                                    This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                            </Card.Footer>
-                        </Card>
-                        <Card>
-                            <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                            <Card.Body>
-                                <Card.Title>Card title</Card.Title>
-                                <Card.Text>
-                                    This card has supporting text below as a natural lead-in to additional
-                                    content.{' '}
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                            </Card.Footer>
-                        </Card>
-                        <Card>
-                            <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                            <Card.Body>
-                                <Card.Title>Card title</Card.Title>
-                                <Card.Text>
-                                    This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This card has even longer content than the first to
-                                    show that equal height action.
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                            </Card.Footer>
-                        </Card>
-                        <Card>
-                            <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                            <Card.Body>
-                                <Card.Title>Card title</Card.Title>
-                                <Card.Text>
-                                    This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This card has even longer content than the first to
-                                    show that equal height action.
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                            </Card.Footer>
-                        </Card>
-                    </CardGroup>
-                </Container>
+                </div>
 
-                <div className="container">
+                {/*<div className="container">
                     <div className="row justify-content-lg-start">
                         <div className="col-lg-3 mb-5">
                             <Card>
@@ -199,6 +142,65 @@ class CustomerHome extends Component<any, any>{
                                     <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
                                     <div>Rating: 4</div>
                                 </Card.Footer>
+                            </Card>
+                        </div>
+                    </div>
+                </div>*/}
+                <br/>
+                <div className="container">
+                    <div className="row justify-content-lg-start">
+                        <div className="col-lg-3 mb-5">
+                            <Card style={{ width: '18rem' }} className="box">
+                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
+                                <Card.Body>
+                                    <Card.Title>Jeans</Card.Title>
+                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                    <Button variant="primary" href=''>Edit</Button>
+                                </Card.Body>
+                            </Card>
+                        </div>
+
+                        <div className="col-lg-3 mb-5">
+                            <Card style={{ width: '18rem' }} className="box">
+                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
+                                <Card.Body>
+                                    <Card.Title>Jeans</Card.Title>
+                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                    <Button variant="primary" href=''>Edit</Button>
+                                </Card.Body>
+                            </Card>
+                        </div>
+
+                        <div className="col-lg-3 mb-5">
+                            <Card style={{ width: '18rem' }} className="box">
+                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
+                                <Card.Body>
+                                    <Card.Title>Jeans</Card.Title>
+                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                    <Button variant="primary" href=''>Edit</Button>
+                                </Card.Body>
+                            </Card>
+                        </div>
+
+                        <div className="col-lg-3 mb-5">
+                            <Card style={{ width: '18rem' }} className="box">
+                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
+                                <Card.Body>
+                                    <Card.Title>Jeans</Card.Title>
+                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                    <Button variant="primary" href=''>Edit</Button>
+                                </Card.Body>
+                            </Card>
+                        </div>
+
+                        <div className="col-lg-3 mb-5">
+                            <Card style={{ width: '18rem' }} className="box">
+                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
+                                <Card.Body>
+                                    <Card.Title>Jeans</Card.Title>
+                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                    <Button variant="primary" href=''>Edit</Button>
+                                </Card.Body>
                             </Card>
                         </div>
                     </div>
