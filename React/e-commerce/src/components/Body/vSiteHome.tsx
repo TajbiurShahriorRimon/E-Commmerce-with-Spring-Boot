@@ -21,7 +21,7 @@ const VendorHome = () => {
                 <Card.Title>{card.title}</Card.Title>
                 <Card.Subtitle>{card.price}</Card.Subtitle>
                 <Card.Text>{card.text}</Card.Text>
-                <Button variant="primary" href=''>Edit</Button>
+                <Button variant="primary" href='/vAddProducts'>Edit</Button>
             </Card.Body>
             </Card>
 

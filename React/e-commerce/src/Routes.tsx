@@ -5,6 +5,7 @@ import UserPassword from './components/Forms/UserPassword';
 import UserRegistration from './components/Forms/UserRegistration';
 import VendorRegistrationShop from './components/Forms/VendorRegistrationShop';
 import VendorRegistrationUser from './components/Forms/VendorRegistrationUser';
+import AddProducts from './components/Forms/AddProducts';
 import Navbar from './components/Navbar/Navbar';
 import VendorNavbar from './components/Navbar/VendorNavbar';
 import Home from './components/Pages/Home';
@@ -12,6 +13,7 @@ import Vendor from './components/Pages/Vendor';
 import RegOption from './components/RegOption';
 import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
+import VendorAddProducts from './components/Body/VendorAddProducts';
 function MainRoutes(){
     return(
         <div>
@@ -26,6 +28,8 @@ function MainRoutes(){
                     <Route path="/vProfile" element={<VendorProfile/>}/>
                     <Route path="/vShopInfo" element={<VendorShopInfo/>}/>
                     <Route path="/vHome" element={<Vendor/>}/>
+                    <Route path="/addProducts" element={<AddProducts/>}/>
+                    <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
             </Routes>
         </div>
     )

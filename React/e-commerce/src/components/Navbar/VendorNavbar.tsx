@@ -29,7 +29,7 @@ function VendorNavbar(){
                     <ul className='nav-links'>
                         <li><a href='/vProfile' >Profile</a></li>
                         <li><a href='/vShopInfo'>Shop Info</a></li>
-                        <li><a href='#' >Products</a></li>
+                        <li><a href='/vAddProducts' >Add Products</a></li>
                         <li><a href='#' >Sales Report</a></li>
                     </ul>
                 </nav>
