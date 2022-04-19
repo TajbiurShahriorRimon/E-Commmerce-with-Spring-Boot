@@ -1,5 +1,5 @@
 import React from "react";
-import {NavDropdown, Container, Nav, Navbar, Form, FormControl, Button, Dropdown} from "react-bootstrap";
+import {NavDropdown, Container, Nav, Navbar, Form, FormControl, Button} from "react-bootstrap";
 import {ImSearch, ImHeart} from "react-icons/im";
 import {HiOutlineLogout} from "react-icons/hi";
 import {CgProfile, CgShoppingCart, CgBox} from "react-icons/cg";

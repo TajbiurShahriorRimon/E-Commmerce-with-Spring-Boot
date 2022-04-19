@@ -2,11 +2,8 @@ import React from 'react';
 import {Col, Input, NavbarToggler, Row} from "reactstrap";
 import  "./navbar.css";
 import icon from "./images/search2.svg";
-import {Card, Container, Form, FormControl, Navbar, NavDropdown, Nav, Button} from 'react-bootstrap';
-import {ImHeart, ImSearch} from "react-icons/im";
-import {CgBox, CgProfile, CgShoppingCart} from "react-icons/cg";
-import {MdReviews} from "react-icons/md";
-import {HiOutlineLogout} from "react-icons/hi";
+import {Card, Container, Form, FormControl, Navbar, Nav, Button} from 'react-bootstrap';
+import {ImSearch} from "react-icons/im";
 
 function VendorNavbar(){
     return(
@@ -33,7 +30,7 @@ function VendorNavbar(){
 
         </div>*/
         <div>
-        <Navbar bg="dark" expand="lg" variant="dark" fixed="top">
+        <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
             <Container>
                 <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,14 +49,6 @@ function VendorNavbar(){
                     <Nav.Link href="/vShopInfo">Shop Info</Nav.Link>
                     <Nav.Link href="#">Products</Nav.Link>
                     <Nav.Link href="#">Sales Report</Nav.Link>
-                    {/*<NavDropdown title="Mr XYZ" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/vProfile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
-                        <NavDropdown.Item href="/vShopInfo">My Wishlist <ImHeart/> </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Product <CgBox/> </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
-                    </NavDropdown>*/}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
