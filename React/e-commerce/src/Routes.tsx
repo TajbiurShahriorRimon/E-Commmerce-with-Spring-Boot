@@ -14,6 +14,7 @@ import RegOption from './components/RegOption';
 import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
 import VendorAddProducts from './components/Body/VendorAddProducts';
+import Customer from "./components/Pages/Customer";
 function MainRoutes(){
     return(
         <div>
@@ -30,6 +31,8 @@ function MainRoutes(){
                     <Route path="/vHome" element={<Vendor/>}/>
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
+                    <Route path="/customer/index" element={<Customer/>}/>
+              
             </Routes>
         </div>
     )

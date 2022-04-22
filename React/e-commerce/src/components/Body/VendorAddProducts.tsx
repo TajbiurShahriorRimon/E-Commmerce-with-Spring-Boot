@@ -15,5 +15,5 @@ return (
         </div>    
     )
 }
-export default VendorAddProducts;
 
+export default VendorAddProducts;

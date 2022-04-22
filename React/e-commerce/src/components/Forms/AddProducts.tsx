@@ -7,14 +7,13 @@ import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
 /* TODO
-
 1) Response message misbehaves somtimes
  */
 
 
 
 
-function UserRegistration(props:any){
+function AddProduct(props:any){
 
     
     useEffect(()=>{
@@ -149,4 +148,4 @@ function UserRegistration(props:any){
     )
 }
 
-export default UserRegistration;
+export default AddProduct;
