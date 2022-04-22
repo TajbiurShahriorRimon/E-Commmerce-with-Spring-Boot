@@ -6,6 +6,7 @@ import UserRegistration from './components/Forms/UserRegistration';
 import VendorRegistrationShop from './components/Forms/VendorRegistrationShop';
 import VendorRegistrationUser from './components/Forms/VendorRegistrationUser';
 import AddProducts from './components/Forms/AddProducts';
+import Login from './components/Forms/Login';
 import Navbar from './components/Navbar/Navbar';
 import VendorNavbar from './components/Navbar/VendorNavbar';
 import Home from './components/Pages/Home';
@@ -20,7 +21,7 @@ function MainRoutes(){
         <div>
             <Routes>
                 
-                    <Route path="/" element={<Vendor/>}/>
+                    <Route path="/" element={<Login/>}/>
                     <Route path="/uReg" element={<UserRegistration/>}/>
                     <Route path="/uVendorReg" element={<VendorRegistrationUser/>}/>
                     <Route path="/sVendorReg" element={<VendorRegistrationShop/>}/>
@@ -32,6 +33,7 @@ function MainRoutes(){
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
                     <Route path="/customer/index" element={<Customer/>}/>
+                    <Route path="/login" element={<Login/>}/>
               
             </Routes>
         </div>
