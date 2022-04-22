@@ -32,6 +32,7 @@ function MainRoutes(){
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
                     <Route path="/customer/index" element={<Customer/>}/>
+              
             </Routes>
         </div>
     )

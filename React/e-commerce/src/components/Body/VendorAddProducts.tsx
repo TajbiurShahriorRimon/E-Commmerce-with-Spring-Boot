@@ -15,4 +15,5 @@ return (
         </div>    
     )
 }
+
 export default VendorAddProducts;

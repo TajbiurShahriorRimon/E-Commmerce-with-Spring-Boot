@@ -11,7 +11,7 @@ function VendorNavbar(){
             
             <div className='nav-body'
             >
-                <h5> Dokan</h5>
+                <a href="/vHome" className='link'>Vendor</a>
                 <div className='search-box'>
                     <input className='search-bar' type='text' placeholder='Type to search'></input>
                     <a className='search-btn'>
@@ -21,8 +21,8 @@ function VendorNavbar(){
                 <nav>
                     <ul className='nav-links'>
                         <li><a href='/vProfile' >Profile</a></li>
-                        <li><a href='//vShopInfo'>Shop Info</a></li>
-                        <li><a href='#' >Products</a></li>
+                        <li><a href='/vShopInfo'>Shop Info</a></li>
+                        <li><a href='/vAddProducts' >Add Products</a></li>
                         <li><a href='#' >Sales Report</a></li>
                     </ul>
                 </nav>
