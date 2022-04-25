@@ -6,6 +6,7 @@ import UserRegistration from './components/Forms/UserRegistration';
 import {BrowserRouter as Router,Outlet,Route, Routes} from "react-router-dom";
 import RegOption from './components/RegOption';
 import MainRoutes from './Routes';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div>

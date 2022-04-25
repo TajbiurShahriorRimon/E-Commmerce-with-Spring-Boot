@@ -104,6 +104,12 @@ img{
   color: #9DBFAF;
 }
 
+.link{
+    font-size: xx-large;
+    text-decoration: none;
+    color: black;
+}
+
 ::placeholder { /* Microsoft Edge */
     color: white;
   }
