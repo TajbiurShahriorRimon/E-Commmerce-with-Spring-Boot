@@ -38,22 +38,8 @@ function Login(){
                     console.log(response.data.mail);
                     alert("Success");
             },(error)=>{
-                console.log(error.response.data.mail);
-                
-                let res:string[]=Object.values(error.response.data);
-                let errorMsg:string="";
-                
-                for(let i=0;i<res.length;i++){
-                    errorMsg+=res[i];
-                    errorMsg+="\n"
-                }
-                
-                  alert(errorMsg);
-                
-                
-                
-                
-            }
+                    alert("Invalid Credentials");
+               }
         );
     };
 
