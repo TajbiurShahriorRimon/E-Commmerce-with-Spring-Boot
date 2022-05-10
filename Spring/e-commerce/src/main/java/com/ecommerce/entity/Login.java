@@ -64,4 +64,10 @@ public class Login implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Login [mail=" + mail + ", password=" + password + "]";
+	}
+	
+	
 }

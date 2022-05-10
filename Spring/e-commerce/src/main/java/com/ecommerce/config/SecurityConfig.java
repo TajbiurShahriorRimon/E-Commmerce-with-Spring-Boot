@@ -3,43 +3,67 @@ package com.ecommerce.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.ecommerce.service.LoginServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	
+	@Autowired
+	private LoginServiceImpl loginService;
+	
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/").permitAll()
-			.anyRequest().authenticated()
+			.cors().disable()
+			.authorizeRequests()
+			.antMatchers("/login").permitAll()
 			.and()
-			.formLogin()
-			.loginPage("/").permitAll()
-			.and()
-			.logout().invalidateHttpSession(true)
-			.clearAuthentication(true);
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		//any request authenticated
+	}
+	
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// TODO Auto-generated method stub
+		auth.userDetailsService(loginService);
 	}
 
-	@Autowired
-	private UserDetailsService userDetailsService;
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
 	
 	@Bean
-	public AuthenticationProvider authProvider() {
-		DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
-		provider.setUserDetailsService(userDetailsService); 
-		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-		
-		return provider;
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
 	}
+	
+//	@Bean
+//	public AuthenticationProvider authProvider() {
+//		DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
+//		provider.setUserDetailsService(userDetailsService); 
+//		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+//		
+//		return provider;
+//	}
 	
 	
 //	@Bean

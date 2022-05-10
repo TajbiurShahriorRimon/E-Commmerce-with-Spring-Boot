@@ -28,7 +28,8 @@ function Login(){
     }
 
     const postDataToServer=(data:any)=>{
-        axios.post(`${base_url}uReg`,data,{
+        //${base_url}login this is the line that decides on which controller method the req will be posted
+        axios.post(`${base_url}login`,data,{
             headers: {
                 'Content-Type': 'application/json',
                  'Accept': 'application/json'

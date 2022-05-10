@@ -22,9 +22,9 @@ public class LoginServiceImpl implements LoginService,UserDetailsService{
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 		
-		Login login=loginDao.getById(username);
+		Login login=loginDao.getById(mail);
 		
 		if(login==null)
 			throw new UsernameNotFoundException("The mail you provided is invalid");
