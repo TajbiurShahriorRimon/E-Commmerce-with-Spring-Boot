@@ -16,6 +16,8 @@ import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
 import VendorAddProducts from './components/Body/VendorAddProducts';
 import Customer from "./components/Pages/Customer";
+import ProductDetails from "./components/Pages/ProductDetails";
+
 function MainRoutes(){
     return(
         <div>
@@ -34,7 +36,8 @@ function MainRoutes(){
                     <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
                     <Route path="/customer/index" element={<Customer/>}/>
                     <Route path="/login" element={<Login/>}/>
-              
+                    <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
+
             </Routes>
         </div>
     )
