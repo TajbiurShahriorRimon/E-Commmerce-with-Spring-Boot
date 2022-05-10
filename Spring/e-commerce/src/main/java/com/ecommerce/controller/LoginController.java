@@ -24,5 +24,10 @@ public class LoginController {
 		return new ResponseEntity<Login>(login, HttpStatus.CREATED);
 	}
 	
+//	@PostMapping(value="/")
+//	public String loginPage() {
+//		return "/customer/index";
+//	}
+//	
 
 }

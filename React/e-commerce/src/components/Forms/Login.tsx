@@ -11,13 +11,60 @@ import axios from 'axios';
 
 
 function Login(){
+
+
+    const [login,setLogin]=useState({
+        mail:"",
+        password:""
+        
+    });
+
+    const handleForm=(e:any)=>{
+        console.log(login);
+        
+        
+        postDataToServer(JSON.stringify(login));
+        e.preventDefault();
+    }
+
+    const postDataToServer=(data:any)=>{
+        //${base_url}login this is the line that decides on which controller method the req will be posted
+        axios.post(`${base_url}login`,data,{
+            headers: {
+                'Content-Type': 'application/json',
+                 'Accept': 'application/json'
+            }}).then(
+            (response)=>{
+                    console.log(response.data.mail);
+                    alert("Success");
+            },(error)=>{
+                console.log(error.response.data.mail);
+                
+                let res:string[]=Object.values(error.response.data);
+                let errorMsg:string="";
+                
+                for(let i=0;i<res.length;i++){
+                    errorMsg+=res[i];
+                    errorMsg+="\n"
+                }
+                
+                  alert(errorMsg);
+                
+                
+                
+                
+            }
+        );
+    };
+
+
     return(
         <div >
             <Container >
             <Row className='justify-content-center my-5'>
                 <Col md={4}>
                 <h1  className="form-label my-2">Login</h1><br></br>
-                    <Form>
+                    <Form onSubmit={handleForm}>
                             <Label className="form-label my-2" for="email">
                                 Email
                             </Label>
@@ -27,6 +74,9 @@ function Login(){
                                 placeholder="Enter Your Email"
                                 type="email"
                                 className='form-control'
+                                onChange={(e)=>{
+                                    setLogin({...login,mail:e.target.value})
+                                }}
                             />
                             
 
@@ -39,6 +89,9 @@ function Login(){
                                 placeholder="Enter Your Password"
                                 type="password"
                                 className='form-control'
+                                onChange={(e)=>{
+                                    setLogin({...login,password:e.target.value})
+                                }}
                             />
                             <br></br>
                             <div className="row mb-4">
