@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entity.Login;
+import com.ecommerce.entity.User;
 import com.ecommerce.service.LoginService;
 
 @RestController
@@ -21,6 +22,16 @@ public class LoginController {
 	@PostMapping(value="/uLoginReg")
 	public ResponseEntity<Login> addLogin(@Valid @RequestBody Login login ){
 		login =this.loginService.addLogin(login);
+		return new ResponseEntity<Login>(login, HttpStatus.CREATED);
+	}
+	
+	@PostMapping(value="/login")
+	public ResponseEntity<Login> verifyLogin(@RequestBody Login login) {
+		System.out.println(login);
+		login=loginService.verifyLogin(login,login.getMail(),login.getPassword());
+		System.out.println(login);
+		if(login==null)
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<Login>(login, HttpStatus.CREATED);
 	}
 	
