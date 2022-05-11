@@ -1,6 +1,9 @@
 package com.ecommerce.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.dao.LoginDao;
@@ -11,11 +14,40 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	private LoginDao loginDao;
 	
+	
+	
 	@Override
 	public Login addLogin(Login login) {
 		
 		loginDao.save(login);
 		return null;
 	}
+
+	
+
+	@Override
+	public Login verifyLogin(Login login,String mail, String password) {
+		// TODO Auto-generated method stub
+		System.out.println(login);
+		login=loginDao.findById(mail).get();
+		System.out.println(login.getPassword());
+		if(login.getPassword().equals(password)) {
+			
+			return login;
+		}
+		return null;
+	}
+	
+	
+
+//	@Override
+//	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+//		
+//		Login login=loginDao.getById(mail);
+//		
+//		if(login==null)
+//			throw new UsernameNotFoundException("The mail you provided is invalid");
+//		return login;
+//	}
 
 }

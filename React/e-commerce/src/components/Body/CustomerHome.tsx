@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
 import {Card, CardGroup, Container, Button, Carousel} from "react-bootstrap";
 import {HiCurrencyBangladeshi} from "react-icons/hi";
 
@@ -157,9 +156,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Jeans</Card.Title>
                                     <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
                                     <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
                                 </Card.Body>
                             </Card>
                         </div>
@@ -171,9 +167,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Jeans</Card.Title>
                                     <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
                                     <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
                                 </Card.Body>
                             </Card>
                         </div>
@@ -185,9 +178,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Jeans</Card.Title>
                                     <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
                                     <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
                                 </Card.Body>
                             </Card>
                         </div>
@@ -199,9 +189,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Jeans</Card.Title>
                                     <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
                                     <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
                                 </Card.Body>
                             </Card>
                         </div>
@@ -213,10 +200,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Jeans</Card.Title>
                                     <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
                                     <Button variant="primary" href=''>Edit</Button>
-
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
                                 </Card.Body>
                             </Card>
                         </div>
