@@ -1,6 +1,12 @@
 package com.ecommerce.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,7 +15,7 @@ import org.springframework.stereotype.Service;
 import com.ecommerce.dao.LoginDao;
 import com.ecommerce.entity.Login;
 @Service
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService,UserDetailsService{
 
 	@Autowired
 	private LoginDao loginDao;
@@ -36,6 +42,20 @@ public class LoginServiceImpl implements LoginService{
 			return login;
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		if(!loginDao.findById(mail).isEmpty()) {
+			String email=loginDao.findById(mail).get().getMail();
+			String password=loginDao.findById(mail).get().getPassword();
+			return new User(email,password, new ArrayList<>());
+		}else {
+			throw new UsernameNotFoundException("Invalid credentials");
+		}
 	}
 	
 	
