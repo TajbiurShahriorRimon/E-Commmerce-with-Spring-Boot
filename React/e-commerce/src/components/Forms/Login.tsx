@@ -35,7 +35,7 @@ function Login(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                    console.log(response.data.mail);
+                    console.log(response.data);
                     alert("Success");
             },(error)=>{
                     alert("Invalid Credentials");
