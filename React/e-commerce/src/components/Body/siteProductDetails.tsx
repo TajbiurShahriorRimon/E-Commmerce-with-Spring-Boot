@@ -4,7 +4,7 @@ import {Button, ButtonGroup} from "reactstrap";
 import {ImCart, ImHeart} from "react-icons/im";
 import {Badge} from "reactstrap";
 import NumericInput from "react-numeric-input";
-import {CgShoppingCart} from "react-icons/cg";
+import StarRatings from 'react-star-ratings';
 
 class SiteProductDetails extends Component<any, any>{
     render() {
@@ -136,8 +136,17 @@ class SiteProductDetails extends Component<any, any>{
                                 <label><strong>Vendor:</strong> Ariful</label>
                             </div>
                             <div>
-                                <label><strong>Rating:</strong> 4.5</label>
+                                <label style={{fontSize:"1.2em"}}><strong>Rating:</strong> 3.7 </label>
+                                <br/>
+                                <StarRatings
+                                    rating={3.7}
+                                    starDimension="25px"
+                                    starSpacing="5px"
+                                    starRatedColor="#cee009"
+                                />
                             </div>
+                            <br/>
+
                             <div className="row">
                                 <div className="col-md-2">
                                     <button className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>
