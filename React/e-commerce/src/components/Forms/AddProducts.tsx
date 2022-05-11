@@ -6,6 +6,7 @@ import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
+import events from "node:events";
 /* TODO
 1) Response message misbehaves somtimes
  */
@@ -24,18 +25,39 @@ function AddProduct(props:any){
         mail:"",
         phone:"",
         address:"",
-        gender:""
-        
+        gender:"",
+
+        photo: "",
+        photoUrl: "", //used to set the photo blob path of the selected photo
+        otherImage : [] //for multiple selected photo
     });
 
     var formData= new FormData();
     var mailError: string="";
     //number of inputs in the form excluding gender as it has a default value
     var numberOfInputs: number=4;
-   
+
+    const AddPhoto = (e:any) => {
+        let image = e.target.files[0];
+        setUser({
+            ...user,
+            photo: image,
+            photoUrl: URL.createObjectURL(image) //displays the image in the image box
+        });
+        e.preventDefault();
+    }
+
+    const AddOtherImages = (e:any) => {
+        let images = e.target.files;
+        setUser({
+            ...user,
+            otherImage: images
+        });
+    }
+
     const handleForm=(e:any)=>{
         console.log(user);
-        
+
         
         postDataToServer(JSON.stringify(user));
         e.preventDefault();
@@ -63,10 +85,6 @@ function AddProduct(props:any){
                 }
                 
                   alert(errorMsg);
-                
-                
-                
-                
             }
         );
     };
@@ -77,7 +95,7 @@ function AddProduct(props:any){
                 <Col md={4}>
                     <Form onSubmit={handleForm}>
                             <Label className="form-label my-2" for="name">
-                                Pruduct Name
+                                Product Name
                             </Label>
                             <Input 
                                 id="productName"
@@ -89,29 +107,6 @@ function AddProduct(props:any){
                                     setUser({...user,mail:e.target.value})
                                 }}
                             />
-                            
-                            
-                              
-                                
-                            
-                            
-                                                   
-                            
-
-
-                            {/* <Label className='form-label my-2' for="userPassword">
-                                Password
-                            </Label>
-                            <Input
-                                id="userPassword"
-                                name="password"
-                                placeholder="Enter Password"
-                                type="password"
-                                className='form-control'
-                                onChange={(e)=>{
-                                    setUser({...user,pass:e.target.value})
-                                }}
-                            /> */}
 
                             <Label className='form-label my-2' for="price">
                                 Price
@@ -136,6 +131,33 @@ function AddProduct(props:any){
                                 <option selected value="shirt">Shirt</option>
                                 <option value="pant">Pant</option>
                             </select>
+                        <Label className='form-label my-2' for="photo">
+                            Photo
+                        </Label>
+                        <div>
+                            <img src={user.photoUrl} id="photoSrc" style={{height: 200, width: 300}}/>
+                            <Input
+                                accept="image/*"
+                                id="photo"
+                                name="photo"
+                                type="file"
+                                className='form-control'
+                                onChange={AddPhoto}
+                            />
+                        </div>
+
+                        <Label className='form-label my-2' for="otherImage">
+                            Other Images
+                        </Label>
+                        <Input
+                            accept="image/*"
+                            id="otherImage"
+                            name="otherImage"
+                            type="file"
+                            className='form-control'
+                            multiple
+                            onChange={AddOtherImages}
+                        />
                             <Button className='my-2 w-100' type='submit' color='primary'>Save</Button>
                     </Form>
                    
