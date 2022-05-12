@@ -17,6 +17,7 @@ import VendorShopInfo from './components/Body/VendorShopInfo';
 import VendorAddProducts from './components/Body/VendorAddProducts';
 import Customer from "./components/Pages/Customer";
 import ProductDetails from "./components/Pages/ProductDetails";
+import CustomerProfile from "./components/Pages/CustomerProfile";
 function MainRoutes(){
     return(
         <div>
@@ -34,9 +35,11 @@ function MainRoutes(){
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
                     <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
-                    <Route path="/customer/index" element={<Customer/>}/>
                     <Route path="/login" element={<Login/>}/>
-              
+
+                    {/*Customer*/}
+                    <Route path="/customer/index" element={<Customer/>}/>
+                    <Route path="/customer/profile/:id" element={<CustomerProfile/>}/>
             </Routes>
         </div>
     )

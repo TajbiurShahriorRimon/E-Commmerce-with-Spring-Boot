@@ -37,7 +37,7 @@ export const CustomerNavbar = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <br/> <br/>
+            <br/> <br/> <br/>
         </div>
     )
 }
