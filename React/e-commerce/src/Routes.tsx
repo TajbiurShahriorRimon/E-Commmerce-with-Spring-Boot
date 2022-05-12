@@ -1,23 +1,20 @@
 import React from 'react';
 import {Routes,Route} from "react-router-dom";
-import App from './App';
 import UserPassword from './components/Forms/UserPassword';
 import UserRegistration from './components/Forms/UserRegistration';
 import VendorRegistrationShop from './components/Forms/VendorRegistrationShop';
 import VendorRegistrationUser from './components/Forms/VendorRegistrationUser';
 import AddProducts from './components/Forms/AddProducts';
 import Login from './components/Forms/Login';
-import Navbar from './components/Navbar/Navbar';
-import VendorNavbar from './components/Navbar/VendorNavbar';
-import Home from './components/Pages/Home';
 import Vendor from './components/Pages/Vendor';
-import RegOption from './components/RegOption';
 import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
 import VendorAddProducts from './components/Body/VendorAddProducts';
 import Customer from "./components/Pages/Customer";
 import ProductDetails from "./components/Pages/ProductDetails";
 import CustomerProfile from "./components/Pages/CustomerProfile";
+import CustomerProductForReview from "./components/Pages/CustomerProductForReview";
+import ProductCustomerGiveReview from "./components/Pages/ProductCustomerGiveReview";
 function MainRoutes(){
     return(
         <div>
@@ -40,6 +37,10 @@ function MainRoutes(){
                     {/*Customer*/}
                     <Route path="/customer/index" element={<Customer/>}/>
                     <Route path="/customer/profile/:id" element={<CustomerProfile/>}/>
+                    <Route path="/customer/productForReview" element={<CustomerProductForReview/>}/>
+
+                    {/*Product*/}
+                    <Route path="/product/customer/giveReview" element={<ProductCustomerGiveReview/>}/>
             </Routes>
         </div>
     )
