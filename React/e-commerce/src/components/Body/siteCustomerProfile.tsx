@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {CgProfile, CgNotes} from "react-icons/cg";
 import {Link} from "react-router-dom";
 import {Button} from "reactstrap";
+import {Nav, Navbar} from "react-bootstrap";
 
 class SiteCustomerProfile extends Component<any, any>{
     render() {
@@ -10,15 +11,22 @@ class SiteCustomerProfile extends Component<any, any>{
                 <div className="form-control">
                     <div className="row">
                         <div className="col-md-3" style={{backgroundColor:"mistyrose"}}>
-                            <div className="form-group">
-                                {/*<label htmlFor="">Name</label>*/}
+                            {/*<div className="form-group">
                                 <h3><u>My Account <CgProfile style={{color:"blue"}}/></u></h3>
                                 <div><Link to=""><strong style={{color: "red"}}>My Profile</strong></Link></div>
                                 <div><Link to=""><strong style={{color: "black"}}>Edit Profile</strong></Link></div>
                                 <hr/>
                                 <h3><u>My Report <CgNotes style={{color:"blue"}}/></u></h3>
                                 <div><Link to=""><strong style={{color: "black"}}>Order Report</strong></Link></div>
-                            </div>
+                            </div>*/}
+                            <Navbar variant="dark" className="flex-column">
+                                <h3><u>My Account <CgProfile style={{color:"blue"}}/></u></h3>
+                                <Nav.Link href=""><strong style={{color: "red"}}>My Profile</strong></Nav.Link>
+                                <Nav.Link href=""><strong style={{color: "black"}}>Edit Profile</strong></Nav.Link>
+
+                                <h3><u>My Report <CgNotes style={{color:"blue"}}/></u></h3>
+                                <Nav.Link href="/home"><strong style={{color: "black"}}>Order Report</strong></Nav.Link>
+                            </Navbar>
                         </div>
                         <div className="col-md-4">
                             <div className="form-control">
