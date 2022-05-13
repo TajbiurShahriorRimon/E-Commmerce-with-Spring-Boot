@@ -7,12 +7,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="vendorDummy1")
+@Table(name="vendorDummy2")
 public class Vendor {
 
 	
 
 	@Id
+	private int id;
+	@NotEmpty
 	private String mail;
 	@NotEmpty
 	@Size(min=4,message="Registration number must have at least 4 characters")
@@ -26,6 +28,12 @@ public class Vendor {
 	private String shopName;
 	
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getMail() {
 		return mail;
 	}
