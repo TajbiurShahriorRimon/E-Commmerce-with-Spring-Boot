@@ -40,7 +40,7 @@ function MainRoutes(){
                     <Route path="/customer/productForReview" element={<CustomerProductForReview/>}/>
 
                     {/*Product*/}
-                    <Route path="/product/customer/giveReview" element={<ProductCustomerGiveReview/>}/>
+                    <Route path="/product/customer/giveReview/:productId" element={<ProductCustomerGiveReview/>}/>
             </Routes>
         </div>
     )

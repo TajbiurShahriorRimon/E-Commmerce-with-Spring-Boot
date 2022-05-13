@@ -4,6 +4,9 @@ import {Badge} from "react-bootstrap";
 import { Button } from "reactstrap";
 
 class SiteCustomerProductForReview extends Component<any, any>{
+    changeRoute = () => {
+        window.location.href = "/product/customer/giveReview/2";
+    }
     render() {
         return(
             <div className="container">
@@ -30,7 +33,7 @@ class SiteCustomerProductForReview extends Component<any, any>{
                                 </div>
                                 <div className="col-md-4">
                                     <br/>
-                                    <button style={{width: 200}} className="btn-outline-info rounded-3 btn">
+                                    <button onClick={this.changeRoute} style={{width: 200}} className="btn-outline-info rounded-3 btn">
                                         <strong>Give Review</strong>
                                     </button>
                                 </div>
@@ -60,7 +63,7 @@ class SiteCustomerProductForReview extends Component<any, any>{
                                 </div>
                                 <div className="col-md-4">
                                     <br/>
-                                    <button  style={{width: 200}} className="btn-outline-info rounded-3 btn">
+                                    <button style={{width: 200}} className="btn-outline-info rounded-3 btn">
                                         <strong>Check Your Review</strong>
                                     </button>
                                 </div>
