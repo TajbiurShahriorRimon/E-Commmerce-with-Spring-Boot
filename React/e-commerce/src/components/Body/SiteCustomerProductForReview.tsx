@@ -1,15 +1,39 @@
-import React, {Component, useState} from "react";
+import React, {Component, useCallback, useState} from "react";
 import Modal from "react-bootstrap/Modal";
 import {Badge} from "react-bootstrap";
 import { Button } from "reactstrap";
+import {useNavigate, Router, Link, Navigate} from "react-router-dom";
+import StarRatings from "react-star-ratings";
 
 class SiteCustomerProductForReview extends Component<any, any>{
-    changeRoute = () => {
-        window.location.href = "/product/customer/giveReview/2";
+    state = {
+        rend: "",
+        show: false,
+        btn: (
+            <button className="btn btn-dark">Hello world</button>
+        )
     }
+
+    handleShow = () =>{
+        this.setState({
+            show: true
+        })
+    }
+
+    handleClose = () =>{
+        this.setState({
+            show: false
+        })
+    }
+
+    alertPop = () => {
+        alert("saved...");
+    }
+
     render() {
         return(
             <div className="container">
+                {/*<Navigate to={""} state={null}/>*/}
                 <div className="row">
                     <div className="col-md-3">
                     </div>
@@ -33,9 +57,11 @@ class SiteCustomerProductForReview extends Component<any, any>{
                                 </div>
                                 <div className="col-md-4">
                                     <br/>
-                                    <button onClick={this.changeRoute} style={{width: 200}} className="btn-outline-info rounded-3 btn">
+                                    <Link to={"/product/customer/giveReview/2"}>
+                                    <button style={{width: 200}} className="btn-outline-info rounded-3 btn">
                                         <strong>Give Review</strong>
                                     </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div> <br/>
@@ -63,7 +89,7 @@ class SiteCustomerProductForReview extends Component<any, any>{
                                 </div>
                                 <div className="col-md-4">
                                     <br/>
-                                    <button style={{width: 200}} className="btn-outline-info rounded-3 btn">
+                                    <button onClick={this.handleShow} style={{width: 200}} className="btn-outline-info rounded-3 btn">
                                         <strong>Check Your Review</strong>
                                     </button>
                                 </div>
@@ -71,6 +97,31 @@ class SiteCustomerProductForReview extends Component<any, any>{
                         </div> <br/>
                     </div>
                 </div>
+                <Modal show={this.state.show} onHide={this.handleClose} animation={false}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>
+                            <StarRatings
+                                rating={3.7}
+                                starDimension="25px"
+                                starSpacing="5px"
+                                starRatedColor="#cee009"
+                            />
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <Link to={"/product/customer/giveReview/2"}>
+                        <Button variant="primary">
+                            Save Changes
+                        </Button>
+                        </Link>
+                    </Modal.Footer>
+                </Modal>
+
             </div>
         )
     }
