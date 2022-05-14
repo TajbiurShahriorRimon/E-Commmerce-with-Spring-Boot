@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Badge} from "react-bootstrap";
 import { Rating } from 'react-simple-star-rating';
-import events from "node:events";
 
 class AddProductReview extends Component<any, any>{
     state = {

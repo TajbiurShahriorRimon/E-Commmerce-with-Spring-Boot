@@ -5,14 +5,56 @@ import {ImCart, ImHeart} from "react-icons/im";
 import {Badge} from "reactstrap";
 import NumericInput from "react-numeric-input";
 import StarRatings from 'react-star-ratings';
+import axios from "axios";
 
 class SiteProductDetails extends Component<any, any>{
+    constructor(props : any) {
+        super(props);
+
+        /*var isLoggedIn = localStorage.getItem("id2");
+        //alert("id: "+localStorage.getItem("id2"));
+        if(isLoggedIn == null){
+            //alert("loggedId: "+localStorage.getItem("id2"));
+            this.props.history.push("/logout/index");
+        }*/
+    }
+
+    state = {
+        result: {
+            productName: "",
+            price: "",
+            category: { //another object
+                categoryName: "",
+            },
+            vendor: {
+                shopName: "",
+            }
+        },
+        loading: true,
+        df: "dsd"
+    }
+
+    async componentDidMount() {
+        console.log(window.location.pathname.split("/").pop());
+        var id = window.location.pathname.split("/").pop();
+        const resp = await axios.get(`http://localhost:9090/product/${id}`);
+
+        console.log(resp.data);
+        if (resp.status === 200){
+            this.setState({
+                result: resp.data,
+                loading: false,
+            })
+        }
+    }
+
     render() {
         var imageArray = [
             "https://thumbs.dreamstime.com/b/flowers-4999705.jpg",
             "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg",
         ]
         const imagePath = "https://www.w3schools.com/html/img_girl.jpg";
+
         return(
             <div className="container">
                 <br/> <br/>
@@ -124,16 +166,16 @@ class SiteProductDetails extends Component<any, any>{
 
                         <div className="col-md-7">
                             <div>
-                                <label><strong>Product Name:</strong> Jeans Blue Faded</label>
+                                <label><strong>Product Name:</strong> {this.state.result.productName}</label>
                             </div>
                             <div>
-                                <label><strong>Price:</strong> <label style={{fontSize: 20}}>Tk 100</label></label>
+                                <label><strong>Price:</strong> <label style={{fontSize: 20}}>{this.state.result.price}</label></label>
                             </div>
                             <div>
-                                <label><strong>Category</strong>: <Badge pill bg="success"><strong> Jeans</strong> </Badge></label>
+                                <label><strong>Category</strong>: <Badge pill bg="success"><strong> {this.state.result.category.categoryName}</strong> </Badge></label>
                             </div>
                             <div>
-                                <label><strong>Vendor:</strong> Ariful</label>
+                                <label><strong>Vendor:</strong> {this.state.result.vendor.shopName}</label>
                             </div>
                             <div>
                                 <label style={{fontSize:"1.2em"}}><strong>Rating:</strong> 3.7 </label>
@@ -182,4 +224,4 @@ class SiteProductDetails extends Component<any, any>{
     }
 }
 
-export default SiteProductDetails
+export default SiteProductDetails;

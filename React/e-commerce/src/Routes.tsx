@@ -30,7 +30,6 @@ function MainRoutes(){
                     <Route path="/vShopInfo" element={<VendorShopInfo/>}/>
                     <Route path="/vHome" element={<Vendor/>}/>
                     <Route path="/addProducts" element={<AddProducts/>}/>
-                    <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
                     <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
                     <Route path="/login" element={<Login/>}/>
 
@@ -41,6 +40,7 @@ function MainRoutes(){
 
                     {/*Product*/}
                     <Route path="/product/customer/giveReview/:productId" element={<ProductCustomerGiveReview/>}/>
+                    <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
             </Routes>
         </div>
     )

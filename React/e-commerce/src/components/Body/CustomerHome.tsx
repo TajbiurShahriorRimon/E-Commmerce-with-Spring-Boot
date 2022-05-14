@@ -2,9 +2,54 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {Card, CardGroup, Container, Button, Carousel} from "react-bootstrap";
 import {HiCurrencyBangladeshi} from "react-icons/hi";
+import axios from "axios";
 
 class CustomerHome extends Component<any, any>{
+    constructor(props:any) {
+        super(props);
+    }
+
+    state = {
+        result: [],
+        loading: true,
+    }
+
+    async componentDidMount() {
+        const resp = await axios.get('http://localhost:9090/products');
+
+        if (resp.status === 200){
+            this.setState({
+                result: resp.data,
+                loading: false,
+            })
+        }
+    }
+
     render() {
+        var resultTable;
+
+        if(this.state.loading){
+            resultTable = <h1>Loading...</h1>
+        }
+        else {
+            resultTable = this.state.result.map((item : any) => {
+                return(
+                    <div className="col-lg-3 mb-5">
+                        <Card style={{ width: '18rem' }} className="box">
+                            <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
+                            <Card.Body>
+                                <Card.Title>{item.productName}</Card.Title>
+                                <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                <Button variant="primary" href=''>Edit</Button>
+                                <Link to={`/product/productDetails/`+item.productId}>
+                                    <button className="btn btn-warning">Information</button>
+                                </Link>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                )
+            })
+        }
         var imagePath = "https://www.w3schools.com/html/img_girl.jpg";
         return (
             <div>
@@ -63,8 +108,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text style={{color: "red", }}>
                                         This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This card has even longer content than the first to
-                                        show that equal height action.
                                     </Card.Text>
                                 </Card.Body>
                                 <Card.Footer>
@@ -99,8 +142,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text style={{color: "red", }}>
                                         This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This card has even longer content than the first to
-                                        show that equal height action.
                                     </Card.Text>
                                 </Card.Body>
                                 <Card.Footer>
@@ -117,8 +158,6 @@ class CustomerHome extends Component<any, any>{
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text style={{color: "red", }}>
                                         This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This card has even longer content than the first to
-                                        show that equal height action.
                                     </Card.Text>
                                 </Card.Body>
                                 <Card.Footer>
@@ -219,6 +258,7 @@ class CustomerHome extends Component<any, any>{
                                 </Card.Body>
                             </Card>
                         </div>
+                        {resultTable}
                     </div>
                 </div>
             </div>
