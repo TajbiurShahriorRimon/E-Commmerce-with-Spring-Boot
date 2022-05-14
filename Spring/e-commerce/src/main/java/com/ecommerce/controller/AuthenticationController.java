@@ -50,6 +50,7 @@ public class AuthenticationController {
 		
 		 Map<Object, Object> response = new HashMap<>();
          response.put("token", token);
+         response.put("mail",login.getMail());
 
          return new ResponseEntity<>(response, HttpStatus.OK);
 
