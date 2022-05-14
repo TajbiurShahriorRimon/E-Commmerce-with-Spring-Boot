@@ -44,5 +44,11 @@ public class UserController {
 			}*/
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
+
+		@GetMapping("/user/{email}")
+		public ResponseEntity<User> get(@PathVariable String email){
+			return ResponseEntity.ok(this.userservice.getUser(email));
+			//return email;
+		}
 		
 	}

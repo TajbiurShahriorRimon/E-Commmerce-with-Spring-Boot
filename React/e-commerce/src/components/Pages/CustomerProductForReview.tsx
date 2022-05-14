@@ -7,18 +7,13 @@ import { useNavigate } from "react-router-dom";
 const CustomerProductForReview = () => {
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleClick = () => { // call back function
+        alert("dsd");
         var sig = 0;
         if (sig == 1){
-            alert("dsd");
             navigate("/product/customer/giveReview/2");
         }
     }
-
-    /*function sd(){
-        const c= useNavigate()
-        c("sds")
-    }*/
 
     return (
         <div onLoad={handleClick}>

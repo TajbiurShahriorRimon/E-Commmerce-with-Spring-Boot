@@ -3,8 +3,37 @@ import {CgProfile, CgNotes} from "react-icons/cg";
 import {Link} from "react-router-dom";
 import {Button} from "reactstrap";
 import {Nav, Navbar} from "react-bootstrap";
+import axios from "axios";
+import base_url from "../../api/bootapi";
 
 class SiteCustomerProfile extends Component<any, any>{
+    constructor(props:any) {
+        super(props);
+    }
+
+    state = {
+        mail: "",
+        address: "",
+        name: "",
+        phone: "",
+        loading: true,
+    }
+
+    async componentDidMount() {
+        const resp = await axios.get(`${base_url}user/${localStorage.getItem("email")}`);
+        console.log(resp);
+        if (resp.status === 200){
+            this.setState({
+                name: resp.data.name,
+                mail: resp.data.mail,
+                address: resp.data.address,
+                phone: resp.data.phone,
+                loading: false,
+            })
+            console.log(this.state.mail);
+        }
+    }
+
     render() {
         return(
             <div className="container">
@@ -31,27 +60,27 @@ class SiteCustomerProfile extends Component<any, any>{
                         <div className="col-md-4">
                             <div className="form-control">
                                 <label htmlFor="">Name</label>
-                                <div><strong>Asif Ahmed</strong></div>
+                                <div><strong>{this.state.name}</strong></div>
                             </div> <br/>
                             <div className="form-control">
                                 <label htmlFor="">Email</label>
-                                <div><strong>asif@gmail.com</strong></div>
+                                <div><strong>{this.state.mail}</strong></div>
                             </div> <br/>
                             <div className="form-control">
                                 <label htmlFor="">Address</label>
-                                <div><strong>Dhaka Bangladesh</strong></div>
+                                <div><strong>{this.state.address}</strong></div>
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div className="form-control">
                                 <label htmlFor="">Phone</label>
-                                <div><strong>0121212</strong></div>
+                                <div><strong>{this.state.phone}</strong></div>
                             </div> <br/>
                             <div className="form-control">
                                 <label htmlFor="">Gender</label>
                                 <div><strong>Male</strong></div>
                             </div> <br/>
-                            <Button style={{width: 200, height: 60}} className="btn-info rounded-3">Change Password</Button>
+                            <Button style={{width: 200, height: 60, float: "right"}} className="btn-info rounded-3">Change Password</Button>
                         </div>
                     </div>
                 </div>

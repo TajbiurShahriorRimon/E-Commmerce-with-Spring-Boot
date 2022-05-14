@@ -31,13 +31,7 @@ public class ProductsServiceImpl implements  ProductsService{
 
 	@Override
 	public Products getProductById(String id){
-		var v = productsDao.findAll();
-		for (Products product : v) {
-			if(product.getProductId().equals(id)){
-				return product;
-			}
-		}
-		return null;
+		return productsDao.findById(id).get();
 	}
 
 }
