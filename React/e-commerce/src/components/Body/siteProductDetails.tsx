@@ -177,40 +177,6 @@ class SiteProductDetails extends Component<any, any>{
                         </div>
                     </div>
                 </div>
-
-                {/*<div className="card-body">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <div className="form-group">
-                                <input type="hidden" id="id"/>
-                                <label htmlFor="name">Company Name</label>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="phone">Phone</label>
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <div className="form-group">
-                                        <label htmlFor="nameInBangla">Name In Bngla</label>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="email">Email</label>
-                                    </div>
-                                </div>
-                                <div className="col-md-3">
-                                    <div className="form-group">
-                                        <label htmlFor="nameInBangla">Name In Bngla</label>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="email">Email</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*/}
             </div>
         )
     }
