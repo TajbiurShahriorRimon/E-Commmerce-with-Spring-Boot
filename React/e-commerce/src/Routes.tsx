@@ -37,7 +37,8 @@ function MainRoutes(){
 
                     {/*Customer*/}
                     <Route path="/customer/index/:tk" element={<Customer/>}/>
-                    <Route path="/customer/profile/:id" element={<CustomerProfile/>}/>
+                    <Route path="/customer/index" element={<Customer/>}/>
+                    <Route path="/customer/profile" element={<CustomerProfile/>}/>
                     <Route path="/customer/productForReview" element={<CustomerProductForReview/>}/>
 
                     {/*Product*/}

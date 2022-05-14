@@ -27,7 +27,7 @@ export const CustomerNavbar = () => {
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
                         <NavDropdown title="Mr XYZ" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
+                            <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">My Wishlist <ImHeart/> </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">My Orders <CgBox/> </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>

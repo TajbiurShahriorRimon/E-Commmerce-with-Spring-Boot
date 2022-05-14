@@ -15,7 +15,8 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 //		User user= new User();
 //		user.name="Asif";
-		return userDao.getById(userId);
+		//return userDao.getById(userId);
+		return userDao.findById(userId).get();
 	}
 
 	@Override
