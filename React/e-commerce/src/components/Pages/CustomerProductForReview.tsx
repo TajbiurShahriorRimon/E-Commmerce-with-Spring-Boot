@@ -15,6 +15,11 @@ const CustomerProductForReview = () => {
         }
     }
 
+    /*function sd(){
+        const c= useNavigate()
+        c("sds")
+    }*/
+
     return (
         <div onLoad={handleClick}>
             <CustomerNavbar/>

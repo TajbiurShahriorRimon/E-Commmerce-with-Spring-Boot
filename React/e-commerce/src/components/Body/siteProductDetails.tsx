@@ -6,6 +6,7 @@ import {Badge} from "reactstrap";
 import NumericInput from "react-numeric-input";
 import StarRatings from 'react-star-ratings';
 import axios from "axios";
+import base_url from "../../api/bootapi";
 
 class SiteProductDetails extends Component<any, any>{
     constructor(props : any) {
@@ -37,7 +38,7 @@ class SiteProductDetails extends Component<any, any>{
     async componentDidMount() {
         console.log(window.location.pathname.split("/").pop());
         var id = window.location.pathname.split("/").pop();
-        const resp = await axios.get(`http://localhost:9090/product/${id}`);
+        const resp = await axios.get(`${base_url}product/${id}`);
 
         console.log(resp.data);
         if (resp.status === 200){

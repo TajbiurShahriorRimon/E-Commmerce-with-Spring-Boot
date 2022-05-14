@@ -6,12 +6,13 @@ import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
 
 
 
 function Login(){
-
+    var navigate = useNavigate();
 
     const [login,setLogin]=useState({
         mail:"",
@@ -36,7 +37,15 @@ function Login(){
             }}).then(
             (response)=>{
                     console.log(response.data);
-                    alert("Success");
+
+                //Log-in Success
+                //Storing data into local storage
+                localStorage.setItem("email", response.data.mail);
+                localStorage.setItem("token", response.data.token); //JWT Token
+
+                //redirecting to customer page. Depending on user type the redirection occurs
+                navigate("/customer/index");
+
             },(error)=>{
                     alert("Invalid Credentials");
                }
