@@ -15,6 +15,7 @@ import ProductDetails from "./components/Pages/ProductDetails";
 import CustomerProfile from "./components/Pages/CustomerProfile";
 import CustomerProductForReview from "./components/Pages/CustomerProductForReview";
 import ProductCustomerGiveReview from "./components/Pages/ProductCustomerGiveReview";
+import TestMail from './components/Pages/testMail';
 function MainRoutes(){
     return(
         <div>
@@ -32,9 +33,10 @@ function MainRoutes(){
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/testMail/:mail" element={<TestMail/>}/>
 
                     {/*Customer*/}
-                    <Route path="/customer/index" element={<Customer/>}/>
+                    <Route path="/customer/index/:tk" element={<Customer/>}/>
                     <Route path="/customer/profile/:id" element={<CustomerProfile/>}/>
                     <Route path="/customer/productForReview" element={<CustomerProductForReview/>}/>
 
