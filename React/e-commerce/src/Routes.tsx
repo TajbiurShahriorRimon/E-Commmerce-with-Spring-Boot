@@ -16,6 +16,7 @@ import CustomerProfile from "./components/Pages/CustomerProfile";
 import CustomerProductForReview from "./components/Pages/CustomerProductForReview";
 import ProductCustomerGiveReview from "./components/Pages/ProductCustomerGiveReview";
 import TestMail from './components/Pages/testMail';
+import ProductReviews from "./components/Pages/ProductReviews";
 function MainRoutes(){
     return(
         <div>
@@ -44,6 +45,7 @@ function MainRoutes(){
                     {/*Product*/}
                     <Route path="/product/customer/giveReview/:productId" element={<ProductCustomerGiveReview/>}/>
                     <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
+                    <Route path="/product/allReviews" element={<ProductReviews/>}/>
             </Routes>
         </div>
     )
