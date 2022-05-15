@@ -8,7 +8,7 @@ const CustomerProductForReview = () => {
     const navigate = useNavigate();
 
     const handleClick = () => { // call back function
-        alert("dsd");
+        //alert("dsd");
         var sig = 0;
         if (sig == 1){
             navigate("/product/customer/giveReview/2");
