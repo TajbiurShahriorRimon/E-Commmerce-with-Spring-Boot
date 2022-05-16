@@ -34,4 +34,11 @@ public class ProductsServiceImpl implements  ProductsService{
 		return productsDao.findById(id).get();
 	}
 
+	@Override
+	public Stream<Products> getAllProducts() {
+		var products = productsDao.findAll()
+		.stream().filter(x -> x.getStatus().equals("1".toString()));
+		return products;
+	}
+
 }

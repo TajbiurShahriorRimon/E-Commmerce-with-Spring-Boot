@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {Card, CardGroup, Container, Button, Carousel} from "react-bootstrap";
-import {HiCurrencyBangladeshi} from "react-icons/hi";
+import {HiInformationCircle} from "react-icons/hi";
 import axios from "axios";
+import {ImHeart} from "react-icons/im";
 
 class CustomerHome extends Component<any, any>{
     constructor(props:any) {
@@ -42,7 +43,8 @@ class CustomerHome extends Component<any, any>{
                                 <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
                                 <Button variant="primary" href=''>Edit</Button>
                                 <Link to={`/product/productDetails/`+item.productId}>
-                                    <button className="btn btn-warning">Information</button>
+
+                                    <HiInformationCircle style={{fontSize:"2em", float: "right"}}/>
                                 </Link>
                             </Card.Body>
                         </Card>

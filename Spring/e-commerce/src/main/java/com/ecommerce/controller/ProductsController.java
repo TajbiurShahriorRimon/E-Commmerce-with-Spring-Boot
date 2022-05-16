@@ -1,6 +1,7 @@
 package com.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import javax.validation.Valid;
 
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import antlr.collections.List;
 
 import com.ecommerce.entity.Products;
-import com.ecommerce.service.ProductRepo;
 import com.ecommerce.service.ProductsService;
 
 
@@ -28,9 +28,6 @@ public class ProductsController {
 	
 	@Autowired
 	private ProductsService productsService;
-
-	@Autowired
-	private ProductRepo productRepo;
 	
 	@PostMapping(value="/addProducts",consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Products> addProducts(@Valid @RequestBody Products product) {
@@ -39,8 +36,8 @@ public class ProductsController {
 	}
 
 	@GetMapping("/products")
-	public ResponseEntity<ArrayList<Products>> getAllProducts(){
-		return ResponseEntity.ok(productRepo.getAllProducts()); 
+	public ResponseEntity<Stream<Products>> getAllProducts(){
+		return ResponseEntity.ok(productsService.getAllProducts()); 
 	}
 
 	@GetMapping("/product/{id}")

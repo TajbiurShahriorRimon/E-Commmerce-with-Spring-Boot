@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Badge} from "react-bootstrap";
 import { Rating } from 'react-simple-star-rating';
+import {Link} from "react-router-dom";
 
 class AddProductReview extends Component<any, any>{
     state = {
@@ -76,7 +77,9 @@ class AddProductReview extends Component<any, any>{
                             </div>
                             <div>
                                 <br/><br/>
-                                <button className="btn btn-secondary">Check All Reviews</button>
+                                <Link to={"/product/allReviews/2"}>
+                                    <button className="btn btn-secondary">Check All Reviews</button>
+                                </Link>
                             </div>
                         </div>
                     </div>

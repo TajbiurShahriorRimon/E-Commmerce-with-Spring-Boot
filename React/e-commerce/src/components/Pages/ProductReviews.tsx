@@ -4,7 +4,7 @@ import SiteProductReview from "../Body/siteProductReviews";
 
 function ProductReviews() {
     return(
-        <div>
+        <div >
             <CustomerNavbar/>
             <SiteProductReview/>
         </div>

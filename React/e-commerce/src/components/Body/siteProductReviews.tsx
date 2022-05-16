@@ -10,7 +10,13 @@ class SiteProductReviews extends Component<any, any>{
         test: "12"
     }
     render() {
+        var st = {
+            height: "100vw",
+            backgroundImage: "url("+"https://inspirationhut.net/wp-content/uploads/2013/05/201.png"+")",
+            backgroundSize: "cover", backgroundRepeat: 'no-repeat'
+        }
         return(
+            <div style={st}>
             <div className='container'>
                 <div className="form-control">
                     <div className="row">
@@ -157,6 +163,7 @@ class SiteProductReviews extends Component<any, any>{
 
                     </div>
                 </div>
+            </div>
             </div>
         )
     }
