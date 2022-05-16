@@ -2,6 +2,7 @@ package com.ecommerce.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -15,7 +16,8 @@ public class Vendor {
 	@Id
 	private int id;
 	@NotEmpty
-	private String mail;
+	@OneToOne
+	private User mail;
 	@NotEmpty
 	@Size(min=4,message="Registration number must have at least 4 characters")
 	private String registrationNumber;
@@ -34,10 +36,10 @@ public class Vendor {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getMail() {
+	public User getMail() {
 		return mail;
 	}
-	public void setMail(String mail) {
+	public void setMail(User mail) {
 		this.mail = mail;
 	}
 	public String getRegistrationNumber() {

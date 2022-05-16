@@ -20,28 +20,22 @@ function AddProduct(props:any){
     useEffect(()=>{
 
     },[]);
-    const [user,setUser]=useState({
-        name:"",
-        mail:"",
-        phone:"",
-        address:"",
-        gender:"",
-
-        photo: "",
-        photoUrl: "", //used to set the photo blob path of the selected photo
+    const [products,setProducts]=useState({
+        productName:"",
+        price:"",
+        categoryId:"",
+        vendorId:"",
+        description:"",
+        photoUrl:"",
+        thumbnail: "", //used to set the photo blob path of the selected photo
         otherImage : [] //for multiple selected photo
     });
 
-    var formData= new FormData();
-    var mailError: string="";
-    //number of inputs in the form excluding gender as it has a default value
-    var numberOfInputs: number=4;
-
     const AddPhoto = (e:any) => {
         let image = e.target.files[0];
-        setUser({
-            ...user,
-            photo: image,
+        setProducts({
+            ...products,
+            thumbnail: image,
             photoUrl: URL.createObjectURL(image) //displays the image in the image box
         });
         e.preventDefault();
@@ -49,32 +43,30 @@ function AddProduct(props:any){
 
     const AddOtherImages = (e:any) => {
         let images = e.target.files;
-        setUser({
-            ...user,
+        setProducts({
+            ...products,
             otherImage: images
         });
     }
 
     const handleForm=(e:any)=>{
-        console.log(user);
+        console.log(products);
 
         
-        postDataToServer(JSON.stringify(user));
+        postDataToServer(JSON.stringify(products));
         e.preventDefault();
     }
 
     //function to post data on server
     const postDataToServer=(data:any)=>{
-        axios.post(`${base_url}uReg`,data,{
+        axios.post(`${base_url}addProducts`,data,{
             headers: {
                 'Content-Type': 'application/json',
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                    console.log(response.data.mail);
                     alert("Success");
             },(error)=>{
-                console.log(error.response.data.mail);
                 
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
@@ -99,12 +91,12 @@ function AddProduct(props:any){
                             </Label>
                             <Input 
                                 id="productName"
-                                name="name"
+                                name="productName"
                                 placeholder="Enter Product Name"
                                 type="text"
                                 className='form-control'
                                 onChange={(e)=>{
-                                    setUser({...user,mail:e.target.value})
+                                    setProducts({...products,productName:e.target.value})
                                 }}
                             />
 
@@ -118,7 +110,7 @@ function AddProduct(props:any){
                                 type="text"
                                 className='form-control'
                                 onChange={(e)=>{
-                                    setUser({...user,name:e.target.value})
+                                    setProducts({...products,price:e.target.value})
                                 }}
                             />
 
@@ -126,20 +118,20 @@ function AddProduct(props:any){
                                 Category
                             </Label>
                             <select className="form-select" aria-label="Default select example" id="category" onChange={(e)=>{
-                                    setUser({...user,gender:e.target.value})
+                                    setProducts({...products,categoryId:e.target.value})
                                 }}>
                                 <option selected value="shirt">Shirt</option>
                                 <option value="pant">Pant</option>
                             </select>
                         <Label className='form-label my-2' for="photo">
-                            Photo
+                        Thumbnail
                         </Label>
                         <div>
-                            <img src={user.photoUrl} id="photoSrc" style={{height: 200, width: 300}}/>
+                            <img src={products.photoUrl} id="photoSrc" style={{height: 200, width: 300}}/>
                             <Input
                                 accept="image/*"
-                                id="photo"
-                                name="photo"
+                                id="thumbnail"
+                                name="thumbnail"
                                 type="file"
                                 className='form-control'
                                 onChange={AddPhoto}
