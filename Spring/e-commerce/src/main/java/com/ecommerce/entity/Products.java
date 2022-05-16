@@ -27,9 +27,17 @@ public class Products {
 	private byte[] thumbnail;
 	@NotEmpty
 	private double price;
+	@NotEmpty
+	private String description;
 	
 	
 	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public byte[] getThumbnail() {
 		return thumbnail;
 	}
