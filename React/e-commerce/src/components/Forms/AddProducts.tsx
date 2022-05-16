@@ -114,6 +114,21 @@ function AddProduct(props:any){
                                 }}
                             />
 
+                            <Label className='form-label my-2' for="description">
+                                Description
+                            </Label>
+                            <Input
+                                id="description"
+                                name="description"
+                                placeholder="Enter Product Description"
+                                type="text"
+                                className='form-control'
+                                style={{width: 400, height: 100}}
+                                onChange={(e)=>{
+                                    setProducts({...products,description:e.target.value})
+                                }}
+                            />
+
                             <Label className='form-label my-2' for="category">
                                 Category
                             </Label>
