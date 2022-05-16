@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import antlr.collections.List;
 
 import com.ecommerce.entity.Products;
+import com.ecommerce.entity.ReviewAndRating;
 import com.ecommerce.service.ProductsService;
+import com.ecommerce.service.ReviewAndRatingService;
 
 
 
@@ -36,7 +38,7 @@ public class ProductsController {
 	}
 
 	@GetMapping("/products")
-	public ResponseEntity<Stream<Products>> getAllProducts(){
+	public ResponseEntity<ArrayList<Products>> getAllProducts(){
 		return ResponseEntity.ok(productsService.getAllProducts()); 
 	}
 

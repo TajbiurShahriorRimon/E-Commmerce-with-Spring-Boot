@@ -77,7 +77,7 @@ class AddProductReview extends Component<any, any>{
                             </div>
                             <div>
                                 <br/><br/>
-                                <Link to={"/product/allReviews/2"}>
+                                <Link to={`/product/allReviews/${window.location.pathname.split("/").pop()}`}>
                                     <button className="btn btn-secondary">Check All Reviews</button>
                                 </Link>
                             </div>
