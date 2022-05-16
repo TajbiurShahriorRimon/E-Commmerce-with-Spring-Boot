@@ -21,7 +21,6 @@ function MainRoutes(){
     return(
         <div>
             <Routes>
-                
                     <Route path="/" element={<Login/>}/>
                     <Route path="/uReg" element={<UserRegistration/>}/>
                     <Route path="/uVendorReg" element={<VendorRegistrationUser/>}/>
@@ -37,7 +36,6 @@ function MainRoutes(){
                     <Route path="/testMail/:mail" element={<TestMail/>}/>
 
                     {/*Customer*/}
-                    <Route path="/customer/index/:tk" element={<Customer/>}/>
                     <Route path="/customer/index" element={<Customer/>}/>
                     <Route path="/customer/profile" element={<CustomerProfile/>}/>
                     <Route path="/customer/productForReview" element={<CustomerProductForReview/>}/>
@@ -45,7 +43,7 @@ function MainRoutes(){
                     {/*Product*/}
                     <Route path="/product/customer/giveReview/:productId" element={<ProductCustomerGiveReview/>}/>
                     <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
-                    <Route path="/product/allReviews" element={<ProductReviews/>}/>
+                    <Route path="/product/allReviews/:id" element={<ProductReviews/>}/>
             </Routes>
         </div>
     )
