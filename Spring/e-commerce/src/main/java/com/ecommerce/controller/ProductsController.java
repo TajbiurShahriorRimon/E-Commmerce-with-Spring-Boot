@@ -43,7 +43,7 @@ public class ProductsController {
 
 	@GetMapping("/products")
 	public ResponseEntity<ArrayList<Products>> getAllProducts(){
-		return ResponseEntity.ok(productsService.getAllProducts()); 
+		return ResponseEntity.ok(productsService.getAllProducts()); }
 	
 	@PostMapping(value="/addImage")
 	public ResponseEntity<String> addImage(@RequestParam("file") MultipartFile file) {
