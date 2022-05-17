@@ -1,31 +1,36 @@
 package com.ecommerce.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
-@Table(name="productsdummy")
+@Table(name="productsdummy1")
 public class Products {
 	
 	@Id
 	private String productId;
 	@NotEmpty
 	private String productName;
-	@NotEmpty
-	@ManyToOne
-	private Category category;
-	@NotEmpty
-	@ManyToOne
-	private Vendor vendor;
-	@NotEmpty
-	private String status;
+//	@NotEmpty
+//	@ManyToOne
+//	private Category category;
+//	@NotEmpty
+//	@ManyToOne
+//	private Vendor vendor;
+//	@NotEmpty
+//	private String status;
 	@Lob
 	private byte[] thumbnail;
-	@NotEmpty
+	@NotNull
 	private double price;
 	@NotEmpty
 	private String description;
@@ -41,8 +46,9 @@ public class Products {
 	public byte[] getThumbnail() {
 		return thumbnail;
 	}
-	public void setThumbnail(byte[] thumbnail) {
+	public Products setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
+		return this;
 	}
 	public double getPrice() {
 		return price;
@@ -63,24 +69,24 @@ public class Products {
 		this.productName = productName;
 	}
 	
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	public Vendor getVendor() {
-		return vendor;
-	}
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
+//	public Category getCategory() {
+//		return category;
+//	}
+//	public void setCategory(Category category) {
+//		this.category = category;
+//	}
+//	public Vendor getVendor() {
+//		return vendor;
+//	}
+//	public void setVendor(Vendor vendor) {
+//		this.vendor = vendor;
+//	}
+//	public String getStatus() {
+//		return status;
+//	}
+//	public void setStatus(String status) {
+//		this.status = status;
+//	}
+//	
 
 }

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import antlr.collections.List;
 
@@ -31,14 +33,23 @@ public class ProductsController {
 	
 	@PostMapping(value="/addProducts",consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Products> addProducts(@Valid @RequestBody Products product) {
+		System.out.println("Add entity");
 		product= this.productsService.addProducts(product);
 		return new ResponseEntity<Products>(product, HttpStatus.CREATED);
 	}
-
-	@GetMapping("/products")
-	public ResponseEntity<Stream<Products>> getAllProducts(){
-		return ResponseEntity.ok(productsService.getAllProducts()); 
+	
+	@PostMapping(value="/addImage")
+	public ResponseEntity<String> addImage(@RequestParam("file") MultipartFile file) {
+		System.out.println("Add image");
+		System.out.println(file.getOriginalFilename());
+		productsService.saveImage(file);
+		return new ResponseEntity("Working",HttpStatus.ACCEPTED); 
 	}
+
+//	@GetMapping("/products")
+//	public ResponseEntity<Stream<Products>> getAllProducts(){
+//		return ResponseEntity.ok(productsService.getAllProducts()); 
+//	}
 
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Products> getProduct(@PathVariable String id){

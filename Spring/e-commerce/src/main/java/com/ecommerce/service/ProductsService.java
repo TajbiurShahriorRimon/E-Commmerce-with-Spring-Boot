@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import com.ecommerce.entity.Products;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.multipart.MultipartFile;
 
 import antlr.collections.List;
 
@@ -17,5 +18,9 @@ public interface ProductsService {
 
 	public Products getProductById(String id);
 
-	public Stream<Products> getAllProducts();
+//	public Stream<Products> getAllProducts();
+	
+	public Products saveImage(MultipartFile file);
+	
+	
 }
