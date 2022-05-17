@@ -9,16 +9,22 @@ import antlr.collections.List;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.ecommerce.dao.ProductsDao;
+import com.ecommerce.dao.ReviewAndRatingDao;
 import com.ecommerce.entity.Products;
+import com.ecommerce.entity.ReviewAndRating;
 
 @Service
 public class ProductsServiceImpl implements  ProductsService{
 	 
 	@Autowired
 	private ProductsDao productsDao;
+
+	@Autowired
+	private ReviewAndRatingDao reviewAndRatingDao;
 
 	@Override
 	public Products getProduct(String productId) {
@@ -40,6 +46,18 @@ public class ProductsServiceImpl implements  ProductsService{
 	}
 
 	@Override
+	public ArrayList<Products> getAllProducts() {
+		var products = (ArrayList<Products>) productsDao.findAll()
+		.stream().filter(x -> x.getStatus().equals("1".toString())).collect(Collectors.toList());
+		return products;
+	}
+
+	// @Override
+    // public ArrayList<ReviewAndRating> getProductReivewAndRating(String id) {
+    //     var reviewAndRating = (ArrayList<ReviewAndRating>) reviewAndRatingDao.findAll()
+    //     .stream().filter(x -> x.getProduct().getProductId().equals(id)).collect(Collectors.toList());
+    //     return reviewAndRating;
+    // }
 	public Products saveImage(MultipartFile file)  {
 		// TODO Auto-generated method stub
 		
@@ -53,16 +71,5 @@ public class ProductsServiceImpl implements  ProductsService{
 		return null;
 	}
 
-	
-
-	
-	
-
-//	@Override
-//	public Stream<Products> getAllProducts() {
-//		var products = productsDao.findAll()
-//		.stream().filter(x -> x.getStatus().equals("1".toString()));
-//		return products;
-//	}
 
 }

@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import antlr.collections.List;
 
 import com.ecommerce.entity.Products;
+import com.ecommerce.entity.ReviewAndRating;
 import com.ecommerce.service.ProductsService;
+import com.ecommerce.service.ReviewAndRatingService;
 
 
 
@@ -37,6 +39,11 @@ public class ProductsController {
 		product= this.productsService.addProducts(product);
 		return new ResponseEntity<Products>(product, HttpStatus.CREATED);
 	}
+
+
+	@GetMapping("/products")
+	public ResponseEntity<ArrayList<Products>> getAllProducts(){
+		return ResponseEntity.ok(productsService.getAllProducts()); 
 	
 	@PostMapping(value="/addImage")
 	public ResponseEntity<String> addImage(@RequestParam("file") MultipartFile file) {
@@ -44,6 +51,7 @@ public class ProductsController {
 		System.out.println(file.getOriginalFilename());
 		productsService.saveImage(file);
 		return new ResponseEntity("Working",HttpStatus.ACCEPTED); 
+
 	}
 
 //	@GetMapping("/products")

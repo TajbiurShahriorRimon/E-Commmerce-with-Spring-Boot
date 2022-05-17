@@ -3,13 +3,83 @@ import {Button, Card } from "react-bootstrap";
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
 import {ButtonGroup} from "reactstrap";
 import StarRatings from "react-star-ratings";
+import axios from "axios";
+import base_url from "../../api/bootapi";
+import {Link} from "react-router-dom";
+import {HiInformationCircle} from "react-icons/hi";
 
 class SiteProductReviews extends Component<any, any>{
-    state = {
-        data: (<button>hello</button>),
-        test: "12"
+    constructor(props:any) {
+        super(props);
     }
+
+    state = {
+        //data: (<button>hello</button>),
+        //test: "12",
+        result: [],
+        productName: "",
+        loading: false
+    }
+
+    async componentDidMount() {
+        var id = window.location.pathname.split("/").pop();
+        const resp = await axios.get(`${base_url}product/getReviewsAndRatings/${id}`);
+        console.log(resp);
+
+        if (resp.status === 200){
+            this.setState({
+                result: resp.data,
+                productName: resp.data[0].product.productName,
+                loading: false,
+            })
+        }
+    }
+
     render() {
+
+        var resultTable;
+
+        if(this.state.loading){
+            resultTable = <h1>Loading...</h1>
+        }
+        else {
+            if (this.state.result.length == 0){
+                resultTable = <h2>No Review...</h2>
+            }
+            else {
+                resultTable = this.state.result.map((item: any) => {
+                    return (
+                        <div key={item.id}>
+                            <Card>
+                                <Card.Header>
+                                    <strong>{item.customer.mail.name}</strong><br/>
+                                    Rating: 3.7 <br/>
+                                    <StarRatings
+                                        rating={item.rating}
+                                        starDimension="25px"
+                                        starSpacing="5px"
+                                        starRatedColor="#cee009"
+                                    />
+                                </Card.Header>
+                                <Card.Body>
+                                    <Card.Title></Card.Title>
+                                    <Card.Text>
+                                        {item.value}
+                                    </Card.Text>
+                                    <button style={{float: "right"}}
+                                            className="btn-danger rounded-end btn"
+                                        /*hidden={this.state.test == "12434" ? true : false}*/
+                                    >
+                                        Hello button
+                                    </button>
+                                </Card.Body>
+                            </Card> <br/>
+                        </div>
+                    )
+                })
+            }
+        }
+
         var st = {
             height: "100vw",
             backgroundImage: "url("+"https://inspirationhut.net/wp-content/uploads/2013/05/201.png"+")",
@@ -45,7 +115,7 @@ class SiteProductReviews extends Component<any, any>{
                                     )}
                                 </TransformWrapper>
                             </div> <br/>
-                            <h4>Jeans Pant</h4>
+                            <h4>{this.state.productName}</h4>
                         </div>
                         <div className="col-md-7" style={{overflow: "auto", height: 400}}>
                             <Card>
@@ -69,94 +139,13 @@ class SiteProductReviews extends Component<any, any>{
                                     </Card.Text>
                                     <button style={{float: "right"}}
                                             className="btn-danger rounded-end btn"
-                                            hidden={this.state.test == "12434" ? true : false}
+                                            /*hidden={this.state.test == "12434" ? true : false}*/
                                     >
                                         Hello button
                                     </button>
                                 </Card.Body>
                             </Card> <br/>
-
-                            <Card>
-                                <Card.Header>
-                                    <strong>Asif Ahmed</strong><br/>
-                                    Rating: 3.7 <br/>
-                                    <StarRatings
-                                        rating={3.7}
-                                        starDimension="25px"
-                                        starSpacing="5px"
-                                        starRatedColor="#cee009"
-                                    />
-                                </Card.Header>
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Text>
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                    </Card.Text>
-                                    <button style={{float: "right"}}
-                                            className="btn-danger rounded-end btn"
-                                            hidden={this.state.test == "12434" ? true : false}
-                                    >
-                                        Hello button
-                                    </button>
-                                </Card.Body>
-                            </Card> <br/>
-                            <Card>
-                                <Card.Header>
-                                    <strong>Asif Ahmed</strong><br/>
-                                    Rating: 3.7 <br/>
-                                    <StarRatings
-                                        rating={3.7}
-                                        starDimension="25px"
-                                        starSpacing="5px"
-                                        starRatedColor="#cee009"
-                                    />
-                                </Card.Header>
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Text>
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                    </Card.Text>
-                                    <button style={{float: "right"}}
-                                            className="btn-danger rounded-end btn"
-                                            hidden={this.state.test == "12434" ? true : false}
-                                    >
-                                        Hello button
-                                    </button>
-                                </Card.Body>
-                            </Card> <br/>
-                            <Card>
-                                <Card.Header>
-                                    <strong>Asif Ahmed</strong><br/>
-                                    Rating: 3.7 <br/>
-                                    <StarRatings
-                                        rating={3.7}
-                                        starDimension="25px"
-                                        starSpacing="5px"
-                                        starRatedColor="#cee009"
-                                    />
-                                </Card.Header>
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Text>
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                        With supporting text below as a natural lead-in to additional content.
-                                    </Card.Text>
-                                    <button style={{float: "right"}}
-                                            className="btn-danger rounded-end btn"
-                                            hidden={this.state.test == "12434" ? true : false}
-                                    >
-                                        Hello button
-                                    </button>
-                                </Card.Body>
-                            </Card> <br/>
+                            {resultTable}
                         </div>
                     </div>
                     <div className="row">

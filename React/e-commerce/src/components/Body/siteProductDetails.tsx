@@ -7,6 +7,7 @@ import NumericInput from "react-numeric-input";
 import StarRatings from 'react-star-ratings';
 import axios from "axios";
 import base_url from "../../api/bootapi";
+import {Link} from "react-router-dom";
 
 class SiteProductDetails extends Component<any, any>{
     constructor(props : any) {
@@ -32,6 +33,7 @@ class SiteProductDetails extends Component<any, any>{
             }
         },
         loading: true,
+        urlParameter: "",
         df: "dsd"
     }
 
@@ -45,6 +47,7 @@ class SiteProductDetails extends Component<any, any>{
             this.setState({
                 result: resp.data,
                 loading: false,
+                urlParameter: id
             })
         }
     }
@@ -216,6 +219,16 @@ class SiteProductDetails extends Component<any, any>{
                                     It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
                                     and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                                 </p>
+                            </div>
+                            <div className="d-grid gap-2 text-danger">
+
+                                    <Button size="lg">
+                                        <Link to={`/product/allReviews/${this.state.urlParameter}`}>
+                                            <button className="btn btn" style={{backgroundColor: "green"}}>
+                                                Check Review
+                                            </button>
+                                        </Link>
+                                    </Button>
                             </div>
                         </div>
                     </div>
