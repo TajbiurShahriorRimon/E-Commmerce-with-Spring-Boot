@@ -1,18 +1,23 @@
 package com.ecommerce.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Category {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int categoryId;
-	@NotEmpty
+	@NotNull
 	private String categoryName;
-	@NotEmpty
+	@NotNull
 	private String status;
+	
+
 	
 	public int getCategoryId() {
 		return categoryId;
