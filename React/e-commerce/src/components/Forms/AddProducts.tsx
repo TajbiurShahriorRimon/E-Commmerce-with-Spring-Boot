@@ -13,9 +13,12 @@ import events from "node:events";
 
 
 
-
+function timeout(delay: number) {
+    return new Promise( res => setTimeout(res, delay) );
+}
 function AddProduct(props:any){
 
+    const[imageBase64String,setImageBase64String]=useState("");
     
     useEffect(()=>{
 
@@ -32,7 +35,21 @@ function AddProduct(props:any){
     });
 
     const AddPhoto = (e:any) => {
+        let reader= new FileReader();
         let image = e.target.files[0];
+        //tested code, probably isn't being used. will dlt later
+        if(image){
+            reader.readAsDataURL(image);
+            reader.onload=()=>{
+                let base64:any= reader.result;
+                setImageBase64String(base64)
+                console.log(imageBase64String)
+            };
+            reader.onerror=function(error){
+                console.log(error)
+            }
+        }
+        //ends here
         setProducts({
             ...products,
             thumbnail: image,
@@ -49,16 +66,30 @@ function AddProduct(props:any){
         });
     }
 
-    const handleForm=(e:any)=>{
-        console.log(products);
+    
 
+    const handleForm= (e:any)=>{
+        console.log(products);
+        const formData = new FormData();
+         formData.append('file',products.thumbnail)
+        // console.log(products.thumbnail)
+        // postDataToServer(JSON.stringify(products));
+        products.thumbnail=""
+        console.log(products.thumbnail)
         
+        //posting data to server
         postDataToServer(JSON.stringify(products));
+        setTimeout(() => {  postImageToServer(formData); }, 2000);
+        
+        
+        
+         
         e.preventDefault();
     }
 
     //function to post data on server
     const postDataToServer=(data:any)=>{
+        console.log("Data");
         axios.post(`${base_url}addProducts`,data,{
             headers: {
                 'Content-Type': 'application/json',
@@ -66,6 +97,33 @@ function AddProduct(props:any){
             }}).then(
             (response)=>{
                     alert("Success");
+            },(error)=>{
+                
+                let res:string[]=Object.values(error.response.data);
+                let errorMsg:string="";
+                
+                for(let i=0;i<res.length;i++){
+                    errorMsg+=res[i];
+                    errorMsg+="\n"
+                }
+                
+                  alert(errorMsg);
+            }
+        );
+    };
+
+    
+    // const config = {
+    //     headers: {
+    //         'content-type': 'multipart/form-data'
+    //     }
+    // }
+    const postImageToServer=(data:any)=>{
+        console.log("Image");
+        axios.post(`${base_url}addImage`,data,{
+           }).then(
+            (response)=>{
+                    alert(response.data);
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);
