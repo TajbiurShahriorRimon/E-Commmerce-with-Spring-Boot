@@ -18,7 +18,7 @@ public interface ProductsService {
 
 	public Products getProductById(String id);
 
-//	public Stream<Products> getAllProducts();
+	public Stream<Products> getAllProducts();
 	
 	public Products saveImage(MultipartFile file);
 	

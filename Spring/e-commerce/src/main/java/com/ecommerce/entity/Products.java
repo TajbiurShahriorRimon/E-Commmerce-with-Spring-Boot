@@ -20,14 +20,14 @@ public class Products {
 	private String productId;
 	@NotEmpty
 	private String productName;
-//	@NotEmpty
-//	@ManyToOne
-//	private Category category;
-//	@NotEmpty
-//	@ManyToOne
-//	private Vendor vendor;
-//	@NotEmpty
-//	private String status;
+	@NotEmpty
+	@ManyToOne
+	private Category category;
+	@NotEmpty
+	@ManyToOne
+	private Vendor vendor;
+	@NotEmpty
+	private String status;
 	@Lob
 	private byte[] thumbnail;
 	@NotNull
@@ -69,24 +69,24 @@ public class Products {
 		this.productName = productName;
 	}
 	
-//	public Category getCategory() {
-//		return category;
-//	}
-//	public void setCategory(Category category) {
-//		this.category = category;
-//	}
-//	public Vendor getVendor() {
-//		return vendor;
-//	}
-//	public void setVendor(Vendor vendor) {
-//		this.vendor = vendor;
-//	}
-//	public String getStatus() {
-//		return status;
-//	}
-//	public void setStatus(String status) {
-//		this.status = status;
-//	}
-//	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public Vendor getVendor() {
+		return vendor;
+	}
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 
 }
