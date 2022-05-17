@@ -22,6 +22,16 @@ class AddProductReview extends Component<any, any>{
         })
     }
 
+    click = (e: any) => {
+        //window.location.replace("/login");
+        if(this.state.review == ""){
+            alert("Review empty...")
+        }
+        if(this.state.initialRating == 0){
+            alert("Review empty...")
+        }
+    }
+
     /*handleText = (e: any) => {
         //e.preventDefault();
         this.setState({
@@ -72,7 +82,7 @@ class AddProductReview extends Component<any, any>{
                                           style={{width: 400, height: 100}}
                                     >
                                     </textarea> <br/> <br/>
-                                    <button className="btn-dark btn">Submit Review</button>
+                                    <button onClick={this.click} className="btn-dark btn">Submit Review</button>
                                 </div>
                             </div>
                             <div>
