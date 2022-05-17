@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
 import com.ecommerce.dao.ReviewAndRatingDao;
 import com.ecommerce.entity.ReviewAndRating;
 
@@ -19,17 +22,33 @@ public class ReviewAndRatingServiceImpl implements ReviewAndRatingService {
     @Autowired
     private ReviewAndRatingDao reviewAndRatingDao;
 
+    @Autowired
+    private EntityManager entityManager;
+
 	@Override
-    // public List<ReviewAndRating> getProductReivewAndRating(String id) {
-    //     var reviewAndRating = reviewAndRatingDao.findAll()
-    //     .stream().filter(x -> x.getProduct().getProductId().equals(id)).collect(Collectors.toList());
-    //     //.stream().filter(x -> x.getProduct().getProductId().equals(id)).collect(Collectors.toList());
-    //     return reviewAndRating;
-    // }
     public ArrayList<ReviewAndRating> getProductReivewAndRating(String id){
         var reviewAndRating = reviewAndRatingDao.findAll()
         .stream().filter(x -> x.getProduct().getProductId().equals(id)).collect(Collectors.toList());
         return (ArrayList<ReviewAndRating>) reviewAndRating;
+    }
+
+    @Override
+    public ReviewAndRating getReview(int id) {
+        var reviewAndRating = reviewAndRatingDao.findById(id).get();
+        return reviewAndRating;
+    }
+
+    @Transactional
+    @Override
+    public ReviewAndRating addReviewAnddRating(ReviewAndRating reviewAndRating) {
+        entityManager.createNativeQuery("INSERT into review_and_rating (rating, value, customer_id, product_product_id) VALUES (?, ?, ?, ?)")
+        .setParameter(1, reviewAndRating.getRating())
+        .setParameter(2, reviewAndRating.getValue())
+        .setParameter(3, reviewAndRating.getCustomer().getId())
+        .setParameter(4, reviewAndRating.getProduct().getProductId())
+        .executeUpdate();
+
+        return reviewAndRating;
     }
     
 }

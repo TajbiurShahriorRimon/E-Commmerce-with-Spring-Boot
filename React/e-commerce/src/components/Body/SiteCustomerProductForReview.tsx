@@ -4,6 +4,8 @@ import {Badge} from "react-bootstrap";
 import { Button } from "reactstrap";
 import {useNavigate, Router, Link, Navigate} from "react-router-dom";
 import StarRatings from "react-star-ratings";
+import axios from "axios";
+import base_url from "../../api/bootapi";
 
 class SiteCustomerProductForReview extends Component<any, any>{
     state = {
@@ -11,7 +13,40 @@ class SiteCustomerProductForReview extends Component<any, any>{
         show: false,
         btn: (
             <button className="btn btn-dark">Hello world</button>
-        )
+        ),
+
+        result: {
+            productName: "",
+            price: "",
+            category: { //another object
+                categoryName: "",
+            },
+            vendor: {
+                shopName: "",
+            }
+        },
+        loading: true,
+        urlParameter: "",
+        df: "dsd"
+    }
+
+    constructor(props : any) {
+        super(props);
+    }
+
+    async componentDidMount() {
+        console.log(window.location.pathname.split("/").pop());
+        var id = window.location.pathname.split("/").pop();
+        const resp = await axios.get(`${base_url}product/${id}`);
+
+        console.log(resp.data);
+        if (resp.status === 200){
+            this.setState({
+                result: resp.data,
+                loading: false,
+                urlParameter: id
+            })
+        }
     }
 
     handleShow = () =>{

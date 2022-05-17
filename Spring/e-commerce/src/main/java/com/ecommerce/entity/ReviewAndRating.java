@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ReviewAndRating {
@@ -22,7 +23,7 @@ public class ReviewAndRating {
 	private Customer customer;
 	@NotEmpty
 	private String value; //review description
-	@NotEmpty
+	@NotNull
 	private float rating; //rating value
 	public int getId() {
 		return id;
