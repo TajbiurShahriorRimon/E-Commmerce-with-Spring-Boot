@@ -1,5 +1,8 @@
 package com.ecommerce.service;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +15,18 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryDao categoryDao;
 
-	@Override
-	public Category getCategory(Integer categoryId) {
-		// TODO Auto-generated method stub
-		return categoryDao.getById(categoryId);
-	}
 
 	@Override
 	public Category addCategory(Category category) {
 		// TODO Auto-generated method stub
 		categoryDao.save(category);
+		return category;
+	}
+	
+	@Override
+	public ArrayList<Category> getAllCategory() {
+		var category = (ArrayList<Category>) categoryDao.findAll()
+		.stream().filter(x -> x.getStatus().equals("active".toString())).collect(Collectors.toList());
 		return category;
 	}
 
