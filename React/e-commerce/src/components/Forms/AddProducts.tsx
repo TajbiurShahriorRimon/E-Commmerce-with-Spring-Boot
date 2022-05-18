@@ -21,8 +21,28 @@ function AddProduct(props:any){
     const[imageBase64String,setImageBase64String]=useState("");
     
     useEffect(()=>{
+        getAllCategory();
 
     },[]);
+
+    const [category,setCategory] = useState([]);
+
+    const getAllCategory = () => {
+        axios.get(`${base_url}category`).then(
+            (response) => {
+                console.log(response.data);
+                setCategory(response.data);
+
+            },
+            (error) => {
+
+            }
+
+        );
+
+    };
+
+
     const [products,setProducts]=useState({
         productName:"",
         price:"",
@@ -193,8 +213,14 @@ function AddProduct(props:any){
                             <select className="form-select" aria-label="Default select example" id="category" onChange={(e)=>{
                                     setProducts({...products,categoryId:e.target.value})
                                 }}>
-                                <option selected value="shirt">Shirt</option>
-                                <option value="pant">Pant</option>
+                                <option selected>Select Category</option>
+                                {
+                                    category.map((item : any) => (
+                                        <option key={item.categoryId} value={item.categoryId}>
+                                            {item.categoryName}
+                                        </option>
+                                    ))
+                                }
                             </select>
                         <Label className='form-label my-2' for="photo">
                         Thumbnail
