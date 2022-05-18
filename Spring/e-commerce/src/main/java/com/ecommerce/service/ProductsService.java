@@ -13,11 +13,11 @@ import antlr.collections.List;
 
 public interface ProductsService {
 	
-	public Products getProduct(String productId);
+	public Products getProduct(int productId);
 
 	public Products addProducts(Products product);
 
-	public Products getProductById(String id);
+	public Products getProductById(int id);
 
 	public ArrayList<Products> getAllProducts();
 	
