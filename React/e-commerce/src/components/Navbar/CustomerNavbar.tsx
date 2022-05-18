@@ -32,7 +32,7 @@ export const CustomerNavbar = () => {
                             <NavDropdown.Item href="#action/3.3">My Orders <CgBox/> </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
+                            <NavDropdown.Item href="/logout">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
                         </NavDropdown>
                     </Navbar.Collapse>
                 </Container>
