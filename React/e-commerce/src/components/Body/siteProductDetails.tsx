@@ -19,6 +19,28 @@ class SiteProductDetails extends Component<any, any>{
             //alert("loggedId: "+localStorage.getItem("id2"));
             this.props.history.push("/logout/index");
         }*/
+
+        /*if (sessionStorage.getItem("shoppingCart") != null){
+
+        }*/
+
+        /*We have to make the Cart button enable or disable which is to add the or subtract item from the cart*/
+        if(localStorage.getItem("shoppingCart") != null){
+            var ara = JSON.parse(localStorage.getItem("shoppingCart") || '{}')
+            alert("not null, length: "+ara.length);
+            console.log(ara);
+            if(ara.length > 0){
+                var i = 0;
+
+                for (i = 0; i < ara.length; i++){
+                    if(ara[i].product_id == window.location.pathname.split("/").pop()){
+                        this.state.unit = ara[i].unit;
+                        this.state.cartButtonHidden = true
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     state = {
@@ -34,7 +56,8 @@ class SiteProductDetails extends Component<any, any>{
         },
         loading: true,
         urlParameter: "",
-        df: "dsd"
+        unit: 0,
+        cartButtonHidden: false
     }
 
     async componentDidMount() {
@@ -50,6 +73,54 @@ class SiteProductDetails extends Component<any, any>{
                 urlParameter: id
             })
         }
+    }
+
+    addToCart = (e: any) => {
+        e.preventDefault();
+        var productId = window.location.pathname.split("/").pop();
+        if (localStorage.getItem("shoppingCart") == null){
+            var cart = [
+                {
+                    product_id: productId,
+                    unit: this.state.unit
+                }
+            ]
+            localStorage.setItem("shoppingCart", JSON.stringify(cart));
+        }
+        else {
+            var ara = JSON.parse(localStorage.getItem("shoppingCart") || '{}')
+            var cart1 = {
+                product_id: productId,
+                unit: this.state.unit
+            }
+            ara.push(cart1);
+            console.log("Array in Storage");
+            console.log(ara);
+        }
+    }
+
+    addUnit = (e: any) => {
+        e.preventDefault();
+        if(this.state.unit == 5){
+            return
+        }
+        this.setState({
+            unit: this.state.unit + 1
+        })
+        this.state.unit = this.state.unit + 1
+        //alert(this.state.unit);
+    }
+
+    subtractUnit = (e: any) => {
+        e.preventDefault();
+        if(this.state.unit == 0){
+            return
+        }
+        this.setState({
+            unit: this.state.unit - 1
+        })
+        this.state.unit = this.state.unit - 1
+        //alert(this.state.unit);
     }
 
     render() {
@@ -195,15 +266,27 @@ class SiteProductDetails extends Component<any, any>{
 
                             <div className="row">
                                 <div className="col-md-2">
-                                    <button className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>
+                                    <button hidden={this.state.cartButtonHidden} onClick={this.addToCart} className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>
                                 </div>
-                                <div className="col-md-2">
+                                <div className="col-md-4">
                                     <span>
-                                        <NumericInput size={2} min={0} max={5}
+                                        {/*<NumericInput size={2} min={0} max={5} value={this.state.unit} type="up-down"
                                             onKeyDown={(e)=>{
                                                 e.preventDefault();
                                             }}
-                                        />
+                                            onChange={(e:any) => {
+                                                alert(e.target.value);
+                                            }}
+                                        />*/}
+                                        <div className="card-group">
+                                            <input size={2} type="text" readOnly={true} value={this.state.unit}/>
+                                            <div className="btn-group">
+                                                <button className="btn btn-dark" onClick={this.subtractUnit}>
+                                                    ↓
+                                                </button>
+                                                <button className="btn btn-dark" onClick={this.addUnit}>↑</button>
+                                            </div>
+                                        </div>
                                     </span>
                                     <button className="btn btn"><ImHeart style={{fontSize:"1.5em"}}/></button>
                                 </div>

@@ -2,18 +2,34 @@ import React, {Component} from "react";
 import {Badge} from "react-bootstrap";
 import { Rating } from 'react-simple-star-rating';
 import {Link} from "react-router-dom";
+import axios from "axios";
+import base_url from "../../api/bootapi";
 
 class AddProductReview extends Component<any, any>{
     state = {
         initialRating: 0,
-        review: ""
+        review: "",
+        reviewDetailsErr: "",
+        ratingErr: "",
+
+        reviewAndRating: {
+            id: "",
+            rating: 0,
+            value: "",
+            customer: {
+                id: 0 //LocalStorage
+            },
+            product: {
+                productId: window.location.pathname.split("/").pop()
+            }
+        }
     }
 
     addRating = (rate: number) => {
         this.setState({
-            initialRating: 4
+            initialRating: rate
         })
-        alert(rate/20);
+        //alert(rate/20);
     }
 
     handleInput = (e: any) => {
@@ -22,13 +38,43 @@ class AddProductReview extends Component<any, any>{
         })
     }
 
-    click = (e: any) => {
+    click = async (e: any) => {
         //window.location.replace("/login");
         if(this.state.review == ""){
-            alert("Review empty...")
+            this.setState({
+                reviewDetailsErr: "Review Description cannot be empty..."
+            })
+            return;
+        }
+        else {
+            this.setState({
+                reviewDetailsErr: ""
+            })
         }
         if(this.state.initialRating == 0){
-            alert("Review empty...")
+            this.setState({
+                ratingErr: "Give a rating..."
+            })
+            return;
+        }
+        else {
+            this.setState({
+                ratingErr: ""
+            })
+        }
+
+        if(this.state.ratingErr == "" && this.state.reviewDetailsErr == ""){
+            var productId = window.location.pathname.split("/").pop();
+            var starRating = (this.state.initialRating)/20;
+
+            this.state.reviewAndRating.value = this.state.review;
+            this.state.reviewAndRating.rating = starRating;
+            this.state.reviewAndRating.customer.id = 1; //Local Storage
+
+            const resp = await axios.post(`${base_url}reviewAndRating`, this.state.reviewAndRating);
+            if(resp.status == 201){
+                alert("Success");
+            }
         }
     }
 
@@ -67,9 +113,13 @@ class AddProductReview extends Component<any, any>{
                                     <br/>
                                     <div>
                                         <Rating onClick={this.addRating} ratingValue={this.state.initialRating}
+                                                initialValue={this.state.initialRating}
                                                 allowHalfIcon={true}
                                                 transition={true}
                                         />
+                                    </div>
+                                    <div className="text-danger">
+                                        {this.state.ratingErr}
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +131,11 @@ class AddProductReview extends Component<any, any>{
                                           value={this.state.review}
                                           style={{width: 400, height: 100}}
                                     >
-                                    </textarea> <br/> <br/>
+                                    </textarea>
+                                    <div className="text-danger">
+                                        {this.state.reviewDetailsErr}
+                                    </div>
+                                    <br/>
                                     <button onClick={this.click} className="btn-dark btn">Submit Review</button>
                                 </div>
                             </div>
