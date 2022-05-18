@@ -18,7 +18,7 @@ export default function VendorRegistrationUser(){
         mail:"",
         phone:"",
         address:"",
-        gender:"",
+        gender:"male",
         type:"vendor"
         
     });

@@ -5,12 +5,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name="user_table")
 public class User {
+	
 	
 	@Id
 	@NotEmpty(message="Mail cannot be empty")
@@ -85,6 +87,12 @@ public class User {
 	}
 	public void setStatus() {
 		this.status="active";
+	}
+	
+	@Override
+	public String toString() {
+		return "User [mail=" + mail + ", name=" + name + ", phone=" + phone + ", address=" + address + ", type=" + type
+				+ ", gender=" + gender + ", status=" + status + "]";
 	}
 	
 }

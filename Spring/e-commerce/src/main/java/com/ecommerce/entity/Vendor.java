@@ -1,23 +1,33 @@
 package com.ecommerce.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
-@Table(name="vendorDummy2")
+@Table(name="vendorDummy3")
 public class Vendor {
 
 	
 
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotEmpty
+	
 	@OneToOne
-	private User mail;
+	@JsonProperty("user")
+	private User user;
+//	private String mail;
 	@NotEmpty
 	@Size(min=4,message="Registration number must have at least 4 characters")
 	private String registrationNumber;
@@ -37,10 +47,10 @@ public class Vendor {
 		this.id = id;
 	}
 	public User getMail() {
-		return mail;
+		return user;
 	}
 	public void setMail(User mail) {
-		this.mail = mail;
+		this.user = mail;
 	}
 	public String getRegistrationNumber() {
 		return registrationNumber;
@@ -65,5 +75,11 @@ public class Vendor {
 	}
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+	
+	@Override
+	public String toString() {
+		return "Vendor [id=" + id + ", user=" + user + ", registrationNumber=" + registrationNumber + ", shopPhone="
+				+ shopPhone + ", shopAddress=" + shopAddress + ", shopName=" + shopName + "]";
 	}
 }

@@ -27,14 +27,12 @@ public class UserController {
 		private UserService userservice;
 		
 		
-		@GetMapping("/userHome/{userId}")
-		public User userHome(@PathVariable String userId) {
-			return this.getUser(userId);
-		}
+//		@GetMapping("/userHome/{userId}")
+//		public User userHome(@PathVariable String userId) {
+//			return this.getUser(userId);
+//		}
 		
-		public User getUser(String userId) {
-			return this.userservice.getUser(userId);
-		}
+		
 		
 		@PostMapping(value="/uReg",consumes=MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
@@ -45,8 +43,13 @@ public class UserController {
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 
-		@GetMapping("/user/{email}")
-		public ResponseEntity<User> get(@PathVariable String email){
+		@PostMapping("/getUser")
+		public ResponseEntity<User> getUser(@RequestBody String email){
+			
+			String[] email2=email.split("=");
+			System.out.println(email2[0]);
+			email=email2[0].replace("%40", "@");
+			System.out.println(email);
 			return ResponseEntity.ok(this.userservice.getUser(email));
 			//return email;
 		}

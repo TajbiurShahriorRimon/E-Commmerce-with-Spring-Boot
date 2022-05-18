@@ -15,9 +15,9 @@ export default function VendorRegistrationShop(){
 
     },[]);
 
-  
+    
     const [vendor,setVendor]=useState({
-        mail:"",
+        user:"",
         shopPhone:"",
         shopAddress:"",
         registrationNumber:"",
@@ -39,25 +39,55 @@ export default function VendorRegistrationShop(){
     const handleForm=(e:any)=>{
        ;
         
-        vendor.mail=mail!;
-
         
-        postDataToServer(JSON.stringify(vendor));
+
+        postMailToServer(mail);
+        setTimeout(() => {  postDataToServer(JSON.stringify(vendor)); }, 2000);
+        
         e.preventDefault();
     }
 
     //function to post data on server
     const postDataToServer=(data:any)=>{
-        
+        console.log(data);
         axios.post(`${base_url}uVendorReg`,data,{
             headers: {
                 'Content-Type': 'application/json',
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                navigate(`/sLoginReg/${vendor.mail}`);
+
+                alert(response.data);
             },(error)=>{
+                console.log("error");
+                let res:string[]=Object.values(error.response.data);
+                let errorMsg:string="";
+
+                for(let i=0;i<res.length;i++){
+                    errorMsg+=res[i];
+                    errorMsg+="\n"
+                }
                 
+                  alert(errorMsg);
+                
+                
+                
+                
+            }
+        );
+    };
+
+    //use
+    const postMailToServer=(data:any)=>{
+        
+        console.log(data);
+        axios.post(`${base_url}getUser`,data).then(
+            (response)=>{
+
+                vendor.user=response.data;
+                console.log(vendor.user);
+            },(error)=>{
+                console.log("error");
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
 
