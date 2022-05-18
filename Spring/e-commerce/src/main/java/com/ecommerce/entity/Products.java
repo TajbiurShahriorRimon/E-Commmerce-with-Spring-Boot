@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 public class Products {
 	
 	@Id
-	private String productId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int productId;
 	@NotEmpty
 	private String productName;
 	@NotEmpty
@@ -56,10 +57,10 @@ public class Products {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public String getProductId() {
+	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(String productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 	public String getProductName() {

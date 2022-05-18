@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.ecommerce.entity.Products;
 
-public interface ProductsDao extends JpaRepository<Products, String> {
+public interface ProductsDao extends JpaRepository<Products, Integer> {
 	
 //	@Query("select t from Products t order by t.id desc LIMIT 1")
 //	public Products findLastRow();

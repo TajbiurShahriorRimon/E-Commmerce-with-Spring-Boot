@@ -27,7 +27,7 @@ public class ProductsServiceImpl implements  ProductsService{
 	private ReviewAndRatingDao reviewAndRatingDao;
 
 	@Override
-	public Products getProduct(String productId) {
+	public Products getProduct(int productId) {
 		// TODO Auto-generated method stub
 		return productsDao.getById(productId);
 	}
@@ -35,13 +35,12 @@ public class ProductsServiceImpl implements  ProductsService{
 	@Override
 	public Products addProducts(Products product) {
 		// TODO Auto-generated method stub
-		product.setProductId("22");
 		productsDao.save(product);
 		return product;
 	}
 
 	@Override
-	public Products getProductById(String id){
+	public Products getProductById(int id){
 		return productsDao.findById(id).get();
 	}
 

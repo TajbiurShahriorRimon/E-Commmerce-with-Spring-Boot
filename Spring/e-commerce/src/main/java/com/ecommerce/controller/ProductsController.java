@@ -60,7 +60,7 @@ public class ProductsController {
 //	}
 
 	@GetMapping("/product/{id}")
-	public ResponseEntity<Products> getProduct(@PathVariable String id){
+	public ResponseEntity<Products> getProduct(@PathVariable int id){
 		return ResponseEntity.ok(productsService.getProductById(id));
 	}
 

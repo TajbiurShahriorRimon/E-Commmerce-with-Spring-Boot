@@ -30,7 +30,7 @@ public class ReviewAndRatingController {
     private EntityManager entityManager;
 
     @GetMapping("/product/getReviewsAndRatings/{id}")
-    public ResponseEntity<ArrayList<ReviewAndRating>> getReviewAndRating(@PathVariable String id /* User Id */){
+    public ResponseEntity<ArrayList<ReviewAndRating>> getReviewAndRating(@PathVariable int id /* User Id */){
         return ResponseEntity.ok(reviewAndRatingService.getProductReivewAndRating(id));
     }
 
