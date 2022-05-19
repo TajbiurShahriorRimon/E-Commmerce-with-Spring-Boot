@@ -1,5 +1,8 @@
 package com.ecommerce.controller;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 //import java.sql.DriverManager;
 
 import javax.validation.Valid;
@@ -46,10 +49,16 @@ public class UserController {
 		@PostMapping("/getUser")
 		public ResponseEntity<User> getUser(@RequestBody String email){
 			
-			String[] email2=email.split("=");
-			System.out.println(email2[0]);
-			email=email2[0].replace("%40", "@");
+//			String[] email2=email.split("=");
+//			System.out.println(email2[0]);
+//			email=email2[0].replace("%40", "@");
 			System.out.println(email);
+			Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(email);
+			while (m.find()) {
+				email=m.group();
+		        System.out.println(m.group());
+		    }
+			//email=m.group();
 			return ResponseEntity.ok(this.userservice.getUser(email));
 			//return email;
 		}

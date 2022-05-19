@@ -3,6 +3,8 @@ package com.ecommerce.controller;
 
 
 import java.net.http.HttpRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.validation.Valid;
 
@@ -18,6 +20,7 @@ import org.springframework.http.MediaType;
 import com.ecommerce.entity.User;
 import com.ecommerce.entity.Vendor;
 import com.ecommerce.service.VendorService;
+import com.ecommerce.service.VendorServiceImpl;
 
 @RestController
 public class VendorController {
@@ -35,6 +38,34 @@ public class VendorController {
 		vendor=this.vendorService.addVendor(vendor);
 		
 		return new ResponseEntity<Vendor> (vendor,HttpStatus.CREATED);
+	}
+	
+//	@PostMapping(value="/getVendor")
+//	public ResponseEntity<Vendor> getVendor( @RequestBody String userMail) {
+//		
+//		System.out.println(userMail);
+//		Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(userMail);
+//		while (m.find()) {
+//			userMail=m.group();
+//	        System.out.println(m.group());
+//	    }
+//		Vendor vendor =this.vendorService.getVendor(userMail);
+//		return new ResponseEntity<Vendor> (vendor,HttpStatus.CREATED);
+//	}
+	
+	@PostMapping(value="/getVendorIdByUserMail")
+	public ResponseEntity<Vendor> getVendorId( @RequestBody String userMail) {
+		
+		System.out.println(userMail);
+		Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(userMail);
+		while (m.find()) {
+			userMail=m.group();
+	        System.out.println(m.group());
+	    }
+		int id =this.vendorService.getVendorIdByUserMail(userMail);
+		Vendor vendor=this.vendorService.getVendor(id);
+		System.out.println(vendor);
+		return  ResponseEntity.ok(vendor);
 	}
 	
 //	@PostMapping(value="/uVendorReg")

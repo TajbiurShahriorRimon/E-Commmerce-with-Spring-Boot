@@ -37,7 +37,7 @@ function MainRoutes(){
                     <Route path="/vHome" element={<Vendor/>}/>
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/addCategory" element={<AddCategory/>}/>
-                    <Route path="/vAddProducts" element={<VendorAddProducts/>}/>
+                    <Route path="/vAddProducts/:mail" element={<VendorAddProducts/>}/>
                     <Route path="/vAddCategory" element={<VendorAddCategory/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/testMail/:mail" element={<TestMail/>}/>

@@ -10,10 +10,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
-@Table(name="productsdummy1")
+@Table(name="productsdummy2")
 public class Products {
 	
 	@Id
@@ -21,13 +22,14 @@ public class Products {
 	private int productId;
 	@NotEmpty
 	private String productName;
-	@NotEmpty
+	
 	@ManyToOne
 	private Category category;
-	@NotEmpty
+	@NotNull
 	@ManyToOne
+	@JsonProperty("vendor")
 	private Vendor vendor;
-	@NotEmpty
+	
 	private String status;
 	@Lob
 	private byte[] thumbnail;
