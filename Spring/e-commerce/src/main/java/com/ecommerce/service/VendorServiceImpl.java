@@ -18,4 +18,17 @@ public class VendorServiceImpl implements VendorService{
 		return vendor;
 	}
 
+	@Override
+	public Vendor getVendor(int id) {
+		// TODO Auto-generated method stub
+		return vendorDao.findById(id).get();
+	}
+
+	@Override
+	public int getVendorIdByUserMail(String mail) {
+		// TODO Auto-generated method stub
+		System.out.println(vendorDao.findByUserMail(mail).getId());
+		return vendorDao.findByUserMail(mail).getId();
+	}
+
 }

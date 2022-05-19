@@ -22,7 +22,7 @@ function AddCategory(props:any){
     },[]);
     const [category,setCategory]=useState({
         categoryName:"",
-        status:"",
+        status:"active",
     });
 
 

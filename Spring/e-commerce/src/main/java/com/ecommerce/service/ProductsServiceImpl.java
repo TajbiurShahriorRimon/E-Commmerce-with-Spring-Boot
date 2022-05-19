@@ -35,6 +35,7 @@ public class ProductsServiceImpl implements  ProductsService{
 	@Override
 	public Products addProducts(Products product) {
 		// TODO Auto-generated method stub
+		product.setStatus("active");
 		productsDao.save(product);
 		return product;
 	}
