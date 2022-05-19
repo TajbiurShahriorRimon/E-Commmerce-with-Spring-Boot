@@ -37,11 +37,11 @@ class CustomerHome extends Component<any, any>{
                 return(
                     <div className="col-lg-3 mb-5">
                         <Card style={{ width: '18rem' }} className="box">
-                            <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
+                            <Card.Img variant="top" src={"data:image/png;base64,"+item.thumbnail} style={{height: "180px", width: "100%"}}/>
                             <Card.Body>
                                 <Card.Title>{item.productName}</Card.Title>
                                 <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
-                                <Button variant="primary" href=''>Edit</Button>
+                                {/*<Button variant="primary" href=''>Edit</Button>*/}
                                 <Link to={`/product/productDetails/`+item.productId}>
 
                                     <HiInformationCircle style={{fontSize:"2em", float: "right"}}/>
@@ -191,75 +191,6 @@ class CustomerHome extends Component<any, any>{
                 <br/>
                 <div className="container">
                     <div className="row justify-content-lg-start">
-                        <div className="col-lg-3 mb-5">
-                            <Card style={{ width: '18rem' }} className="box">
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
-                                <Card.Body>
-                                    <Card.Title>Jeans</Card.Title>
-                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
-                                    <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card style={{ width: '18rem' }} className="box">
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
-                                <Card.Body>
-                                    <Card.Title>Jeans</Card.Title>
-                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
-                                    <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card style={{ width: '18rem' }} className="box">
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
-                                <Card.Body>
-                                    <Card.Title>Jeans</Card.Title>
-                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
-                                    <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card style={{ width: '18rem' }} className="box">
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
-                                <Card.Body>
-                                    <Card.Title>Jeans</Card.Title>
-                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
-                                    <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card style={{ width: '18rem' }} className="box">
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}}/>
-                                <Card.Body>
-                                    <Card.Title>Jeans</Card.Title>
-                                    <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
-                                    <Button variant="primary" href=''>Edit</Button>
-                                    <Link to={`/product/productDetails/2`}>
-                                        <button className="btn btn-warning">Information</button>
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </div>
                         {resultTable}
                     </div>
                 </div>
