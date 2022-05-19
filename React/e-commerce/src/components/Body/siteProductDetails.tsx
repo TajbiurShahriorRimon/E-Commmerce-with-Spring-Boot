@@ -18,6 +18,7 @@ class SiteProductDetails extends Component<any, any>{
         result: {
             productName: "",
             price: "",
+            thumbnail: "",
             category: { //another object
                 categoryName: "",
             },
@@ -168,7 +169,7 @@ class SiteProductDetails extends Component<any, any>{
             "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg",
         ]
         const imagePath = "https://www.w3schools.com/html/img_girl.jpg";
-
+        var thumb = "data:image/png;base64,"+this.state.result.thumbnail;
         return(
             <div className="container">
                 <br/> <br/>
@@ -181,7 +182,14 @@ class SiteProductDetails extends Component<any, any>{
                                         <React.Fragment>
 
                                             <TransformComponent>
-                                                <img src="https://www.w3schools.com/html/img_girl.jpg" alt="test"
+                                                {/*<img src={this.state.result.thumbnail == null ? imagePath : this.state.result.thumbnail} alt="test"
+                                                     style={
+                                                         {  height: 300,
+                                                             width: 250
+                                                         }
+                                                     }
+                                                />*/}
+                                                <img src={this.state.result.thumbnail == null ? imagePath : thumb}
                                                      style={
                                                          {  height: 300,
                                                              width: 250
@@ -201,7 +209,7 @@ class SiteProductDetails extends Component<any, any>{
                                 </TransformWrapper>
                             </div>
                             <br/>
-                            <div className="row">
+                            {/*<div className="row">
                                 <div className="col-md-3" style={{border: "solid", backgroundColor: "mistyrose"}}>
                                     <TransformWrapper initialScale={1}>
                                         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
@@ -275,7 +283,7 @@ class SiteProductDetails extends Component<any, any>{
                                         )}
                                     </TransformWrapper>
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
 
                         <div className="col-md-7">
