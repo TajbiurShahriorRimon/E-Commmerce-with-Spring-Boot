@@ -12,35 +12,6 @@ import {Link} from "react-router-dom";
 class SiteProductDetails extends Component<any, any>{
     constructor(props : any) {
         super(props);
-
-        /*var isLoggedIn = localStorage.getItem("id2");
-        //alert("id: "+localStorage.getItem("id2"));
-        if(isLoggedIn == null){
-            //alert("loggedId: "+localStorage.getItem("id2"));
-            this.props.history.push("/logout/index");
-        }*/
-
-        /*if (sessionStorage.getItem("shoppingCart") != null){
-
-        }*/
-
-        /*We have to make the Cart button enable or disable which is to add the or subtract item from the cart*/
-        if(localStorage.getItem("shoppingCart") != null){
-            var ara = JSON.parse(localStorage.getItem("shoppingCart") || '{}')
-            alert("not null, length: "+ara.length);
-            console.log(ara);
-            if(ara.length > 0){
-                var i = 0;
-
-                for (i = 0; i < ara.length; i++){
-                    if(ara[i].product_id == window.location.pathname.split("/").pop()){
-                        this.state.unit = ara[i].unit;
-                        this.state.cartButtonHidden = true
-                        break;
-                    }
-                }
-            }
-        }
     }
 
     state = {
@@ -50,18 +21,45 @@ class SiteProductDetails extends Component<any, any>{
             category: { //another object
                 categoryName: "",
             },
-            vendor: {
+            /*vendor: {
                 shopName: "",
-            }
+            }*/
         },
         loading: true,
         urlParameter: "",
-        unit: 0,
-        cartButtonHidden: false
+        unit: 1,
+        cartButtonHidden: false,
+        cartBtn: (
+            <button className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>
+        )
     }
 
     async componentDidMount() {
-        console.log(window.location.pathname.split("/").pop());
+        /*We have to make the Cart button enable or disable which is to add the or subtract item from the cart*/
+        if(localStorage.getItem("shoppingCart") != null){
+            var ara = JSON.parse(localStorage.getItem("shoppingCart") || '{}')
+            //alert("not null, length: "+ara.length);
+            console.log(ara);
+            if(ara.length > 0){
+                var i = 0;
+                console.log(localStorage.getItem("shoppingCart"));
+
+                for (i = 0; i < ara.length; i++){
+                    if(ara[i].product_id == window.location.pathname.split("/").pop()){
+                        //alert("found");
+                        this.state.unit = ara[i].unit;
+                        this.setState({
+                            cartBtn: (
+                                <button className="btn-outline-primary btn-info btn"><strong>Update Cart</strong> <ImCart/></button>
+                            )
+                        })
+                        break;
+                    }
+                }
+            }
+        }
+
+        //console.log(window.location.pathname.split("/").pop());
         var id = window.location.pathname.split("/").pop();
         const resp = await axios.get(`${base_url}product/${id}`);
 
@@ -77,25 +75,64 @@ class SiteProductDetails extends Component<any, any>{
 
     addToCart = (e: any) => {
         e.preventDefault();
+        //Changing the button of the cart
+        this.setState({
+            cartBtn: (
+                <button className="btn-outline-primary btn-info btn"><strong>Update Cart</strong> <ImCart/></button>
+            )
+        })
+
         var productId = window.location.pathname.split("/").pop();
+        //If the shopping cart is empty then we have to add a product in the cart
         if (localStorage.getItem("shoppingCart") == null){
             var cart = [
                 {
                     product_id: productId,
-                    unit: this.state.unit
+                    unit: this.state.unit,
+                    product_name: this.state.result.productName,
+                    product_category_name: this.state.result.category.categoryName,
+                    product_price: this.state.result.price,
                 }
             ]
             localStorage.setItem("shoppingCart", JSON.stringify(cart));
+            console.log(JSON.parse(localStorage.getItem("shoppingCart") || '{}'))
         }
         else {
+            //Check if the product exists in the cart
             var ara = JSON.parse(localStorage.getItem("shoppingCart") || '{}')
+
+            if(ara.length > 0){
+                var i = 0;
+                console.log(localStorage.getItem("shoppingCart"));
+
+                //If the product exists then we have to update the unit value
+                for (i = 0; i < ara.length; i++){
+                    if(ara[i].product_id == window.location.pathname.split("/").pop()){
+                        //alert("found! already added: " + this.state.unit);
+                        ara[i].unit = this.state.unit;
+                        this.setState({
+                            unit: ara[i].unit
+                        })
+                        localStorage.setItem("shoppingCart", JSON.stringify(ara));
+                        console.log("cart...");
+                        console.log(JSON.parse(localStorage.getItem("shoppingCart") || '{}'))
+                        return;
+                    }
+                }
+            }
+
+            //So this product is not in the cart. Therefore insert product in the shopping cart
             var cart1 = {
                 product_id: productId,
-                unit: this.state.unit
+                unit: this.state.unit,
+                product_name: this.state.result.productName,
+                product_category_name: this.state.result.category.categoryName,
+                product_price: this.state.result.price,
             }
             ara.push(cart1);
+            localStorage.setItem("shoppingCart", JSON.stringify(ara));
             console.log("Array in Storage");
-            console.log(ara);
+            console.log(JSON.parse(localStorage.getItem("shoppingCart") || '{}'));
         }
     }
 
@@ -113,14 +150,16 @@ class SiteProductDetails extends Component<any, any>{
 
     subtractUnit = (e: any) => {
         e.preventDefault();
-        if(this.state.unit == 0){
+        if(this.state.unit == 1){
+            this.setState({
+                cartButtonHidden: this.state.unit - 1
+            })
             return
         }
         this.setState({
             unit: this.state.unit - 1
         })
         this.state.unit = this.state.unit - 1
-        //alert(this.state.unit);
     }
 
     render() {
@@ -250,7 +289,8 @@ class SiteProductDetails extends Component<any, any>{
                                 <label><strong>Category</strong>: <Badge pill bg="success"><strong> {this.state.result.category.categoryName}</strong> </Badge></label>
                             </div>
                             <div>
-                                <label><strong>Vendor:</strong> {this.state.result.vendor.shopName}</label>
+                                {/*<label><strong>Vendor:</strong> {this.state.result.vendor.shopName}</label>*/}
+                                <label><strong>Vendor:</strong> </label>
                             </div>
                             <div>
                                 <label style={{fontSize:"1.2em"}}><strong>Rating:</strong> 3.7 </label>
@@ -265,8 +305,9 @@ class SiteProductDetails extends Component<any, any>{
                             <br/>
 
                             <div className="row">
-                                <div className="col-md-2">
-                                    <button hidden={this.state.cartButtonHidden} onClick={this.addToCart} className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>
+                                <div className="col-md-2" onClick={this.addToCart}>
+                                    {/*<button hidden={this.state.cartButtonHidden} onClick={this.addToCart} className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>*/}
+                                    {this.state.cartBtn}
                                 </div>
                                 <div className="col-md-4">
                                     <span>

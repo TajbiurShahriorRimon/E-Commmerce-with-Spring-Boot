@@ -4,6 +4,7 @@ import {ImSearch, ImHeart} from "react-icons/im";
 import {HiOutlineLogout} from "react-icons/hi";
 import {CgProfile, CgShoppingCart, CgBox} from "react-icons/cg";
 import {MdReviews} from "react-icons/md";
+import {Link} from "react-router-dom";
 
 export const CustomerNavbar = () => {
     return (
@@ -31,6 +32,11 @@ export const CustomerNavbar = () => {
                             <NavDropdown.Item href="#action/3.2">My Wishlist <ImHeart/> </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">My Orders <CgBox/> </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>
+                            <div className="dropdown-item">
+                                <Link to={"/shoppingCart"}>
+                                    My Cart <CgShoppingCart/>
+                                </Link>
+                            </div>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="/logout">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
                         </NavDropdown>

@@ -28,7 +28,7 @@ public class ReviewAndRatingServiceImpl implements ReviewAndRatingService {
 	@Override
     public ArrayList<ReviewAndRating> getProductReivewAndRating(int id){
         var reviewAndRating = reviewAndRatingDao.findAll()
-        .stream().filter(x -> x.getProduct().getProductId().equals(id)).collect(Collectors.toList());
+        .stream().filter(x -> x.getProduct().getProductId() == id).collect(Collectors.toList());
         return (ArrayList<ReviewAndRating>) reviewAndRating;
     }
 
