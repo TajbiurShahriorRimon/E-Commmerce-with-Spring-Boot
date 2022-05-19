@@ -11,7 +11,7 @@ export const CustomerNavbar = () => {
         <div>
             <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
                 <Container>
-                    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand href="#home">Dokan</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="justify-content-center" style={{ flex: 1}}>
@@ -25,7 +25,7 @@ export const CustomerNavbar = () => {
                             </Form>
                             <Nav.Link href="" className="d-flex"> <CgShoppingCart style={{fontSize:"1.5em"}}/> </Nav.Link>
                         </Nav>
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="/customer/index">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
                         <NavDropdown title="Mr XYZ" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>

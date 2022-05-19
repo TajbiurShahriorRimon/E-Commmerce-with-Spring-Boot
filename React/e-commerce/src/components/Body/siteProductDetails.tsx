@@ -89,10 +89,17 @@ class SiteProductDetails extends Component<any, any>{
             var cart = [
                 {
                     product_id: productId,
-                    unit: this.state.unit,
                     product_name: this.state.result.productName,
                     product_category_name: this.state.result.category.categoryName,
                     product_price: this.state.result.price,
+                    product:{
+                        productId: productId
+                    },
+                    order:{
+                        id: 0
+                    },
+                    price: this.state.result.price,
+                    unit: this.state.unit
                 }
             ]
             localStorage.setItem("shoppingCart", JSON.stringify(cart));
@@ -125,10 +132,17 @@ class SiteProductDetails extends Component<any, any>{
             //So this product is not in the cart. Therefore insert product in the shopping cart
             var cart1 = {
                 product_id: productId,
-                unit: this.state.unit,
                 product_name: this.state.result.productName,
                 product_category_name: this.state.result.category.categoryName,
                 product_price: this.state.result.price,
+                product:{
+                    productId: productId
+                },
+                order:{
+                    id: 0
+                },
+                price: this.state.result.price,
+                unit: this.state.unit
             }
             ara.push(cart1);
             localStorage.setItem("shoppingCart", JSON.stringify(ara));

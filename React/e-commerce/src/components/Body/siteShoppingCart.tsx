@@ -5,6 +5,7 @@ import {Button} from "reactstrap";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {HiInformationCircle} from "react-icons/hi";
+import base_url from "../../api/bootapi";
 
 class SiteShoppingCart extends Component<any, any>{
     constructor(props:any) {
@@ -16,10 +17,19 @@ class SiteShoppingCart extends Component<any, any>{
         resultData: [],
         totalPrice: "",
         loading: true,
+        //below object is used to place order
+        orderData: {
+            customer: {
+                id: 1 //session_userId local_storage
+            },
+            totalPrice: 0,
+            date: "dummy date",
+            status: "pending"
+        }
     }
 
     async componentDidMount() {
-        const resp = await axios.get('http://localhost:9090/products');
+        const resp = await axios.get(`${base_url}products`);
         console.log(resp);
         if (resp.status === 200){
             this.setState({
@@ -39,6 +49,7 @@ class SiteShoppingCart extends Component<any, any>{
                 totalPrice: totalProductPrice,
                 loading: false,
             })
+            this.state.orderData.totalPrice = totalProductPrice;
         }
     }
 
@@ -71,12 +82,41 @@ class SiteShoppingCart extends Component<any, any>{
                 this.setState({
                     resultData: array,
                     loading: false,
-                    totalPrice: totalProductPrice
+                    totalPrice: totalProductPrice,
                 })
+                this.state.orderData.totalPrice = totalProductPrice;
                 localStorage.setItem("shoppingCart", JSON.stringify(array));
                 console.log(JSON.parse(localStorage.getItem("shoppingCart") || '{}'))
                 break;
             }
+        }
+    }
+
+    orderProduct = async () => {
+        const resp = await axios.post(`${base_url}order`, this.state.orderData);
+        //console.log(resp);
+        var order_id = resp.data; //getting the order_id which will be used for insertion for sales items
+        if(resp.status == 201){
+            //alert("Success");
+            await this.salesItem(order_id);
+        }
+    }
+
+    salesItem = async (order_id: any) => {
+        var array = JSON.parse(localStorage.getItem("shoppingCart") || '{}');
+        for(let i = 0; i < array.length; i++){
+            array[i].order.id = order_id;
+        }
+        const response = await axios.post(`${base_url}sales`, array);
+        if(response.status == 201){
+            //After successful insertion, we have to remove the session
+            alert("Successfully Purchased");
+            this.setState({
+                resultData: [],
+                loading: false,
+                totalPrice: ""
+            })
+            localStorage.removeItem("shoppingCart"); //removing the shopping cart session
         }
     }
 
@@ -121,7 +161,7 @@ class SiteShoppingCart extends Component<any, any>{
                     <button disabled={true} hidden={this.state.totalPrice == "" ? true : false} className="btn btn-primary">
                         <strong>Total Price: {this.state.totalPrice}</strong>
                     </button>
-                    <button hidden={this.state.totalPrice == "" ? true : false} className="btn btn-dark">
+                    <button onClick={this.orderProduct} hidden={this.state.totalPrice == "" ? true : false} className="btn btn-dark">
                         Confirm Order
                     </button>
                 </div>
