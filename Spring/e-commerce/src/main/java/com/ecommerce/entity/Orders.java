@@ -15,7 +15,6 @@ public class Orders {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@OneToOne
-	@NotEmpty
 	private Customer customer;
 	@NotEmpty
 	private String date;

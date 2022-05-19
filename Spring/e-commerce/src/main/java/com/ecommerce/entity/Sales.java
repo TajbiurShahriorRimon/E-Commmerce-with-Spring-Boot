@@ -14,10 +14,8 @@ public class Sales {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@OneToOne
-	@NotEmpty
 	private Orders order;
 	@OneToOne
-	@NotEmpty
 	private Products product;
 	@NotNull
 	private int unit;

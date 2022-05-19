@@ -17,7 +17,7 @@ class AddProductReview extends Component<any, any>{
             rating: 0,
             value: "",
             customer: {
-                id: 0 //LocalStorage
+                id: 0 //Local_Storage session_userId
             },
             product: {
                 productId: window.location.pathname.split("/").pop()
