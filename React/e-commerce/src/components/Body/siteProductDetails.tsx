@@ -22,9 +22,9 @@ class SiteProductDetails extends Component<any, any>{
             category: { //another object
                 categoryName: "",
             },
-            /*vendor: {
+            vendor: {
                 shopName: "",
-            }*/
+            }
         },
         loading: true,
         urlParameter: "",
@@ -298,7 +298,7 @@ class SiteProductDetails extends Component<any, any>{
                             </div>
                             <div>
                                 {/*<label><strong>Vendor:</strong> {this.state.result.vendor.shopName}</label>*/}
-                                <label><strong>Vendor:</strong> </label>
+                                <label><strong>Vendor:</strong> {this.state.result.vendor.shopName} </label>
                             </div>
                             <div>
                                 <label style={{fontSize:"1.2em"}}><strong>Rating:</strong> 3.7 </label>
