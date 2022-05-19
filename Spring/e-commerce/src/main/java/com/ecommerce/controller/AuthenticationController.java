@@ -55,5 +55,9 @@ public class AuthenticationController {
          return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
+	@PostMapping("/tokenValidation")
+	public ResponseEntity<?> authenticateToken(String empty){
+		return ResponseEntity.ok("OK");
+	}
 
 }
