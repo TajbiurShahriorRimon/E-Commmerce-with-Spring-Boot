@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 package com.ecommerce.service;
 
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class ReviewAndRatingServiceImpl implements ReviewAndRatingService {
     }
     
 }
-=======
+
 //package com.ecommerce.service;
 //
 //import java.util.ArrayList;
@@ -108,4 +107,4 @@ public class ReviewAndRatingServiceImpl implements ReviewAndRatingService {
 //    }
 //    
 //}
->>>>>>> Stashed changes
+
