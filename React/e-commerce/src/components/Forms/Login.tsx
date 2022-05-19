@@ -44,7 +44,7 @@ function Login(){
                 localStorage.setItem("token", response.data.token); //JWT Token
 
                 //redirecting to customer page. Depending on user type the redirection occurs
-                navigate("/customer/index");
+                navigate("/customer/productForReview");
 
             },(error)=>{
                     alert("Invalid Credentials");
