@@ -16,8 +16,18 @@ export default function VendorRegistrationShop(){
     },[]);
 
     
+   
+    let [userOb,setUser]=useState({
+        name:"",
+        mail:"",
+        phone:"",
+        address:"",
+        gender:"male",
+        type:"vendor"
+        
+    });
     const [vendor,setVendor]=useState({
-        user:"",
+        user:userOb,
         shopPhone:"",
         shopAddress:"",
         registrationNumber:"",
@@ -33,22 +43,23 @@ export default function VendorRegistrationShop(){
     
     const { mail } = useParams<VendorParams>();
     
-    //number of inputs in the form excluding gender as it has a default value
-    var numberOfInputs: number=4;
+    
    
     const handleForm=(e:any)=>{
        ;
         
         
-
+        console.log(mail);
         postMailToServer(mail);
-        setTimeout(() => {  postDataToServer(JSON.stringify(vendor)); }, 2000);
+        console.log(vendor.user);
+       // console.log(vendor.user);
+        setTimeout(() => {  postVendorToServer(JSON.stringify(vendor)); }, 5000);
         
         e.preventDefault();
     }
 
     //function to post data on server
-    const postDataToServer=(data:any)=>{
+    const postVendorToServer=(data:any)=>{
         console.log(data);
         axios.post(`${base_url}uVendorReg`,data,{
             headers: {
@@ -83,9 +94,8 @@ export default function VendorRegistrationShop(){
         console.log(data);
         axios.post(`${base_url}getUser`,data).then(
             (response)=>{
-
-                vendor.user=response.data;
-                console.log(vendor.user);
+                setVendor({...vendor,user:response.data})
+               
             },(error)=>{
                 console.log("error");
                 let res:string[]=Object.values(error.response.data);

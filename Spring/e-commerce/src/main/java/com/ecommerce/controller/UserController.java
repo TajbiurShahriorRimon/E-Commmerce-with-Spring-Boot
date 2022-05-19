@@ -51,7 +51,7 @@ public class UserController {
 			
 //			String[] email2=email.split("=");
 //			System.out.println(email2[0]);
-//			email=email2[0].replace("%40", "@");
+			email=email.replace("%40", "@");
 			System.out.println(email);
 			Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(email);
 			while (m.find()) {
