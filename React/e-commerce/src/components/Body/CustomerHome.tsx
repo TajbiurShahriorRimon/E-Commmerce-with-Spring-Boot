@@ -17,7 +17,7 @@ class CustomerHome extends Component<any, any>{
 
     async componentDidMount() {
         const resp = await axios.get('http://localhost:9090/products');
-
+        console.log(resp);
         if (resp.status === 200){
             this.setState({
                 result: resp.data,
