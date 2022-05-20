@@ -8,4 +8,5 @@ public interface ReviewAndRatingService {
 	public ArrayList<ReviewAndRating> getProductReivewAndRating(int id);
 	public ReviewAndRating getReview(int id);
 	public ReviewAndRating addReviewAnddRating(ReviewAndRating reviewAndRating);
+	public ReviewAndRating checkUserReviewGiven(int productId, int customer_id);
 }

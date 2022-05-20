@@ -7,6 +7,7 @@ import axios from "axios";
 import base_url from "../../api/bootapi";
 import {Link} from "react-router-dom";
 import {HiInformationCircle} from "react-icons/hi";
+import Modal from "react-bootstrap/Modal";
 
 class SiteProductReviews extends Component<any, any>{
     constructor(props:any) {
@@ -16,9 +17,16 @@ class SiteProductReviews extends Component<any, any>{
     state = {
         //data: (<button>hello</button>),
         //test: "12",
+        show: false,
         result: [],
         productName: "",
-        loading: false
+        loading: false,
+        customerReview: {
+            value: "",
+            rating: 0
+        },
+        reviewBtn: "",
+        reviewModal: ""
     }
 
     async componentDidMount() {
@@ -27,12 +35,66 @@ class SiteProductReviews extends Component<any, any>{
         console.log(resp);
 
         if (resp.status === 200){
-            this.setState({
-                result: resp.data,
-                productName: resp.data[0].product.productName,
-                loading: false,
-            })
+            if(resp.data.length > 0) {
+                this.setState({
+                    result: resp.data,
+                    productName: resp.data[0].product.productName,
+                    loading: false,
+                })
+            }
         }
+
+        var customer_id = 1; //session_userId
+        var resultData = await axios.get(`${base_url}review/checkCustomerReviewForProduct/${id}/${customer_id}`)
+
+        //The following line executes if it is found that customer has given a review
+        if(resultData.status == 200){
+            this.setState({
+                customerReview: resultData.data,
+                reviewBtn: (
+                    <button className="btn-outline-info btn btn-outline-danger" style={{float: "right"}}
+                        onClick={this.handleShow}
+                    >
+                        Show My Review
+                    </button>
+                )
+            })
+            //console.log("reviewStatus");
+            //console.log(this.state.customerReview.value);
+        }
+        //the customer did not give a review
+        else { //status code is 204... Not Content
+            //Now it has to be checked if the customer actually bought the product and got the delivery
+            var resultData = await axios.get(`${base_url}order/checkSold/${id}/${customer_id}`);
+            console.log(resultData);
+            if(resultData.status == 200){
+                //The customer bought product but did not give a review
+                if(resultData.data.length > 0){
+                    this.setState({
+                        reviewBtn: (
+                            <Link to={"/product/customer/giveReview/"+id}>
+                                <button className="btn-outline-info btn btn-outline-danger" style={{float: "right"}}>
+                                    Give Review
+                                </button>
+                            </Link>
+                        )
+                    })
+                }
+            }
+        }
+
+    }
+
+    handleShow = () =>{
+        this.setState({
+            show: true
+        })
+    }
+
+    handleClose = () =>{
+        this.setState({
+            show: false
+        })
     }
 
     render() {
@@ -90,6 +152,7 @@ class SiteProductReviews extends Component<any, any>{
             <div className='container'>
                 <div className="form-control">
                     <div className="row">
+                        {this.state.reviewBtn}
                         <div className="col-md-5">
                             <div style={{display: 'flex', justifyContent:'center', alignItems:'center', backgroundColor: "mistyrose"}}>
                                 <TransformWrapper initialScale={1}>
@@ -118,7 +181,7 @@ class SiteProductReviews extends Component<any, any>{
                             <h4>{this.state.productName}</h4>
                         </div>
                         <div className="col-md-7" style={{overflow: "auto", height: 400}}>
-                            <Card>
+                            {/*<Card>
                                 <Card.Header>
                                     <strong>Asif Ahmed</strong><br/>
                                     Rating: 3.7 <br/>
@@ -139,17 +202,34 @@ class SiteProductReviews extends Component<any, any>{
                                     </Card.Text>
                                     <button style={{float: "right"}}
                                             className="btn-danger rounded-end btn"
-                                            /*hidden={this.state.test == "12434" ? true : false}*/
                                     >
                                         Hello button
                                     </button>
                                 </Card.Body>
-                            </Card> <br/>
+                            </Card> <br/>*/}
                             {resultTable}
                         </div>
                     </div>
                     <div className="row">
-
+                        <Modal show={this.state.show} onHide={this.handleClose} animation={false}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Modal heading</Modal.Title>
+                                <Modal.Title>
+                                    <StarRatings
+                                        rating={this.state.customerReview.rating}
+                                        starDimension="25px"
+                                        starSpacing="5px"
+                                        starRatedColor="#cee009"
+                                    />
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>{this.state.customerReview.value}</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={this.handleClose}>
+                                    Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                     </div>
                 </div>
             </div>

@@ -386,7 +386,7 @@ class SiteProductDetails extends Component<any, any>{
 
                                     <Button size="lg">
                                         <Link to={`/product/allReviews/${this.state.urlParameter}`}>
-                                            <button className="btn btn" style={{backgroundColor: "green"}}>
+                                            <button className="btn btn" style={{backgroundColor: "green", maxWidth: 20}}>
                                                 Check Review
                                             </button>
                                         </Link>

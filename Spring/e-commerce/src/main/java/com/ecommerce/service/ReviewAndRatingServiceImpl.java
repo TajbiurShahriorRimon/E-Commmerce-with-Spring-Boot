@@ -52,5 +52,12 @@ public class ReviewAndRatingServiceImpl implements ReviewAndRatingService {
         return reviewAndRating;
     }
 
+    @Override
+    public ReviewAndRating checkUserReviewGiven(int productId, int customer_id){
+        var review_and_rating = (ReviewAndRating) reviewAndRatingDao.findAll()
+        .stream().filter(x -> x.getProduct().getProductId() == productId && x.getCustomer().getId() == customer_id).findFirst().orElse(null);
+        return review_and_rating;
+    }
+
 }
 

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 
 @RestController
 public class ReviewAndRatingController {
@@ -48,6 +49,15 @@ public class ReviewAndRatingController {
        //var x = reviewAndRatingService.addReviewAnddRating(reviewAndRating);
        //return ResponseEntity.ok(reviewAndRatingService.addReviewAnddRating(reviewAndRating));
        return new ResponseEntity<ReviewAndRating>(reviewAndRatingService.addReviewAnddRating(reviewAndRating), HttpStatus.CREATED);
+   }
+
+   @GetMapping(value = "/review/checkCustomerReviewForProduct/{productId}/{customerId}")
+   public ResponseEntity<ReviewAndRating> checkIfCustomerReviewGiven(@PathVariable int productId, @PathVariable int customerId){
+       ReviewAndRating reviewAndRating = reviewAndRatingService.checkUserReviewGiven(productId, customerId);
+       if(reviewAndRating == null){
+           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+       }
+       return new ResponseEntity<ReviewAndRating>(reviewAndRating, HttpStatus.OK);
    }
 	
 }
