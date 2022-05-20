@@ -16,13 +16,30 @@ class CustomerHome extends Component<any, any>{
     }
 
     async componentDidMount() {
-        const resp = await axios.get('http://localhost:9090/products');
-        console.log(resp);
-        if (resp.status === 200){
-            this.setState({
-                result: resp.data,
-                loading: false,
-            })
+        //If the user search a product then the following line executes
+        if(localStorage.getItem("searchProductSession") != null){
+            const resp = await axios.get('http://localhost:9090/products');
+            //now remove the session
+            localStorage.removeItem("searchProductSession");
+            console.log(resp);
+            if (resp.status === 200) {
+                this.setState({
+                    result: resp.data,
+                    loading: false,
+                })
+            }
+            //alert("hello");
+        }
+        else {
+            const resp = await axios.get('http://localhost:9090/products');
+            console.log(resp);
+            if (resp.status === 200) {
+                this.setState({
+                    result: resp.data,
+                    loading: false,
+                })
+            }
+            //alert("hello123");
         }
     }
 
