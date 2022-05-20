@@ -69,11 +69,12 @@ class AddProductReview extends Component<any, any>{
 
             this.state.reviewAndRating.value = this.state.review;
             this.state.reviewAndRating.rating = starRating;
-            this.state.reviewAndRating.customer.id = 1; //Local Storage
+            this.state.reviewAndRating.customer.id = 1; //Local_Storage
 
             const resp = await axios.post(`${base_url}reviewAndRating`, this.state.reviewAndRating);
             if(resp.status == 201){
-                alert("Success");
+                alert("Review Added");
+                window.location.replace("/product/allReviews/"+window.location.pathname.split("/").pop())
             }
         }
     }
