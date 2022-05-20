@@ -25,7 +25,7 @@ public class Vendor {
 	private int id;
 	
 	@OneToOne
-	@JsonProperty("mail")
+	//@JsonProperty("mail")
 	private User user;
 //	private String mail;
 	@NotEmpty

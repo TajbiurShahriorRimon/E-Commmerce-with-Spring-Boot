@@ -19,7 +19,7 @@ export default function VendorRegistrationShop(){
    
     let [userOb,setUser]=useState({
         name:"",
-        mail:"",
+        mail: window.location.pathname.split("/").pop(),
         phone:"",
         address:"",
         gender:"male",
@@ -31,8 +31,9 @@ export default function VendorRegistrationShop(){
         shopPhone:"",
         shopAddress:"",
         registrationNumber:"",
-        shopName:""
-        
+        shopName:"",
+
+        mail: userOb
     });
 
     const navigate = useNavigate();
