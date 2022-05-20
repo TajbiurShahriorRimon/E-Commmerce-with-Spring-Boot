@@ -1,12 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import {NavDropdown, Container, Nav, Navbar, Form, FormControl, Button} from "react-bootstrap";
 import {ImSearch, ImHeart} from "react-icons/im";
 import {HiOutlineLogout} from "react-icons/hi";
 import {CgProfile, CgShoppingCart, CgBox} from "react-icons/cg";
 import {MdReviews} from "react-icons/md";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export const CustomerNavbar = () => {
+    var navigate = useNavigate();
+
+    const [search,setSearch]=useState({
+        searchField: ""
+    })
+    const searchProducts = () => {
+        localStorage.setItem("searchProductSession", search.searchField);
+        //alert("dds");
+        //navigate("/customer/index");
+        window.location.href = "/customer/index";
+    }
     return (
         <div>
             <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
@@ -20,8 +31,11 @@ export const CustomerNavbar = () => {
                                     type="search"
                                     placeholder="Search"
                                     aria-label="Search"
+                                    onChange={(e)=>{
+                                        setSearch({searchField:e.target.value})
+                                    }}
                                 />
-                                <Button variant="outline-success"><ImSearch/></Button>
+                                <Button onClick={searchProducts} variant="outline-success"><ImSearch/></Button>
                             </Form>
                             <Nav.Link href="" className="d-flex"> <CgShoppingCart style={{fontSize:"1.5em"}}/> </Nav.Link>
                         </Nav>

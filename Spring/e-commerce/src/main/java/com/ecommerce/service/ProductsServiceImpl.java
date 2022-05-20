@@ -48,7 +48,7 @@ public class ProductsServiceImpl implements  ProductsService{
 	@Override
 	public ArrayList<Products> getAllProducts() {
 		var products = (ArrayList<Products>) productsDao.findAll()
-		.stream().filter(x -> x.getStatus().equals("1".toString())).collect(Collectors.toList());
+		.stream().filter(x -> x.getStatus().equals("active".toString())).collect(Collectors.toList());
 		return products;
 	}
 

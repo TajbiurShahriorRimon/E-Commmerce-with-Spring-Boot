@@ -32,7 +32,8 @@ class SiteProductDetails extends Component<any, any>{
         cartButtonHidden: false,
         cartBtn: (
             <button className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>
-        )
+        ),
+        ratingStar: 0
     }
 
     async componentDidMount() {
@@ -71,6 +72,21 @@ class SiteProductDetails extends Component<any, any>{
                 loading: false,
                 urlParameter: id
             })
+        }
+
+        //Now we have to set the rating star
+        const result = await axios.get(`${base_url}product/getReviewsAndRatings/${id}`);
+        console.log(result.data);
+        if(result.status == 200){
+            if(result.data.length > 0){
+                var avgRating = 0;
+                for(let i = 0; i < result.data.length; i++){
+                    avgRating += result.data[i].rating;
+                }
+                this.setState({
+                    ratingStar: avgRating / result.data.length
+                })
+            }
         }
     }
 
@@ -315,10 +331,10 @@ class SiteProductDetails extends Component<any, any>{
                                 <label><strong>Vendor:</strong> {this.state.result.vendor.shopName} </label>
                             </div>
                             <div>
-                                <label style={{fontSize:"1.2em"}}><strong>Rating:</strong> 3.7 </label>
+                                <label style={{fontSize:"1.2em"}}><strong>Rating:</strong> {this.state.ratingStar == 0 ? "No Rating" : this.state.ratingStar} </label>
                                 <br/>
                                 <StarRatings
-                                    rating={3.7}
+                                    rating={this.state.ratingStar}
                                     starDimension="25px"
                                     starSpacing="5px"
                                     starRatedColor="#cee009"
@@ -351,7 +367,7 @@ class SiteProductDetails extends Component<any, any>{
                                             </div>
                                         </div>
                                     </span>
-                                    <button className="btn btn"><ImHeart style={{fontSize:"1.5em"}}/></button>
+                                    {/*<button className="btn btn"><ImHeart style={{fontSize:"1.5em"}}/></button>*/}
                                 </div>
                             </div>
                             <br/>
