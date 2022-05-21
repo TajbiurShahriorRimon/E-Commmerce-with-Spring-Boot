@@ -76,7 +76,10 @@ function AddProduct(props:any){
     const [products,setProducts]=useState({
         productName:"",
         price:"",
-        categoryId:"",
+        //categoryId:"", //changes made
+        category: {
+            categoryId: ""
+        },
         vendor:vendorOb,
         description:"",
         photoUrl:"",
@@ -299,7 +302,12 @@ function AddProduct(props:any){
                                 Category
                             </Label>
                             <select className="form-select" aria-label="Default select example" id="category" onChange={(e)=>{
-                                    setProducts({...products,categoryId:e.target.value})
+                                    setProducts({...products,
+                                        //categoryId:e.target.value //changes made
+                                        category: {
+                                            categoryId: e.target.value
+                                        }
+                                    })
                                 }}>
                                 <option selected>Select Category</option>
                                 {
@@ -325,7 +333,7 @@ function AddProduct(props:any){
                             />
                         </div>
 
-                        <Label className='form-label my-2' for="otherImage">
+                        {/*<Label className='form-label my-2' for="otherImage">
                             Other Images
                         </Label>
                         <Input
@@ -336,7 +344,7 @@ function AddProduct(props:any){
                             className='form-control'
                             multiple
                             onChange={AddOtherImages}
-                        />
+                        />*/}
                             <Button className='my-2 w-100' type='submit' color='primary'>Save</Button>
                     </Form>
                    
