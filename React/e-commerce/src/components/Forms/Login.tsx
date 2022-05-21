@@ -28,9 +28,37 @@ function Login(){
         e.preventDefault();
     }
 
-    const postDataToServer=(data:any)=>{
+
+
+    const getUserInfo = async (email: any) => {
+        //getting the user information who is to be logged in
+        var resp = await axios.get(`${base_url}user/getUserDataForSession/${email}`);
+        if(resp.status == 200){
+            localStorage.setItem("userType_session", resp.data.type);
+            if(resp.data.type == "customer"){
+                //alert("Customer");
+                var vendorResp = await axios.get(`${base_url}customer/getCustomerIdByEmail/${email}`);
+                console.log(vendorResp.data);
+                if(vendorResp.status == 200){
+                    localStorage.setItem("userId_session", vendorResp.data); //customerId from customer table
+                    //redirecting to customer page. Depending on user type the redirection occurs
+                    navigate("/customer/index");
+                }
+            }
+            else if(resp.data.type == "vendor"){
+                //alert("vendor")
+                var vendorResp = await axios.get(`${base_url}vendor/getVendorIdByEmail/${email}`);
+                console.log(vendorResp.data);
+                if(vendorResp.status == 200){
+                    localStorage.setItem("userId_session", vendorResp.data); //vendorId from vendor table
+                }
+            }
+        }
+    }
+
+    const postDataToServer = async (data:any)=>{
         //${base_url}login this is the line that decides on which controller method the req will be posted
-        axios.post(`${base_url}login`,data,{
+        await axios.post(`${base_url}login`,data,{
             headers: {
                 'Content-Type': 'application/json',
                  'Accept': 'application/json'
@@ -43,8 +71,13 @@ function Login(){
                 localStorage.setItem("email", response.data.mail);
                 localStorage.setItem("token", response.data.token); //JWT Token
 
+                //check for user type
+                //var resp = axios.get(`${base_url}user/getUserDataForSession/${response.data.mail}`);
+                //await getUserData(response.data.mail);
+                getUserInfo(response.data.mail);
+
                 //redirecting to customer page. Depending on user type the redirection occurs
-                navigate("/customer/productForReview");
+                //navigate("/customer/productForReview");
 
             },(error)=>{
                     alert("Invalid Credentials");

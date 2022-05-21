@@ -6,4 +6,5 @@ import com.ecommerce.entity.Sales;
 
 public interface SalesService {
     public void addSales(ArrayList<Sales> sales);
+    public ArrayList<Sales> getPendingOrderByIdSales(int id);
 }

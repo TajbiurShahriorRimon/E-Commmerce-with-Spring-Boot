@@ -1,9 +1,13 @@
 package com.ecommerce.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.ecommerce.entity.Orders;
+import com.ecommerce.entity.Sales;
 import com.ecommerce.service.OrdersService;
+import com.ecommerce.service.SalesService;
 import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +34,15 @@ public class OrdersController {
     public List checkIfCustomerReviewGiven(@PathVariable int productId, @PathVariable int customerId){
         var v = ordersService.checkIfCustomerPurchasedProduct(productId, customerId);
         return v;
+    }
+
+    @GetMapping(value = "/order/getPedingOrders")
+    public ArrayList<Orders> getAllPendingOrders(){
+        return ordersService.getPendingOrders();
+    }
+
+    @GetMapping(value = "/order/changeDeliveryStauts/{id}")
+    public ResponseEntity<Boolean> changeDeiliveryStatus(@PathVariable int id){
+        return new ResponseEntity<Boolean>(ordersService.setDeliverdStatus(id), HttpStatus.OK);
     }
 }

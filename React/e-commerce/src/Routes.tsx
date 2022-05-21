@@ -21,6 +21,7 @@ import TestMail from './components/Pages/testMail';
 import ProductReviews from "./components/Pages/ProductReviews";
 import Logout from "./components/Pages/Logout";
 import ShoppingCart from "./components/Pages/ShoppingCart";
+import OrderPending from "./components/Pages/OrderPending";
 
 function MainRoutes(){
     return(
@@ -52,6 +53,9 @@ function MainRoutes(){
                     <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
                     <Route path="/product/allReviews/:id" element={<ProductReviews/>}/>
                     <Route path="/shoppingCart" element={<ShoppingCart/>}/>
+
+                    {/*Order*/}
+                    <Route path="/order/pending" element={<OrderPending/>}/>
 
                     {/*Logout*/}
                     <Route path="/logout" element={<Logout/>}/>

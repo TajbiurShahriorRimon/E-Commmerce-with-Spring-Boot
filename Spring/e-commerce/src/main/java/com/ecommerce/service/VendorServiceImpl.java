@@ -31,4 +31,10 @@ public class VendorServiceImpl implements VendorService{
 		return vendorDao.findByUserMail(mail).getId();
 	}
 
+	@Override
+	public int getVendorIdByEmail(String email){
+		var vendor = vendorDao.findAll().stream().filter(x -> x.getMail().getMail().equals(email.toString())).findFirst().orElse(null);
+		return vendor.getId();
+	}
+
 }
