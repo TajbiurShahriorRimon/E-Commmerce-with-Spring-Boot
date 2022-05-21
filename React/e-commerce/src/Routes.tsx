@@ -21,10 +21,11 @@ import TestMail from './components/Pages/testMail';
 import ProductReviews from "./components/Pages/ProductReviews";
 import Logout from "./components/Pages/Logout";
 import ShoppingCart from "./components/Pages/ShoppingCart";
-import OrderPending from "./components/Pages/OrderPending";
 import Home from './components/Pages/Home';
 import VendorReg from './components/Pages/VendorReg';
 import CustomerReg from './components/Pages/CustomerReg';
+import OrderPending from "./components/Pages/OrderPending";
+import OrderPendingDetails from "./components/Pages/OrderPendingDetails";
 
 function MainRoutes(){
     return(
@@ -62,6 +63,7 @@ function MainRoutes(){
 
                     {/*Order*/}
                     <Route path="/order/pending" element={<OrderPending/>}/>
+                    <Route path="/order/pendingSalesDetails/:orderId" element={<OrderPendingDetails/>}/>
 
                     {/*Logout*/}
                     <Route path="/logout" element={<Logout/>}/>

@@ -44,14 +44,18 @@ class SiteOrderPending extends Component<any, any>{
                             <Card.Body>
                                 <Card.Title>Customer: {item.customer.mail.name}</Card.Title>
                                 <Card.Text>
-                                    <strong>Price: {item.totalPrice}</strong>
+                                    <strong>Total Purchase: Tk {item.totalPrice}</strong> <br/>
+                                    <strong>Phone: {item.customer.mail.phone}</strong> <br/>
+                                    <strong>Email: {item.customer.mail.mail}</strong> <br/>
                                 </Card.Text>
-                                <button style={{float: "right"}}
-                                        className="btn-danger rounded-end btn"
-                                    /*hidden={this.state.test == "12434" ? true : false}*/
-                                >
-                                    Check Product List
-                                </button>
+                                <Link to={"/order/pendingSalesDetails/"+item.id}>
+                                    <button style={{float: "right"}}
+                                            className="btn-danger rounded-end btn"
+                                        /*hidden={this.state.test == "12434" ? true : false}*/
+                                    >
+                                        Check Product List
+                                    </button>
+                                </Link>
                             </Card.Body>
                         </Card> <br/>
                     </div>
@@ -62,7 +66,7 @@ class SiteOrderPending extends Component<any, any>{
             <div>
                 <div className='container'>
                     <div className="row">
-                        <div className="col-sm-5">
+                        <div className="col-sm-7">
                             {resultTable}
                         </div>
                     </div>
