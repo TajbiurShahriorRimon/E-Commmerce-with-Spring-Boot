@@ -46,8 +46,8 @@ public class ProductsController {
 	public ResponseEntity<ArrayList<Products>> getAllProducts(){
 		return ResponseEntity.ok(productsService.getAllProducts()); }
 	
-	@GetMapping("/products/name")
-	public ResponseEntity<ArrayList<Products>> searchProducts(@RequestParam String value){
+	@GetMapping("/products/{name}")
+	public ResponseEntity<ArrayList<Products>> searchProducts(@PathVariable String value){
 		return ResponseEntity.ok(productsService.searchProducts(value)); }
 	
 	@PostMapping(value="/addImage")
