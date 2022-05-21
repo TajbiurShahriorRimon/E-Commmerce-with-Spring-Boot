@@ -15,6 +15,5 @@ public interface ProductsDao extends JpaRepository<Products, Integer> {
 //	public Products findLastRow();
 	
 	public Products findFirstByOrderByProductIdDesc();
-	ArrayList<Products> findByProductName(String value);
 
 }
