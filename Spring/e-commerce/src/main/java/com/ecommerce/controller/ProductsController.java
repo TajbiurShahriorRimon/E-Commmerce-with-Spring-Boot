@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import antlr.collections.List;
 
 import com.ecommerce.entity.Products;
 import com.ecommerce.entity.ReviewAndRating;
 import com.ecommerce.service.ProductsService;
 import com.ecommerce.service.ReviewAndRatingService;
+
+import antlr.collections.List;
 
 
 
@@ -44,6 +45,10 @@ public class ProductsController {
 	@GetMapping("/products")
 	public ResponseEntity<ArrayList<Products>> getAllProducts(){
 		return ResponseEntity.ok(productsService.getAllProducts()); }
+	
+	@GetMapping("/products/{name}")
+	public ResponseEntity<ArrayList<Products>> searchProducts(@PathVariable String value){
+		return ResponseEntity.ok(productsService.searchProducts(value)); }
 	
 	@PostMapping(value="/addImage")
 	public ResponseEntity<String> addImage(@RequestParam("file") MultipartFile file) {

@@ -6,7 +6,7 @@ import VendorRegistrationShop from './components/Forms/VendorRegistrationShop';
 import VendorRegistrationUser from './components/Forms/VendorRegistrationUser';
 import AddProducts from './components/Forms/AddProducts';
 import AddCategory from './components/Forms/AddCategory';
-import Login from './components/Forms/Login';
+import Login from './components/Pages/Login';
 import Vendor from './components/Pages/Vendor';
 import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
@@ -22,12 +22,16 @@ import ProductReviews from "./components/Pages/ProductReviews";
 import Logout from "./components/Pages/Logout";
 import ShoppingCart from "./components/Pages/ShoppingCart";
 import OrderPending from "./components/Pages/OrderPending";
+import Home from './components/Pages/Home';
+import VendorReg from './components/Pages/VendorReg';
+import CustomerReg from './components/Pages/CustomerReg';
 
 function MainRoutes(){
     return(
         <div>
             <Routes>
-                    <Route path="/" element={<Login/>}/>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/home" element={<Home/>}/>
                     <Route path="/uReg" element={<UserRegistration/>}/>
                     <Route path="/uVendorReg" element={<VendorRegistrationUser/>}/>
                     <Route path="/sVendorReg" element={<VendorRegistrationShop/>}/>
@@ -41,6 +45,8 @@ function MainRoutes(){
                     <Route path="/vAddProducts/:mail" element={<VendorAddProducts/>}/>
                     <Route path="/vAddCategory" element={<VendorAddCategory/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/customerReg" element={<CustomerReg/>}/>
+                    <Route path="/vendorReg" element={<VendorReg/>}/>
                     <Route path="/testMail/:mail" element={<TestMail/>}/>
 
                     {/*Customer*/}

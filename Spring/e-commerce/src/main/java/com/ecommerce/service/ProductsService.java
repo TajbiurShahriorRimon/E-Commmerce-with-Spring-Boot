@@ -22,5 +22,7 @@ public interface ProductsService {
 	public ArrayList<Products> getAllProducts();
 	
 	public Products saveImage(MultipartFile file);
+	
+	public ArrayList<Products> searchProducts(String value);
 
 }

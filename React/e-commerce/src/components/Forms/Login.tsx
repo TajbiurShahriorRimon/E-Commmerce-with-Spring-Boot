@@ -136,9 +136,7 @@ function Login(){
                             </div>
 
                             <Button className='my-2 w-100' type='submit' color='primary'>Login</Button><br></br><br></br>
-                            <div className="text-center">
-                            <p>Not a member? <a href="#!">Register</a></p>
-                            </div>
+
                     </Form>
                    
                 </Col>

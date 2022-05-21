@@ -1,6 +1,6 @@
 import React from 'react';
 import SiteHome from '../Body/SiteHome';
-import Navbar from '../Navbar/Navbar';
+import HomeNavbar from '../Navbar/HomeNavbar';
 import RegOption from '../RegOption';
 import './home.css'
 
@@ -9,7 +9,7 @@ export default function Home(){
     return (
         
             <div className='home'>
-                <Navbar/>
+                <HomeNavbar/>
                 <SiteHome/>
                 
             </div>
