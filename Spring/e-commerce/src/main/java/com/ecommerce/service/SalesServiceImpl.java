@@ -1,6 +1,7 @@
 package com.ecommerce.service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.ecommerce.dao.SalesDao;
 import com.ecommerce.entity.Sales;
@@ -18,8 +19,11 @@ public class SalesServiceImpl implements SalesService {
         for (Sales item : sales) {
             salesDao.save(item);
         }
+    }
 
-        var c = "sa";
+    public ArrayList<Sales> getPendingOrderByIdSales(int id){
+        var sales = (ArrayList<Sales>) salesDao.findAll().stream().filter(x -> x.getOrder().getId() == id).collect(Collectors.toList());
+        return sales;
     }
     
 }

@@ -7,4 +7,5 @@ public interface VendorService {
 	public Vendor addVendor(Vendor vendor);
 	public Vendor getVendor(int id);
 	public int getVendorIdByUserMail(String mail);
+	public int getVendorIdByEmail(String email);
 }

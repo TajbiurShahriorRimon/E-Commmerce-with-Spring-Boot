@@ -63,4 +63,9 @@ public class UserController {
 			//return email;
 		}
 		
+		@GetMapping(value = "/user/getUserDataForSession/{email}")
+		public ResponseEntity<User> getUserDataById(@PathVariable String email){
+			return new ResponseEntity<User>(userservice.getUserDataForSession(email), HttpStatus.OK);
+		}
+
 	}

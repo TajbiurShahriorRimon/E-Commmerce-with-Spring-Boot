@@ -28,5 +28,10 @@ public class UserServiceImpl implements UserService {
 		return user;
 	} 
 	
+	@Override
+	public User getUserDataForSession(String email){
+		var user = userDao.findById(email).get();
+		return user;
+	}
 	
 }
