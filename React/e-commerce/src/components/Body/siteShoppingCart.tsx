@@ -20,7 +20,7 @@ class SiteShoppingCart extends Component<any, any>{
         //below object is used to place order
         orderData: {
             customer: {
-                id: 1 //session_userId local_storage
+                id: localStorage.getItem("userId_session") //1 //session_userId local_storage
             },
             totalPrice: 0,
             date: "dummy date",

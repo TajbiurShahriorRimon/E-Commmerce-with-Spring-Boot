@@ -5,6 +5,7 @@ import {HiOutlineLogout} from "react-icons/hi";
 import {CgProfile, CgShoppingCart, CgBox} from "react-icons/cg";
 import {MdReviews} from "react-icons/md";
 import {Link, useNavigate} from "react-router-dom";
+import {Input} from "reactstrap";
 
 export const CustomerNavbar = () => {
     var navigate = useNavigate();
@@ -22,12 +23,10 @@ export const CustomerNavbar = () => {
                                 <Nav className="justify-content-center" style={{ flex: 1}}>
                                     <Form className="d-flex align-content-md-center position-fixed">
                                         <FormControl
-                                            type="search"
+                                            type="text"
                                             placeholder="Search"
                                             aria-label="Search"
-                                            onChange={(e)=>{
-                                                setSearch({searchField:e.target.value})
-                                            }}
+                                            onChange={setSearchVale}
                                         />
                                         <Button onClick={searchProducts} variant="outline-success"><ImSearch/></Button>
                                     </Form>
@@ -35,7 +34,7 @@ export const CustomerNavbar = () => {
                                 </Nav>
                                 <Nav.Link href="/customer/index">Home</Nav.Link>
                                 <Nav.Link href="#link">Link</Nav.Link>
-                                <NavDropdown title="Mr XYZ" id="basic-nav-dropdown">
+                                <NavDropdown title="Customer" id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.2">My Wishlist <ImHeart/> </NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.3">My Orders <CgBox/> </NavDropdown.Item>
@@ -61,14 +60,30 @@ export const CustomerNavbar = () => {
         tabNav: (<div></div>)
     })
 
+    const setSearchVale = (e: any) => {
+        //alert(e.target.value);
+        localStorage.setItem("searchProductSession", e.target.value);
+        //alert(localStorage.getItem("searchProductSession"));
+    }
+
     const [search,setSearch]=useState({
         searchField: "",
     })
     const searchProducts = () => {
-        localStorage.setItem("searchProductSession", search.searchField);
-        //alert("dds");
-        //navigate("/customer/index");
-        window.location.href = "/customer/index";
+        //alert('fdf');
+        if (localStorage.getItem("searchProductSession") != null){
+            alert('not null');
+            if(localStorage.getItem("searchProductSession") == ""){
+                alert('prob');
+                return
+            }
+            var key = localStorage.getItem("searchProductSession");
+            localStorage.removeItem("searchProductSession");
+            alert(key);
+            //navigate("/product/search/"+key);
+            window.location.href = "/product/search/"+key;
+            alert('last');
+        }
     }
     return (
         <div>

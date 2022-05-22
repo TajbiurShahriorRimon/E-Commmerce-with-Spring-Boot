@@ -44,7 +44,7 @@ class SiteProductReviews extends Component<any, any>{
             }
         }
 
-        var customer_id = 1; //session_userId
+        var customer_id = localStorage.getItem("userId_session") //1; //session_userId
         var resultData = await axios.get(`${base_url}review/checkCustomerReviewForProduct/${id}/${customer_id}`)
 
         //The following line executes if it is found that customer has given a review

@@ -75,5 +75,13 @@ public class OrdersServiceImpl implements OrdersService {
         ordersDao.save(order);
         return true;
     }
+
+    @Override
+    public boolean setCancelStatus(int id){
+        Orders order = ordersDao.findById(id).get();
+        order.setStatus("cancelled");
+        ordersDao.save(order);
+        return true;
+    }
     
 }
