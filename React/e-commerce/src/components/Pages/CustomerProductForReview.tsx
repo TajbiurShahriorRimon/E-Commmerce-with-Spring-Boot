@@ -32,10 +32,6 @@ const CustomerProductForReview = () => {
                 }
                 
                   alert(errorMsg);
-                
-                
-                
-                
             }
         );
     };

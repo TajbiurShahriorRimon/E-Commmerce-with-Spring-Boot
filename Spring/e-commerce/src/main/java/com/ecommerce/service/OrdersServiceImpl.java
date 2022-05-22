@@ -68,7 +68,6 @@ public class OrdersServiceImpl implements OrdersService {
         return v;
     }
 
-    @Transactional
     @Override
     public boolean setDeliverdStatus(int id){
         Orders order = ordersDao.findById(id).get();

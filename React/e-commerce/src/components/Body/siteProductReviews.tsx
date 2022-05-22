@@ -54,6 +54,7 @@ class SiteProductReviews extends Component<any, any>{
                 reviewBtn: (
                     <button className="btn-outline-info btn btn-outline-danger" style={{float: "right"}}
                         onClick={this.handleShow}
+                        hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
                     >
                         Show My Review
                     </button>
@@ -63,7 +64,7 @@ class SiteProductReviews extends Component<any, any>{
             //console.log(this.state.customerReview.value);
         }
         //the customer did not give a review
-        else { //status code is 204... Not Content
+        else { //status code is 204... No Content
             //Now it has to be checked if the customer actually bought the product and got the delivery
             var resultData = await axios.get(`${base_url}order/checkSold/${id}/${customer_id}`);
             console.log(resultData);
@@ -128,12 +129,6 @@ class SiteProductReviews extends Component<any, any>{
                                     <Card.Text>
                                         {item.value}
                                     </Card.Text>
-                                    <button style={{float: "right"}}
-                                            className="btn-danger rounded-end btn"
-                                        /*hidden={this.state.test == "12434" ? true : false}*/
-                                    >
-                                        Hello button
-                                    </button>
                                 </Card.Body>
                             </Card> <br/>
                         </div>

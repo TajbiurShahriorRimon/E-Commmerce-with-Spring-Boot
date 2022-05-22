@@ -122,7 +122,7 @@ function Login(){
                                 }}
                             />
                             <br></br>
-                            <div className="row mb-4">
+                            {/*<div className="row mb-4">
                                 <div className="col d-flex justify-content-center">
                                 <div>
                                     <input type="checkbox" value="" id="remember" checked />
@@ -133,7 +133,7 @@ function Login(){
                                 <div className="col">
                                 <a href="#!">Forgot password?</a>
                                 </div>
-                            </div>
+                            </div>*/}
 
                             <Button className='my-2 w-100' type='submit' color='primary'>Login</Button><br></br><br></br>
 

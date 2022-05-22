@@ -31,7 +31,9 @@ class SiteProductDetails extends Component<any, any>{
         unit: 1,
         cartButtonHidden: false,
         cartBtn: (
-            <button className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>
+            <button className="btn-outline-danger btn" hidden={localStorage.getItem("userType_session") == "customer" ? false : true}>
+                <strong>Add To Cart</strong> <ImCart/>
+            </button>
         ),
         ratingStar: 0
     }
@@ -52,7 +54,10 @@ class SiteProductDetails extends Component<any, any>{
                         this.state.unit = ara[i].unit;
                         this.setState({
                             cartBtn: (
-                                <button className="btn-outline-primary btn-info btn"><strong>Update Cart</strong> <ImCart/></button>
+                                <button className="btn-outline-primary btn-info btn"
+                                    hidden={localStorage.getItem("userType_session") == "customer" ? false : true}>
+                                    <strong>Update Cart</strong> <ImCart/>
+                                </button>
                             )
                         })
                         break;
@@ -357,7 +362,9 @@ class SiteProductDetails extends Component<any, any>{
                                                 alert(e.target.value);
                                             }}
                                         />*/}
-                                        <div className="card-group">
+                                        <div className="card-group"
+                                             hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
+                                        >
                                             <input size={2} type="text" readOnly={true} value={this.state.unit}/>
                                             <div className="btn-group">
                                                 <button className="btn btn-dark" onClick={this.subtractUnit}>
@@ -386,7 +393,7 @@ class SiteProductDetails extends Component<any, any>{
 
                                     <Button size="lg">
                                         <Link to={`/product/allReviews/${this.state.urlParameter}`}>
-                                            <button className="btn btn" style={{backgroundColor: "green", maxWidth: 20}}>
+                                            <button className="btn btn" style={{backgroundColor: "green", maxWidth: 100}}>
                                                 Check Review
                                             </button>
                                         </Link>

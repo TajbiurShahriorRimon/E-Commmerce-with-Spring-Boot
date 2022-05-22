@@ -73,9 +73,9 @@ public class ProductsServiceImpl implements  ProductsService{
 
 	@Override
 	public ArrayList<Products> searchProducts(String value) {
-		
-		//return productsDao.findByProductName(value);
-		return null;
+		var products = (ArrayList<Products>) productsDao.findAll().stream().filter(x -> x.getProductName().contains(value)
+		 && x.getStatus().equals("active")).collect(Collectors.toList());
+		return products;
 	}
 
 
