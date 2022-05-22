@@ -11,6 +11,7 @@ import Vendor from './components/Pages/Vendor';
 import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
 import VendorAddProducts from './components/Body/VendorAddProducts';
+import VendorEditProducts from './components/Body/VendorAddProducts';
 import VendorAddCategory from './components/Body/VendorAddCategory';
 import Customer from "./components/Pages/Customer";
 import ProductDetails from "./components/Pages/ProductDetails";
@@ -44,6 +45,7 @@ function MainRoutes(){
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/addCategory" element={<AddCategory/>}/>
                     <Route path="/vAddProducts/:mail" element={<VendorAddProducts/>}/>
+                    <Route path="/vEditProducts/:mail/:id" element={<VendorEditProducts/>}/>
                     <Route path="/vAddCategory" element={<VendorAddCategory/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/customerReg" element={<CustomerReg/>}/>
