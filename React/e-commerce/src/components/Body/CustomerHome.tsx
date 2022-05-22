@@ -17,7 +17,7 @@ class CustomerHome extends Component<any, any>{
 
     async componentDidMount() {
         //If the user search a product then the following line executes
-        if(localStorage.getItem("searchProductSession") != null){
+        /*if(localStorage.getItem("searchProductSession") != null){
             const resp = await axios.get('http://localhost:9090/products');
             //now remove the session
             localStorage.removeItem("searchProductSession");
@@ -29,8 +29,8 @@ class CustomerHome extends Component<any, any>{
                 })
             }
             //alert("hello");
-        }
-        else {
+        }*/
+        //else {
             const resp = await axios.get('http://localhost:9090/products');
             console.log(resp);
             if (resp.status === 200) {
@@ -40,7 +40,7 @@ class CustomerHome extends Component<any, any>{
                 })
             }
             //alert("hello123");
-        }
+        //}
     }
 
     render() {
@@ -117,94 +117,6 @@ class CustomerHome extends Component<any, any>{
                         </Carousel.Item>
                     </Carousel>
                 </div>
-
-                {/*<div className="container">
-                    <div className="row justify-content-lg-start">
-                        <div className="col-lg-3 mb-5">
-                            <Card>
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg" style={{height: "180px", width: "100%"}} />
-                                <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text style={{color: "red", }}>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                                    <div>Rating: 4</div>
-                                </Card.Footer>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card>
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                                <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text style={{color: "red", }}>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This card has even longer content than the first to
-                                        show that equal height action.
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                                    <div>Rating: 4</div>
-                                </Card.Footer>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card>
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                                <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text style={{color: "red", }}>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                                    <div>Rating: 4</div>
-                                </Card.Footer>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card>
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                                <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text style={{color: "red", }}>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                                    <div>Rating: 4</div>
-                                </Card.Footer>
-                            </Card>
-                        </div>
-
-                        <div className="col-lg-3 mb-5">
-                            <Card>
-                                <Card.Img variant="top" src="https://www.w3schools.com/html/img_girl.jpg"  style={{height: "180px", width: "100%"}} />
-                                <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text style={{color: "red", }}>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This card has even longer content than the first to
-                                        show that equal height action.
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted" style={{fontSize: "1.5em"}}><HiCurrencyBangladeshi/>100</small>
-                                    <div>Rating: 4</div>
-                                </Card.Footer>
-                            </Card>
-                        </div>
-                    </div>
-                </div>*/}
                 <br/>
                 <div className="container">
                     <div className="row justify-content-lg-start">

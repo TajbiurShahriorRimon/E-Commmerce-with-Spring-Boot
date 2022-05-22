@@ -15,4 +15,5 @@ public interface OrdersService {
     //public Map<Integer, java.util.List<Sales>> getPendingOrders();
     public ArrayList<Orders> getPendingOrders();
     public boolean setDeliverdStatus(int id);
+    public boolean setCancelStatus(int id);
 }

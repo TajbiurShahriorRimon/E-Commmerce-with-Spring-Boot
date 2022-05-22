@@ -4,13 +4,14 @@ import SiteOrderPending from "../Body/siteOrderPending";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import base_url from "../../api/bootapi";
+import un_auth from "../../unAuthRedirect/unAuth";
 
 const OrderPending = () => {
 
     var navigate = useNavigate();
 
     useEffect(() => {
-        /*let token= "Bearer "+localStorage.getItem("token");
+        let token= "Bearer "+localStorage.getItem("token");
         console.log(token);
         axios.post(`${base_url}tokenValidation`,"data",{
             headers: {
@@ -19,24 +20,27 @@ const OrderPending = () => {
                 'Accept': 'application/json'
             }}).then(
             (response)=>{
-                navigate("/customer/index");
+                //navigate("/customer/index");
+                if(localStorage.getItem("userType_session") != "admin"){
+                    navigate(`${un_auth}`); //un_auth
+                }
             },(error)=>{
 
+                navigate(`${un_auth}`);
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
 
-                /!*for(let i=0;i<res.length;i++){
+                navigate(`${un_auth}`);
+
+                /*for(let i=0;i<res.length;i++){
                     errorMsg+=res[i];
                     errorMsg+="\n"
                 }
+                navigate("/");*/
 
-                navigate("/");
-                alert(errorMsg);*!/
+                //alert(errorMsg);
             }
-        );*/
-        if(localStorage.getItem("userType_session") != "admin"){
-            navigate("/");
-        }
+        );
     }, [])
 
     return(

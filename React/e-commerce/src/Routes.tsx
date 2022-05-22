@@ -27,6 +27,7 @@ import VendorReg from './components/Pages/VendorReg';
 import CustomerReg from './components/Pages/CustomerReg';
 import OrderPending from "./components/Pages/OrderPending";
 import OrderPendingDetails from "./components/Pages/OrderPendingDetails";
+import ProductSearch from "./components/Pages/ProductSearch";
 
 function MainRoutes(){
     return(
@@ -61,6 +62,7 @@ function MainRoutes(){
                     <Route path="/product/customer/giveReview/:productId" element={<ProductCustomerGiveReview/>}/>
                     <Route path="/product/productDetails/:id" element={<ProductDetails/>}/>
                     <Route path="/product/allReviews/:id" element={<ProductReviews/>}/>
+                    <Route path="/product/search/:key" element={<ProductSearch/>}/>
                     <Route path="/shoppingCart" element={<ShoppingCart/>}/>
 
                     {/*Order*/}

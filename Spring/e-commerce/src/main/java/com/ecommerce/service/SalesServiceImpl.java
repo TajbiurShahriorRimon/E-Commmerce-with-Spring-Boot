@@ -22,7 +22,8 @@ public class SalesServiceImpl implements SalesService {
     }
 
     public ArrayList<Sales> getPendingOrderByIdSales(int id){
-        var sales = (ArrayList<Sales>) salesDao.findAll().stream().filter(x -> x.getOrder().getId() == id).collect(Collectors.toList());
+        var sales = (ArrayList<Sales>) salesDao.findAll().stream().filter(x -> x.getOrder().getId() == id)
+        .collect(Collectors.toList());
         return sales;
     }
     

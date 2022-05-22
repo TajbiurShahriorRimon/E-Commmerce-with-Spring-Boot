@@ -45,4 +45,9 @@ public class OrdersController {
     public ResponseEntity<Boolean> changeDeiliveryStatus(@PathVariable int id){
         return new ResponseEntity<Boolean>(ordersService.setDeliverdStatus(id), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/order/changeCancelStatus/{id}")
+    public ResponseEntity<Boolean> changeCancelStatus(@PathVariable int id){
+        return new ResponseEntity<Boolean>(ordersService.setCancelStatus(id), HttpStatus.OK);
+    }
 }

@@ -4,6 +4,7 @@ import CustomerHome from "../Body/CustomerHome";
 import axios from "axios";
 import base_url from "../../api/bootapi";
 import {useNavigate} from "react-router-dom";
+import un_auth from "../../unAuthRedirect/unAuth";
 
 /*class Customer extends Component<any, any>{
     render() {
@@ -30,23 +31,26 @@ const Customer = () => {
                 'Accept': 'application/json'
             }}).then(
             (response)=>{ //user is authorized
-                alert("Authorized");
+                //alert("Authorized");
                 if(localStorage.getItem("userType_session") != "customer"){ //only authorized customer can get access
-                    alert("not customer");
+                    navigate(`${un_auth}`) //un_auth
+                    //alert("not customer");
                 }
                 //navigate("/customer/index");
                 return
             },(error)=>{
-                alert("UnAuth")
+                //alert("UnAuth")
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
+
+                navigate(`${un_auth}`);
 
                 /*for(let i=0;i<res.length;i++){
                     errorMsg+=res[i];
                     errorMsg+="\n"
                 }*/
 
-                alert(errorMsg);
+                //alert(errorMsg);
             }
         );
     };

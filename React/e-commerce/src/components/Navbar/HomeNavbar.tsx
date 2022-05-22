@@ -12,14 +12,14 @@ import { Link } from 'react-router-dom';
 function HomeNavbar(){
 
     const [homeNav,setHomeNav]=useState({
-        homeNav: (<div>fdsfs</div>)
+        homeNav: (<div></div>)
     })
 
     useEffect(() => {
-        if (localStorage.getItem("userType_session") == null ||
+        if (localStorage.getItem("userType_session") == null /*||
             localStorage.getItem("userType_session") != "admin" ||
             localStorage.getItem("userType_session") != "vendor" ||
-            localStorage.getItem("userType_session") != "customer"
+            localStorage.getItem("userType_session") != "customer"*/
         ){
             setHomeNav({
                 homeNav: (
