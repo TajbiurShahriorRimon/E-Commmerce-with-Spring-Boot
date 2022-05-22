@@ -46,7 +46,7 @@ public class ProductsController {
 	public ResponseEntity<ArrayList<Products>> getAllProducts(){
 		return ResponseEntity.ok(productsService.getAllProducts()); }
 	
-	@GetMapping("/products/{name}")
+	@GetMapping(value = "/products/{value}")
 	public ResponseEntity<ArrayList<Products>> searchProducts(@PathVariable String value){
 		return ResponseEntity.ok(productsService.searchProducts(value)); }
 	

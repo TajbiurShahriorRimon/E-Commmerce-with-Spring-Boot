@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Input, NavbarToggler, Row} from "reactstrap";
 import  "./navbar.css";
 import icon from "./images/search2.svg";
@@ -10,9 +10,55 @@ import { MdReviews } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 function HomeNavbar(){
+
+    const [homeNav,setHomeNav]=useState({
+        homeNav: (<div>fdsfs</div>)
+    })
+
+    useEffect(() => {
+        if (localStorage.getItem("userType_session") == null ||
+            localStorage.getItem("userType_session") != "admin" ||
+            localStorage.getItem("userType_session") != "vendor" ||
+            localStorage.getItem("userType_session") != "customer"
+        ){
+            setHomeNav({
+                homeNav: (
+                    <div>
+                        <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
+                            <Container>
+                                <Navbar.Brand href="/home">Dokan</Navbar.Brand>
+                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                <Navbar.Collapse id="basic-navbar-nav">
+                                    <Nav className="justify-content-center" style={{ flex: 1}}>
+                                        <Form className="d-flex align-content-center">
+                                            <FormControl
+                                                type="search"
+                                                placeholder="Search"
+                                                aria-label="Search"
+                                            />
+                                            <Button variant="outline-success"><ImSearch/></Button>
+                                        </Form>
+                                    </Nav>
+                                    <Nav.Link href="/home">Home</Nav.Link>
+                                    <Nav.Link href="/login">Login</Nav.Link>
+                                    <NavDropdown title="Registration" id="basic-nav-dropdown">
+                                        <NavDropdown.Item href="/customerReg">Customer Registration <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
+                                        <NavDropdown.Item href="/vendorReg">Vendor Registration <CgHome style={{color:"red"}}/> </NavDropdown.Item>
+                                    </NavDropdown>
+                                </Navbar.Collapse>
+                            </Container>
+                        </Navbar>
+                        <br/> <br/> <br/>
+                    </div>
+                )
+            })
+        }
+    }, [])
+
     return(
         <div>
-        <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
+            {homeNav.homeNav}
+        {/*<Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
             <Container>
                 <Navbar.Brand href="/home">Dokan</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -36,7 +82,7 @@ function HomeNavbar(){
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-            <br/> <br/> <br/>
+            <br/> <br/> <br/>*/}
         </div>
     )
 }
