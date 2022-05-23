@@ -83,5 +83,24 @@ public class OrdersServiceImpl implements OrdersService {
         ordersDao.save(order);
         return true;
     }
+
+    @Override
+    public ArrayList<Orders> getAllOrdersCustomerById(int id) {
+        var v = (ArrayList<Orders>) ordersDao.findAll()
+        .stream().filter(x -> x.getCustomer().getId() == id).collect(Collectors.toList());
+        if(v == null){
+            return null;
+        }
+        return v;
+    }
+
+    @Override
+    public ArrayList<Orders> getAll() {
+        var v = (ArrayList<Orders>) ordersDao.findAll();
+        if(v == null){
+            return null;
+        }
+        return v;
+    }
     
 }

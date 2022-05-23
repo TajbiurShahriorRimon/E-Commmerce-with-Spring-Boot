@@ -1,14 +1,14 @@
-import React, {Component, useEffect} from "react";
-import {CustomerNavbar} from "../Navbar/CustomerNavbar";
-import SiteCustomerProfile from "../Body/siteCustomerProfile";
-import {AdminNavbar} from "../Navbar/AdminNavbar";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import base_url from "../../api/bootapi";
 import un_auth from "../../unAuthRedirect/unAuth";
-import {useNavigate} from "react-router-dom";
+import {CustomerNavbar} from "../Navbar/CustomerNavbar";
+import CustomerHome from "../Body/CustomerHome";
+import React, {useEffect} from "react";
+import SiteOrderCustomer from "../Body/siteOrderCustomer";
 
-function CustomerProfile(){
-    var navigate = useNavigate();
+const CustomerOrders = () => {
+    const navigate = useNavigate();
 
     useEffect(() => {
         let token= "Bearer "+localStorage.getItem("token");
@@ -19,14 +19,16 @@ function CustomerProfile(){
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }}).then(
-            (response)=>{
-                //navigate("/customer/index");
-                if(localStorage.getItem("userType_session") == null){
-                    navigate(`${un_auth}`); //un_auth
+            (response)=>{ //user is authorized
+                //alert("Authorized");
+                if(localStorage.getItem("userType_session") != "customer"){ //only authorized customer can get access
+                    navigate(`${un_auth}`) //un_auth
+                    //alert("not customer");
                 }
+                //navigate("/customer/index");
+                return
             },(error)=>{
-
-                navigate(`${un_auth}`);
+                //alert("UnAuth")
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
 
@@ -35,21 +37,18 @@ function CustomerProfile(){
                 /*for(let i=0;i<res.length;i++){
                     errorMsg+=res[i];
                     errorMsg+="\n"
-                }
-                navigate("/");*/
-
+                }*/
                 //alert(errorMsg);
             }
         );
     }, [])
 
-    return (
+    return(
         <div>
             <CustomerNavbar/>
-            <AdminNavbar/>
-            <SiteCustomerProfile/>
+            <SiteOrderCustomer/>
         </div>
     )
 }
 
-export default CustomerProfile;
+export default CustomerOrders;

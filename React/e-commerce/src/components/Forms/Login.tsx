@@ -51,10 +51,12 @@ function Login(){
                 console.log(vendorResp.data);
                 if(vendorResp.status == 200){
                     localStorage.setItem("userId_session", vendorResp.data); //vendorId from vendor table
+                    navigate("/vHome");
                 }
             }
             else { //user is Admin
-                navigate('/order/pending');
+                //navigate('/order/pending');
+                navigate('/admin');
             }
         }
     }
