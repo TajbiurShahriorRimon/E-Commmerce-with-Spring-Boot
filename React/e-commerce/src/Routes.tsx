@@ -12,7 +12,7 @@ import VendorProfile from './components/Body/VendorProfile';
 import VendorShopInfo from './components/Body/VendorShopInfo';
 import VendorAddProducts from './components/Body/VendorAddProducts';
 import VendorEditProducts from './components/Body/VendorAddProducts';
-import VendorAddCategory from './components/Body/VendorAddCategory';
+import AdminAddCategories from './components/Body/AdminAddCategories';
 import Customer from "./components/Pages/Customer";
 import ProductDetails from "./components/Pages/ProductDetails";
 import CustomerProfile from "./components/Pages/CustomerProfile";
@@ -23,6 +23,9 @@ import ProductReviews from "./components/Pages/ProductReviews";
 import Logout from "./components/Pages/Logout";
 import ShoppingCart from "./components/Pages/ShoppingCart";
 import Home from './components/Pages/Home';
+import Admin from './components/Pages/Admin';
+import AdminManageUsers from './components/Pages/AdminManageUsers';
+import AdminManageCategory from './components/Pages/AdminManageCategory';
 import VendorReg from './components/Pages/VendorReg';
 import CustomerReg from './components/Pages/CustomerReg';
 import OrderPending from "./components/Pages/OrderPending";
@@ -43,11 +46,14 @@ function MainRoutes(){
                     <Route path="/vProfile" element={<VendorProfile/>}/>
                     <Route path="/vShopInfo" element={<VendorShopInfo/>}/>
                     <Route path="/vHome" element={<Vendor/>}/>
+                    <Route path="/admin" element={<Admin/>}/>
+                    <Route path="/aManageUsers" element={<AdminManageUsers/>}/>
+                    <Route path="/aManagecategory" element={<AdminManageCategory/>}/>
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/addCategory" element={<AddCategory/>}/>
                     <Route path="/vAddProducts/:mail" element={<VendorAddProducts/>}/>
                     <Route path="/vEditProducts/:mail/:id" element={<VendorEditProducts/>}/>
-                    <Route path="/vAddCategory" element={<VendorAddCategory/>}/>
+                    <Route path="/aAddCategory" element={<AdminAddCategories/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/customerReg" element={<CustomerReg/>}/>
                     <Route path="/vendorReg" element={<VendorReg/>}/>
