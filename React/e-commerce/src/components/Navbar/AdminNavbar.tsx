@@ -20,7 +20,8 @@ export const AdminNavbar = () => {
                     <div>
                         <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
                             <Container>
-                                <Navbar.Brand href="#home">Dokan</Navbar.Brand>
+                                <Navbar.Brand href="/home">Dokan</Navbar.Brand>
+                                <Nav.Link href="/aManageUsers">Manage Users</Nav.Link>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="justify-content-center" style={{ flex: 1}}>
@@ -36,7 +37,7 @@ export const AdminNavbar = () => {
                                         <Nav.Link href="" className="d-flex"> <CgShoppingCart style={{fontSize:"1.5em"}}/> </Nav.Link>
                                     </Nav>
                                     <Nav.Link href="/customer/index">Home</Nav.Link>
-                                    {/*<Nav.Link href="#link">Link</Nav.Link>*/}
+                                    <Nav.Link href="/aManageUsers">Manage Users</Nav.Link>
                                     <NavDropdown title="Admin" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
                                         {/*<NavDropdown.Item href="#action/3.3">My Orders <CgBox/> </NavDropdown.Item>*/}
@@ -84,7 +85,8 @@ export const AdminNavbar = () => {
 
     return (
         <div>
-            <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
+            {adminNav.adminNavbar}
+            {/*<Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
                 <Container>
                     <Navbar.Brand href="/home">Dokan</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -103,7 +105,7 @@ export const AdminNavbar = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <br/> <br/> <br/>
+            <br/> <br/> <br/>*/}
         </div>
     )
 }
