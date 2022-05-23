@@ -1,5 +1,6 @@
 package com.ecommerce.controller;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,5 +74,9 @@ public class UserController {
 			return ResponseEntity.ok(this.userservice.getUser(email));
 			//return email;
 		}
+		
+		@GetMapping("/allUsers")
+		public ResponseEntity<List<User>> getAllUsers(){
+			return ResponseEntity.ok(userservice.getAllUsers()); }
 
 	}
