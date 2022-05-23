@@ -1,5 +1,7 @@
 package com.ecommerce.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return userDao.findAll();
+
 	public boolean userExists(String mail) {
 		// TODO Auto-generated method stub
 		

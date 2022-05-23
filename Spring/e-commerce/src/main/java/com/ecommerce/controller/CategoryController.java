@@ -1,6 +1,7 @@
 package com.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -31,5 +32,9 @@ public class CategoryController {
 	@GetMapping("/category")
 	public ResponseEntity<ArrayList<Category>> getAllCategory(){
 		return ResponseEntity.ok(categoryService.getAllCategory()); }
+	
+	@GetMapping("/allCategory")
+	public ResponseEntity<List<Category>> getAllCategories(){
+		return ResponseEntity.ok(categoryService.getAllCategories()); }
 
 }

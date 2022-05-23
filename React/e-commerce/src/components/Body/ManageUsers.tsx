@@ -1,12 +1,34 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { FormControl } from 'react-bootstrap';
 import { ImSearch } from 'react-icons/im';
 import { Button, Form, Table } from 'reactstrap';
+import base_url from '../../api/bootapi';
 
 
 
 
-const ManageUsers = () => {
+function ManageUsers(props:any){
+
+    useEffect(()=>{
+      getAllUsers();
+    },[]);
+  
+    const [user,setUsers] = useState([]);
+  
+    const getAllUsers = () => {
+        axios.get(`${base_url}allUsers`).then(
+            (response) => {
+                console.log(response.data);
+                setUsers(response.data);
+  
+            },
+            (error) => {
+  
+            }
+  
+        );
+      };
 
 
 return (
@@ -33,16 +55,23 @@ return (
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td><Button href="#" variant="success">Edit</Button></td>
-      <td><Button href="#" variant="danger">Delete</Button></td>
-    </tr>
+  {
+   user.map((value : any ) => {
+    return (
+      <tr>
+        <td>{value.name}</td>
+        <td>{value.address}</td>
+        <td>{value.mail}</td>
+        <td>{value.phone}</td>
+        <td>{value.status}</td>
+        <td>{value.type}</td>
+        <td><Button href="#" variant="success">Edit</Button></td>
+        <td><Button href="#" variant="danger">Delete</Button></td>
+      </tr>
+    )
+  }
+  )         
+}
   </tbody>
 </Table>
     </div>
