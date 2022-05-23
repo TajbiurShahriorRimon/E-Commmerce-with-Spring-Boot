@@ -25,7 +25,7 @@ function UserRegistration(props:any){
         mail:"",
         phone:"",
         address:"",
-        gender:"",
+        gender:"male",
         type:"user"
 
     });
@@ -62,23 +62,25 @@ function UserRegistration(props:any){
                 navigate(`/sLoginReg/${response.data.mail}`);
             },(error)=>{
                 //console.log(error.response.data.mail);
-
+                if(error.response.status==409){
+                    alert("A user with the same mail already exists");
+                  }else{
                 setErrorUser({
                     mail: error.response.data.mail,
                     name: error.response.data.name,
                     phone: error.response.data.phone,
                     address: error.response.data.address
-                });
+                });}
 
-                /*let res:string[]=Object.values(error.response.data);
+                /*
+                let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
 
                 for(let i=0;i<res.length;i++){
                     errorMsg+=res[i];
                     errorMsg+="\n"
-                }
-
-                  alert(errorMsg);*/
+                }*/
+                
 
 
 

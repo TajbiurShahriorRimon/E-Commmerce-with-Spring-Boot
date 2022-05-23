@@ -10,4 +10,6 @@ public interface UserService {
 	public User addUser(User user);
 
 	public User getUserDataForSession(String email);
+	
+	public boolean userExists(String mail);
 }
