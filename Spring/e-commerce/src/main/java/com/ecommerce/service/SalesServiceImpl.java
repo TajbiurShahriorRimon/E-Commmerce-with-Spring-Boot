@@ -26,5 +26,15 @@ public class SalesServiceImpl implements SalesService {
         .collect(Collectors.toList());
         return sales;
     }
+
+    @Override
+    public ArrayList<Sales> getOrderByIdSales(int id) {
+        var sales = (ArrayList<Sales>) salesDao.findAll().stream().filter(x -> x.getOrder().getId() == id)
+        .collect(Collectors.toList());
+        if(sales == null){
+            return null;
+        }
+        return sales;
+    }
     
 }

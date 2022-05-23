@@ -36,7 +36,7 @@ export const AdminNavbar = () => {
                                         </Form>
                                         <Nav.Link href="" className="d-flex"> <CgShoppingCart style={{fontSize:"1.5em"}}/> </Nav.Link>
                                     </Nav>
-                                    <Nav.Link href="/customer/index">Home</Nav.Link>
+                                    <Nav.Link href="/admin">Home</Nav.Link>
                                     <Nav.Link href="/aManageUsers">Manage Users</Nav.Link>
                                     <NavDropdown title="Admin" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>

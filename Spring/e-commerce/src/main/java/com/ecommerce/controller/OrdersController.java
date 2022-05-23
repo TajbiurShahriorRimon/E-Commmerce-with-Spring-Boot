@@ -50,4 +50,14 @@ public class OrdersController {
     public ResponseEntity<Boolean> changeCancelStatus(@PathVariable int id){
         return new ResponseEntity<Boolean>(ordersService.setCancelStatus(id), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/order/customer/{id}")
+    public ResponseEntity<ArrayList<Orders>> getOrdersCustomerById(@PathVariable int id /* Customer Id */){
+        return new ResponseEntity<>(ordersService.getAllOrdersCustomerById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/order/get")
+    public ResponseEntity<ArrayList<Orders>> get(){
+        return new ResponseEntity<>(ordersService.getAll(), HttpStatus.OK);
+    }
 }

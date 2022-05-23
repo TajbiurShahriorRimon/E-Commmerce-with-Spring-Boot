@@ -16,4 +16,6 @@ public interface OrdersService {
     public ArrayList<Orders> getPendingOrders();
     public boolean setDeliverdStatus(int id);
     public boolean setCancelStatus(int id);
+    public ArrayList<Orders> getAllOrdersCustomerById(int id);
+    public ArrayList<Orders> getAll();
 }

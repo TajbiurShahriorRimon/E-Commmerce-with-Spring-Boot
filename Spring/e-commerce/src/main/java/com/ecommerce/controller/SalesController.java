@@ -30,4 +30,9 @@ public class SalesController {
     public ResponseEntity<ArrayList<Sales>> getSalesByOrder(@PathVariable int id /* Order Id */){
         return new ResponseEntity<ArrayList<Sales>>(salesService.getPendingOrderByIdSales(id), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/sales/getBySalesOrder/{id}")
+    public ResponseEntity<ArrayList<Sales>> getSalesByCustomerId(@PathVariable int id /* Order Id */){
+        return new ResponseEntity<ArrayList<Sales>>(salesService.getOrderByIdSales(id), HttpStatus.OK);
+    }
 }
