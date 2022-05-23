@@ -9,16 +9,6 @@ import {Link, useNavigate} from "react-router-dom";
 export const AdminNavbar = () => {
     var navigate = useNavigate();
 
-    const [search,setSearch]=useState({
-        searchField: ""
-    })
-    const searchProducts = () => {
-        localStorage.setItem("searchProductSession", search.searchField);
-        //alert("dds");
-        //navigate("/customer/index");
-        window.location.href = "/customer/index";
-    }
-
     const [adminNav,setAdminNav]=useState({
         adminNavbar: (<div></div>)
     })
@@ -39,9 +29,7 @@ export const AdminNavbar = () => {
                                                 type="search"
                                                 placeholder="Search"
                                                 aria-label="Search"
-                                                onChange={(e)=>{
-                                                    setSearch({searchField:e.target.value})
-                                                }}
+                                                onChange={setSearchValue}
                                             />
                                             <Button onClick={searchProducts} variant="outline-success"><ImSearch/></Button>
                                         </Form>
@@ -69,6 +57,27 @@ export const AdminNavbar = () => {
             })
         }
     }, [])
+
+    const setSearchValue = (e: any) => {
+        //alert(e.target.value);
+        localStorage.setItem("searchProductSession", e.target.value);
+        //alert(localStorage.getItem("searchProductSession"));
+    }
+
+    const searchProducts = () => {
+        //alert('fdf');
+        if (localStorage.getItem("searchProductSession") != null){
+            if(localStorage.getItem("searchProductSession") == ""){
+                //alert('prob');
+                return
+            }
+            var key = localStorage.getItem("searchProductSession");
+            localStorage.removeItem("searchProductSession");
+            //navigate("/product/search/"+key);
+            window.location.href = "/product/search/"+key;
+            //alert('last');
+        }
+    }
 
     return (
         <div>
