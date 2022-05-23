@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
 		user.setStatus();
-		//user.setType();
 		userDao.save(user);
+		
 		return user;
 	} 
 	
@@ -32,6 +32,13 @@ public class UserServiceImpl implements UserService {
 	public User getUserDataForSession(String email){
 		var user = userDao.findById(email).get();
 		return user;
+	}
+
+	@Override
+	public boolean userExists(String mail) {
+		// TODO Auto-generated method stub
+		
+		return userDao.existsById(mail);
 	}
 	
 }
