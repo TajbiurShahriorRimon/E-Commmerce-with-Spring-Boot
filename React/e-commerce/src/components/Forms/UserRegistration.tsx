@@ -25,7 +25,8 @@ function UserRegistration(props:any){
         mail:"",
         phone:"",
         address:"",
-        gender:""
+        gender:"",
+        type:"user"
 
     });
 
