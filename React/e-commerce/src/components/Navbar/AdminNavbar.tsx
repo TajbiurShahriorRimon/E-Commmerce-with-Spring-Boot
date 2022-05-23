@@ -20,10 +20,10 @@ export const AdminNavbar = () => {
                         </Nav>
                         <Nav.Link href="/admin">Home</Nav.Link>
                         <Nav.Link href="#">Profile</Nav.Link>
-                        <Nav.Link href="#">Manage Users</Nav.Link>
+                        <Nav.Link href="/aManageUsers">Manage Users</Nav.Link>
                         <NavDropdown title="Product Category" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/aAddCategory">Add Category <CgAdd style={{color:"blue"}}/></NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">View Categories <CgViewGrid style={{color:"green"}}/> </NavDropdown.Item>
+                            <NavDropdown.Item href="/aManagecategory">View Categories <CgViewGrid style={{color:"green"}}/> </NavDropdown.Item>
                             <NavDropdown.Divider />
                         </NavDropdown>
                         <Nav.Link href="/logout">Log Out <HiOutlineLogout style={{color:"red"}}/></Nav.Link>

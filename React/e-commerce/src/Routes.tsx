@@ -24,6 +24,8 @@ import Logout from "./components/Pages/Logout";
 import ShoppingCart from "./components/Pages/ShoppingCart";
 import Home from './components/Pages/Home';
 import Admin from './components/Pages/Admin';
+import AdminManageUsers from './components/Pages/AdminManageUsers';
+import AdminManageCategory from './components/Pages/AdminManageCategory';
 import VendorReg from './components/Pages/VendorReg';
 import CustomerReg from './components/Pages/CustomerReg';
 import OrderPending from "./components/Pages/OrderPending";
@@ -44,6 +46,8 @@ function MainRoutes(){
                     <Route path="/vShopInfo" element={<VendorShopInfo/>}/>
                     <Route path="/vHome" element={<Vendor/>}/>
                     <Route path="/admin" element={<Admin/>}/>
+                    <Route path="/aManageUsers" element={<AdminManageUsers/>}/>
+                    <Route path="/aManagecategory" element={<AdminManageCategory/>}/>
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/addCategory" element={<AddCategory/>}/>
                     <Route path="/vAddProducts/:mail" element={<VendorAddProducts/>}/>
