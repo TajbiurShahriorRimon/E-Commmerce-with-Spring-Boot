@@ -6,6 +6,8 @@ import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
 import axios from 'axios';
+
+import {  useNavigate } from 'react-router-dom';
 /* TODO
 
 1) Response message misbehaves somtimes
@@ -33,7 +35,7 @@ function UserRegistration(props:any){
         phone:"",
         address:""
     });
-
+    const navigate = useNavigate();
     var formData= new FormData();
     var mailError: string="";
     //number of inputs in the form excluding gender as it has a default value
@@ -56,7 +58,7 @@ function UserRegistration(props:any){
             }}).then(
             (response)=>{
                 console.log(response.data.mail);
-                alert("Success");
+                navigate(`/sLoginReg/${response.data.mail}`);
             },(error)=>{
                 //console.log(error.response.data.mail);
 
