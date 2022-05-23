@@ -24,5 +24,7 @@ public interface ProductsService {
 	public Products saveImage(MultipartFile file);
 	
 	public ArrayList<Products> searchProducts(String value);
+	
+	public ArrayList<Products> getProductsVendor(int id);
 
 }

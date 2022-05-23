@@ -1,36 +1,91 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Input, NavbarToggler, Row} from "reactstrap";
 import  "./navbar.css";
 import icon from "./images/search2.svg";
-import {Card, Container, Form, FormControl, Navbar, Nav, Button} from 'react-bootstrap';
+import {Card, Container, Form, FormControl, Navbar, Nav, Button, NavDropdown} from 'react-bootstrap';
 import {ImSearch} from "react-icons/im";
+import {Link, useNavigate} from "react-router-dom";
+import {CgAdd, CgProfile, CgViewGrid} from "react-icons/cg";
+import {HiOutlineLogout} from "react-icons/hi";
 
 function VendorNavbar(){
-    return(
-        /*<div>
-            
-            <div className='nav-body'
-            >
-                <a href="/vHome" className='link'>Vendor</a>
-                <div className='search-box'>
-                    <input className='search-bar' type='text' placeholder='Type to search'></input>
-                    <a className='search-btn'>
-                    <img src={icon}/>
-                    </a>
-                </div>
-                <nav>
-                    <ul className='nav-links'>
-                        <li><a href='/vProfile' >Profile</a></li>
-                        <li><a href='/vShopInfo'>Shop Info</a></li>
-                        <li><a href='/vAddProducts' >Add Products</a></li>
-                        <li><a href='#' >Sales Report</a></li>
-                    </ul>
-                </nav>
-            </div>
+    var navigate = useNavigate();
 
-        </div>*/
+    const [vendorNav,setVendorNav]=useState({
+        vendorNavbar: (<div></div>)
+    })
+
+    useEffect(() => {
+        if (localStorage.getItem("userType_session") == "vendor") {
+            setVendorNav({
+                vendorNavbar: (
+                    <div>
+                        <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
+                            <Container>
+                                <Navbar.Brand href="/vHome">Dokan</Navbar.Brand>
+                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                <Navbar.Collapse id="basic-navbar-nav">
+                                    <Nav className="justify-content-center" style={{ flex: 1}}>
+                                        <Form className="d-flex align-content-center">
+                                            <FormControl
+                                                type="search"
+                                                placeholder="Search"
+                                                aria-label="Search"
+                                                onChange={setSearchValue}
+                                            />
+                                            <Button onClick={searchProducts} variant="outline-success"><ImSearch/></Button>
+                                        </Form>
+                                    </Nav>
+                                    <Nav.Link href="/vProfile">Profile</Nav.Link>
+                                    <Nav.Link href="/vShopInfo">Shop Info</Nav.Link>
+                                    <Nav.Link href="/vAddProducts">Products</Nav.Link>
+                                    <Nav.Link href="#">Sales Report</Nav.Link>
+                                    <NavDropdown title="Vendor" id="basic-nav-dropdown">
+                                        <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
+                                        <NavDropdown.Item href="/vendor/products">My Products <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
+                                        <div className="dropdown-item">
+                                            <Link to={"/order/pending"}>
+                                                Pending Orders
+                                            </Link>
+                                        </div>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="/logout">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
+                                    </NavDropdown>
+                                </Navbar.Collapse>
+                            </Container>
+                        </Navbar>
+                        <br/> <br/> <br/>
+                    </div>
+                )
+            })
+        }
+    }, [])
+
+    const setSearchValue = (e: any) => {
+        //alert(e.target.value);
+        localStorage.setItem("searchProductSession", e.target.value);
+        //alert(localStorage.getItem("searchProductSession"));
+    }
+
+    const searchProducts = () => {
+        //alert('fdf');
+        if (localStorage.getItem("searchProductSession") != null){
+            if(localStorage.getItem("searchProductSession") == ""){
+                //alert('prob');
+                return
+            }
+            var key = localStorage.getItem("searchProductSession");
+            localStorage.removeItem("searchProductSession");
+            //navigate("/product/search/"+key);
+            window.location.href = "/product/search/"+key;
+            //alert('last');
+        }
+    }
+
+    return(
         <div>
-        <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
+            {vendorNav.vendorNavbar}
+        {/*<Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">
             <Container>
                 <Navbar.Brand href="/vHome">Vendor</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,7 +107,7 @@ function VendorNavbar(){
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-            <br/> <br/> <br/>
+            <br/> <br/> <br/>*/}
         </div>
     )
 }
