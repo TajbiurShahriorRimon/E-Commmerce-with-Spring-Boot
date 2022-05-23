@@ -1,19 +1,19 @@
 import React from 'react';
 import  "./vendorprofile.css";
-import VendorProfileNavbar from '../Navbar/VendorProfileNavbar';
+import {AdminNavbar} from '../Navbar/AdminNavbar';
 import VendorAddCategory from '../Forms/AddCategory';
 
 
 
-function VendorAddCategories(){
+function AdminAddCategories(){
 
 return (
         <div className='container'>
-            <VendorProfileNavbar/>
+            <AdminNavbar/>
             <VendorAddCategory/>
             
         </div>    
     )
 }
 
-export default VendorAddCategories;
+export default AdminAddCategories;
