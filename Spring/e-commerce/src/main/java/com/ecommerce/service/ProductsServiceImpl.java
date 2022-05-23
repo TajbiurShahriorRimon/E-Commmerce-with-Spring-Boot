@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
 import com.ecommerce.dao.ProductsDao;
 import com.ecommerce.dao.ReviewAndRatingDao;
 import com.ecommerce.entity.Products;
@@ -25,6 +28,9 @@ public class ProductsServiceImpl implements  ProductsService{
 
 	@Autowired
 	private ReviewAndRatingDao reviewAndRatingDao;
+
+	@Autowired
+	private EntityManager entityManager;
 
 	@Override
 	public Products getProduct(int productId) {
@@ -71,10 +77,13 @@ public class ProductsServiceImpl implements  ProductsService{
 		return null;
 	}
 
+	@Transactional
 	@Override
 	public ArrayList<Products> searchProducts(String value) {
-		var products = (ArrayList<Products>) productsDao.findAll().stream().filter(x -> x.getProductName().contains(value)
-		 && x.getStatus().equals("active")).collect(Collectors.toList());
+		// var products = (ArrayList<Products>) productsDao.findAll().stream().filter(x -> x.getProductName().contains(value)
+		//  && x.getStatus().equals("active")).collect(Collectors.toList());
+		var products = (ArrayList<Products>) entityManager.createNativeQuery("SELECT * FROM productsdummy2 WHERE product_name LIKE '%"+value+"%'").getResultList();
+
 		return products;
 	}
 

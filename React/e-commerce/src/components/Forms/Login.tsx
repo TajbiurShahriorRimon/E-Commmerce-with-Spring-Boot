@@ -53,6 +53,9 @@ function Login(){
                     localStorage.setItem("userId_session", vendorResp.data); //vendorId from vendor table
                 }
             }
+            else { //user is Admin
+                navigate('/order/pending');
+            }
         }
     }
 

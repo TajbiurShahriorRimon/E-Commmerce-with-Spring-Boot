@@ -17,7 +17,7 @@ class AddProductReview extends Component<any, any>{
             rating: 0,
             value: "",
             customer: {
-                id: 0 //Local_Storage session_userId
+                id: localStorage.getItem("userId_session")//0 //Local_Storage session_userId
             },
             product: {
                 productId: window.location.pathname.split("/").pop()
@@ -69,7 +69,7 @@ class AddProductReview extends Component<any, any>{
 
             this.state.reviewAndRating.value = this.state.review;
             this.state.reviewAndRating.rating = starRating;
-            this.state.reviewAndRating.customer.id = 1; //Local_Storage
+            this.state.reviewAndRating.customer.id = localStorage.getItem("userId_session"); //Local_Storage
 
             const resp = await axios.post(`${base_url}reviewAndRating`, this.state.reviewAndRating);
             if(resp.status == 201){

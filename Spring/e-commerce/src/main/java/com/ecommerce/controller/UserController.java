@@ -68,4 +68,10 @@ public class UserController {
 			return new ResponseEntity<User>(userservice.getUserDataForSession(email), HttpStatus.OK);
 		}
 
+		@GetMapping("/user/{email}")
+		public ResponseEntity<User> get(@PathVariable String email){
+			return ResponseEntity.ok(this.userservice.getUser(email));
+			//return email;
+		}
+
 	}

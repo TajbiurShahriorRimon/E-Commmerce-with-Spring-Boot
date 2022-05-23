@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {NavDropdown, Container, Nav, Navbar, Form, FormControl, Button} from "react-bootstrap";
 import {ImSearch, ImHeart} from "react-icons/im";
 import {HiOutlineLogout} from "react-icons/hi";
@@ -8,7 +8,6 @@ import {Link, useNavigate} from "react-router-dom";
 
 export const AdminNavbar = () => {
     var navigate = useNavigate();
-
     return (
         <div>
             <Navbar bg="dark" expand="lg" variant="dark" fixed="top" className="navbar text-opacity-100">

@@ -38,6 +38,14 @@ class OrderPendingSalesDetails extends Component<any, any>{
         }
     }
 
+    changeToCancelStatus = async () => {
+        var response = await axios.get(`${base_url}order/changeCancelStatus/`+window.location.pathname.split("/").pop());
+        if(response.status == 200){
+            alert("Order Cancelled");
+            window.location.replace("/order/pending");
+        }
+    }
+
     render() {
         var resultTable;
         var table;
@@ -77,9 +85,15 @@ class OrderPendingSalesDetails extends Component<any, any>{
                             </Card.Text>
                                 <button style={{float: "right"}}
                                     onClick={this.changeDeliveryStatus}
-                                className="btn-danger rounded-end btn"
+                                className="btn-dark rounded-end btn"
                                 >
                                 Set to Deliver
+                                </button>
+                                <button style={{float: "right"}}
+                                        onClick={this.changeToCancelStatus}
+                                        className="btn-danger rounded-end btn"
+                                >
+                                    Cancel Delivery
                                 </button>
                         </Card.Body>
                     </Card> <br/>
