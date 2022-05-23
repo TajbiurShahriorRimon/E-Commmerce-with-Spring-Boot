@@ -72,19 +72,18 @@ export const CustomerNavbar = () => {
     const searchProducts = () => {
         //alert('fdf');
         if (localStorage.getItem("searchProductSession") != null){
-            alert('not null');
             if(localStorage.getItem("searchProductSession") == ""){
                 alert('prob');
                 return
             }
             var key = localStorage.getItem("searchProductSession");
             localStorage.removeItem("searchProductSession");
-            alert(key);
             //navigate("/product/search/"+key);
             window.location.href = "/product/search/"+key;
-            alert('last');
+            //alert('last');
         }
     }
+
     return (
         <div>
             {nav1.tabNav}
