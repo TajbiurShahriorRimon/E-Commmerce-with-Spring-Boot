@@ -26,7 +26,7 @@ export default function VendorRegistrationShop(){
         type:"vendor"
         
     });
-    const [vendor,setVendor]=useState({
+    let [vendor,setVendor]=useState({
         user:userOb,
         shopPhone:"",
         shopAddress:"",
@@ -68,8 +68,8 @@ export default function VendorRegistrationShop(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-
                 alert(response.data);
+                navigate(`/sLoginReg/${vendor.mail.mail}`);
             },(error)=>{
                 console.log("error");
                 let res:string[]=Object.values(error.response.data);
