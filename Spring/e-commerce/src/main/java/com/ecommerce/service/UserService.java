@@ -14,4 +14,6 @@ public interface UserService {
 	public User getUserDataForSession(String email);
 	
 	public List<User> getAllUsers();
+  
+	public boolean userExists(String mail);
 }

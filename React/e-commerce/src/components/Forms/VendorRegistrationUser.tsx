@@ -57,12 +57,15 @@ export default function VendorRegistrationUser(){
                 navigate(`/sVendorReg/${mailParam}`);
             },(error)=>{
 
+                if(error.response.status==409){
+                    alert("A user with the same mail already exists");
+                  }else{
                 setErrorUser({
                     mail: error.response.data.mail,
                     name: error.response.data.name,
                     phone: error.response.data.phone,
                     address: error.response.data.address
-                })
+                });}
                 
                 /*let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";

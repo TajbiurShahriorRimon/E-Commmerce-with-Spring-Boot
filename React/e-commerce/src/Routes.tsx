@@ -31,6 +31,8 @@ import CustomerReg from './components/Pages/CustomerReg';
 import OrderPending from "./components/Pages/OrderPending";
 import OrderPendingDetails from "./components/Pages/OrderPendingDetails";
 import ProductSearch from "./components/Pages/ProductSearch";
+import CustomerOrders from "./components/Pages/CustomerOrders";
+import CustomerOrderDetails from "./components/Pages/CustomerOrderDetails";
 
 function MainRoutes(){
     return(
@@ -74,6 +76,8 @@ function MainRoutes(){
                     {/*Order*/}
                     <Route path="/order/pending" element={<OrderPending/>}/>
                     <Route path="/order/pendingSalesDetails/:orderId" element={<OrderPendingDetails/>}/>
+                    <Route path="/order/customer" element={<CustomerOrders/>}/>
+                    <Route path="/order/salesDetails/:orderId" element={<CustomerOrderDetails/>}/>
 
                     {/*Logout*/}
                     <Route path="/logout" element={<Logout/>}/>

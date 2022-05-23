@@ -33,11 +33,10 @@ export const CustomerNavbar = () => {
                                     <Nav.Link href="" className="d-flex"> <CgShoppingCart style={{fontSize:"1.5em"}}/> </Nav.Link>
                                 </Nav>
                                 <Nav.Link href="/customer/index">Home</Nav.Link>
-                                <Nav.Link href="#link">Link</Nav.Link>
                                 <NavDropdown title="Customer" id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.2">My Wishlist <ImHeart/> </NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.3">My Orders <CgBox/> </NavDropdown.Item>
+                                    <NavDropdown.Item href="/order/customer">My Orders <CgBox/> </NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>
                                     <div className="dropdown-item">
                                         <Link to={"/shoppingCart"}>
@@ -72,19 +71,18 @@ export const CustomerNavbar = () => {
     const searchProducts = () => {
         //alert('fdf');
         if (localStorage.getItem("searchProductSession") != null){
-            alert('not null');
             if(localStorage.getItem("searchProductSession") == ""){
                 alert('prob');
                 return
             }
             var key = localStorage.getItem("searchProductSession");
             localStorage.removeItem("searchProductSession");
-            alert(key);
             //navigate("/product/search/"+key);
             window.location.href = "/product/search/"+key;
-            alert('last');
+            //alert('last');
         }
     }
+
     return (
         <div>
             {nav1.tabNav}

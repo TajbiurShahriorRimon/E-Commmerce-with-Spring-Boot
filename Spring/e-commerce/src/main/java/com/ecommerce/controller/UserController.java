@@ -40,7 +40,11 @@ public class UserController {
 		
 		@PostMapping(value="/uReg",consumes=MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
-			user= this.userservice.addUser(user);
+			if(!this.userservice.userExists(user.getMail())) {
+				user= this.userservice.addUser(user);
+			}else {
+				return new ResponseEntity<>(HttpStatus.CONFLICT);
+			}
 			/*if(user.getType().equals("vendor")) {
 				user=this.vendorservice.addVendor((Vendor)user);
 			}*/

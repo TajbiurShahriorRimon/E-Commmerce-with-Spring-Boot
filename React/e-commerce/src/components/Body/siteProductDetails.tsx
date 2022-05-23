@@ -19,6 +19,7 @@ class SiteProductDetails extends Component<any, any>{
             productName: "",
             price: "",
             thumbnail: "",
+            description: "",
             category: { //another object
                 categoryName: "",
             },
@@ -39,7 +40,7 @@ class SiteProductDetails extends Component<any, any>{
     }
 
     async componentDidMount() {
-        /*We have to make the Cart button enable or disable which is to add the or subtract item from the cart*/
+        /*We have to make the Cart button enable or disable which is to add or subtract item from the cart*/
         if(localStorage.getItem("shoppingCart") != null){
             var ara = JSON.parse(localStorage.getItem("shoppingCart") || '{}')
             //alert("not null, length: "+ara.length);
@@ -244,81 +245,6 @@ class SiteProductDetails extends Component<any, any>{
                                 </TransformWrapper>
                             </div>
                             <br/>
-                            {/*<div className="row">
-                                <div className="col-md-3" style={{border: "solid", backgroundColor: "mistyrose"}}>
-                                    <TransformWrapper initialScale={1}>
-                                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                                            <React.Fragment>
-                                                <TransformComponent>
-                                                    <img src={imageArray[0]} alt="test"
-                                                         style={
-                                                             {  height: 200,
-                                                                 width: 120
-                                                             }
-                                                         }
-                                                    />
-                                                </TransformComponent>
-                                                <div className="tools">
-                                                    <ButtonGroup className="me-2" aria-label="Second group">
-                                                        <Button onClick={() => zoomIn()} className="btn-dark btn">+</Button>
-                                                        <Button onClick={() => zoomOut()} className="btn btn-dark">-</Button>
-                                                        <Button onClick={() => resetTransform()} className="btn btn-outline-danger">X</Button>
-                                                    </ButtonGroup>
-                                                </div>
-                                            </React.Fragment>
-                                        )}
-                                    </TransformWrapper>
-                                </div>
-                                <div className="col-md-3" style={{border: "solid", backgroundColor: "mistyrose"}}>
-                                    <TransformWrapper initialScale={1}>
-                                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                                            <React.Fragment>
-                                                <TransformComponent>
-                                                    <img src={imageArray[1]} alt="test"
-                                                         style={
-                                                             {  height: 200,
-                                                                 width: 120
-                                                             }
-                                                         }
-                                                    />
-                                                </TransformComponent>
-                                                <div className="tools">
-                                                    <ButtonGroup className="me-2" aria-label="Second group">
-                                                        <Button onClick={() => zoomIn()} className="btn-dark btn">+</Button>
-                                                        <Button onClick={() => zoomOut()} className="btn btn-dark">-</Button>
-                                                        <Button onClick={() => resetTransform()} className="btn btn-outline-danger">X</Button>
-                                                    </ButtonGroup>
-                                                </div>
-                                            </React.Fragment>
-                                        )}
-                                    </TransformWrapper>
-                                </div>
-                                <div className="col-md-3" style={{border: "solid", backgroundColor: "mistyrose"}}>
-                                    <TransformWrapper initialScale={1}>
-                                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                                            <React.Fragment>
-
-                                                <TransformComponent>
-                                                    <img src={imageArray[0]} alt="test"
-                                                         style={
-                                                             {  height: 200,
-                                                                 width: 120
-                                                             }
-                                                         }
-                                                    />
-                                                </TransformComponent>
-                                                <div className="tools">
-                                                    <ButtonGroup className="me-2" aria-label="Second group">
-                                                        <Button onClick={() => zoomIn()} className="btn-dark btn">+</Button>
-                                                        <Button onClick={() => zoomOut()} className="btn btn-dark">-</Button>
-                                                        <Button onClick={() => resetTransform()} className="btn btn-outline-danger">X</Button>
-                                                    </ButtonGroup>
-                                                </div>
-                                            </React.Fragment>
-                                        )}
-                                    </TransformWrapper>
-                                </div>
-                            </div>*/}
                         </div>
 
                         <div className="col-md-7">
@@ -332,7 +258,6 @@ class SiteProductDetails extends Component<any, any>{
                                 <label><strong>Category</strong>: <Badge pill bg="success"><strong> {this.state.result.category.categoryName}</strong> </Badge></label>
                             </div>
                             <div>
-                                {/*<label><strong>Vendor:</strong> {this.state.result.vendor.shopName}</label>*/}
                                 <label><strong>Vendor:</strong> {this.state.result.vendor.shopName} </label>
                             </div>
                             <div>
@@ -349,7 +274,6 @@ class SiteProductDetails extends Component<any, any>{
 
                             <div className="row">
                                 <div className="col-md-2" onClick={this.addToCart}>
-                                    {/*<button hidden={this.state.cartButtonHidden} onClick={this.addToCart} className="btn-outline-danger btn"><strong>Add To Cart</strong> <ImCart/></button>*/}
                                     {this.state.cartBtn}
                                 </div>
                                 <div className="col-md-4">
@@ -374,19 +298,19 @@ class SiteProductDetails extends Component<any, any>{
                                             </div>
                                         </div>
                                     </span>
-                                    {/*<button className="btn btn"><ImHeart style={{fontSize:"1.5em"}}/></button>*/}
                                 </div>
                             </div>
                             <br/>
                             <div>
                                 <h2><u>Product Description</u></h2>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    {this.state.result.description}
+                                    {/*Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                     when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                                     It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                                     It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*/}
                                 </p>
                             </div>
                             <div className="d-grid gap-2 text-danger">

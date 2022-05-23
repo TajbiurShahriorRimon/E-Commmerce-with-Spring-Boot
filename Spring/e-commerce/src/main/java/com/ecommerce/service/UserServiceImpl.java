@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
 		user.setStatus();
-		//user.setType();
 		userDao.save(user);
+		
 		return user;
 	} 
 	
@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
 		return userDao.findAll();
+
+	public boolean userExists(String mail) {
+		// TODO Auto-generated method stub
+		
+		return userDao.existsById(mail);
 	}
 	
 }
