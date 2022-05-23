@@ -3,6 +3,7 @@ import React from "react";
 import SiteProductReview from "../Body/siteProductReviews";
 import HomeNavbar from "../Navbar/HomeNavbar";
 import {AdminNavbar} from "../Navbar/AdminNavbar";
+import VendorNavbar from "../Navbar/VendorNavbar";
 
 function ProductReviews() {
     return(
@@ -10,6 +11,7 @@ function ProductReviews() {
             <CustomerNavbar/>
             <HomeNavbar/>
             <AdminNavbar/>
+            <VendorNavbar/>
             <SiteProductReview/>
         </div>
     )

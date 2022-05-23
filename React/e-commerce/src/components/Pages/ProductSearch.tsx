@@ -13,7 +13,7 @@ const ProductSearch = () => {
             <CustomerNavbar/>
 
             <AdminNavbar/>
-            {/*<VendorNavbar/>*/}
+            <VendorNavbar/>
 
             <SiteProductSearch/>
         </div>

@@ -1,14 +1,14 @@
-import React, {Component, useEffect} from "react";
-import {CustomerNavbar} from "../Navbar/CustomerNavbar";
-import SiteCustomerProfile from "../Body/siteCustomerProfile";
-import {AdminNavbar} from "../Navbar/AdminNavbar";
+import {useNavigate} from "react-router-dom";
+import React, {useEffect} from "react";
 import axios from "axios";
 import base_url from "../../api/bootapi";
 import un_auth from "../../unAuthRedirect/unAuth";
-import {useNavigate} from "react-router-dom";
+import {CustomerNavbar} from "../Navbar/CustomerNavbar";
+import SiteShoppingCart from "../Body/siteShoppingCart";
 import VendorNavbar from "../Navbar/VendorNavbar";
+import SiteVendorProducts from "../Body/siteVendorProducts";
 
-function CustomerProfile(){
+const VendorProducts = () => {
     var navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function CustomerProfile(){
             }}).then(
             (response)=>{
                 //navigate("/customer/index");
-                if(localStorage.getItem("userType_session") == null){
+                if(localStorage.getItem("userType_session") != "vendor"){
                     navigate(`${un_auth}`); //un_auth
                 }
             },(error)=>{
@@ -46,12 +46,10 @@ function CustomerProfile(){
 
     return (
         <div>
-            <CustomerNavbar/>
-            <AdminNavbar/>
             <VendorNavbar/>
-            <SiteCustomerProfile/>
+            <SiteVendorProducts/>
         </div>
-    )
+    );
 }
 
-export default CustomerProfile;
+export default VendorProducts;

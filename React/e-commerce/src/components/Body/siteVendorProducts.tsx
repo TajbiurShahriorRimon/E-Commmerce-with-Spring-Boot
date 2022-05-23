@@ -1,31 +1,11 @@
-import React, {Component} from 'react';
-import  "./sitehome.css";
+import React, {Component} from "react";
 import axios from "axios";
 import base_url from "../../api/bootapi";
-import {Card, Carousel} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {HiInformationCircle} from "react-icons/hi";
 
-
-
-/*export default function SiteHome(){
-
-return (
-        <div className='container'>
-            <section id="header" className="jumbotron text-left text-white">
-                <div className="container p-5 ">
-                    <h1 className="display-4 ">GET UPTO 60% OFF!</h1>
-                    <p className="lead">Summer sale is now available with free shipping of all your products.</p>
-                    <hr className="my-4"/>
-                    <p>Patronize us today because limited products available</p>
-                    <a className="btn btn-primary btn-lg " href="#" role="button ">Learn more</a>
-                </div>
-            </section>
-        </div>    
-    )
-}*/
-
-class SiteHome extends Component<any, any>{
+class SiteVendorProducts extends Component<any, any>{
     constructor(props:any) {
         super(props);
     }
@@ -36,7 +16,7 @@ class SiteHome extends Component<any, any>{
     }
 
     async componentDidMount() {
-        const resp = await axios.get(`${base_url}products`);
+        const resp = await axios.get(`${base_url}product/vendor/`+localStorage.getItem("userId_session"));
         console.log(resp);
         if (resp.status === 200) {
             this.setState({
@@ -76,15 +56,6 @@ class SiteHome extends Component<any, any>{
         return (
             <div>
                 <div className="container">
-                    <section id="header" className="jumbotron text-left text-white">
-                        <div className="container p-5 ">
-                            <h1 className="display-4 ">GET UPTO 60% OFF!</h1>
-                            <p className="lead">Summer sale is now available with free shipping of all your products.</p>
-                            <hr className="my-4"/>
-                            <p>Patronize us today because limited products available</p>
-                            <a className="btn btn-primary btn-lg " href="#" role="button ">Learn more</a>
-                        </div>
-                    </section> <br/>
                     <div className="row justify-content-lg-start">
                         {resultTable}
                     </div>
@@ -94,5 +65,4 @@ class SiteHome extends Component<any, any>{
     }
 }
 
-export default SiteHome
-
+export default SiteVendorProducts

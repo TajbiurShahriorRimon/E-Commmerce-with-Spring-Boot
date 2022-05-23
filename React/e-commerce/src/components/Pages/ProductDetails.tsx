@@ -3,6 +3,7 @@ import {CustomerNavbar} from "../Navbar/CustomerNavbar";
 import SiteProductDetails from "../Body/siteProductDetails";
 import HomeNavbar from "../Navbar/HomeNavbar";
 import {AdminNavbar} from "../Navbar/AdminNavbar";
+import VendorNavbar from "../Navbar/VendorNavbar";
 
 class ProductDetails extends Component<any, any>{
     render() {
@@ -10,6 +11,7 @@ class ProductDetails extends Component<any, any>{
             <div>
                 <CustomerNavbar/>
                 <AdminNavbar/>
+                <VendorNavbar/>
                 <HomeNavbar/>
                 <SiteProductDetails/>
             </div>

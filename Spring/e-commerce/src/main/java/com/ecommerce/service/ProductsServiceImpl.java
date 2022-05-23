@@ -87,5 +87,15 @@ public class ProductsServiceImpl implements  ProductsService{
 		return products;
 	}
 
+	@Override
+	public ArrayList<Products> getProductsVendor(int id) {
+		var products = (ArrayList<Products>) productsDao.findAll()
+		.stream().filter(x -> x.getVendor().getId() == id).collect(Collectors.toList());
+		if(products == null){
+			return null;
+		}
+		return products;
+	}
+
 
 }

@@ -69,4 +69,8 @@ public class ProductsController {
 		return ResponseEntity.ok(productsService.getProductById(id));
 	}
 
+	@GetMapping("/product/vendor/{id}")
+	public ResponseEntity<ArrayList<Products>> getProductsForVendor(@PathVariable int id /* Vendor Id */){
+		return ResponseEntity.ok(productsService.getProductsVendor(id));
+	}
 }
