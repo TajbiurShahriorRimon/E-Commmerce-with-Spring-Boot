@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entity.User;
 import com.ecommerce.entity.Vendor;
+import com.ecommerce.service.CustomerService;
 import com.ecommerce.service.UserService;
 import com.ecommerce.service.VendorService;
 
@@ -29,6 +30,8 @@ public class UserController {
 	
 		@Autowired
 		private UserService userservice;
+		@Autowired
+		private CustomerService customerService;
 		
 		
 //		@GetMapping("/userHome/{userId}")
@@ -42,6 +45,9 @@ public class UserController {
 		public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
 			if(!this.userservice.userExists(user.getMail())) {
 				user= this.userservice.addUser(user);
+				if(user.getType().equals("customer")) {
+					customerService.addCustomer(user);
+				}
 			}else {
 				return new ResponseEntity<>(HttpStatus.CONFLICT);
 			}

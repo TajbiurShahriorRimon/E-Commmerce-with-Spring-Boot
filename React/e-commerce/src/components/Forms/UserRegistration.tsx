@@ -26,7 +26,6 @@ function UserRegistration(props:any){
         phone:"",
         address:"",
         gender:"male",
-        //type:"user"
         type:"customer"
 
     });
