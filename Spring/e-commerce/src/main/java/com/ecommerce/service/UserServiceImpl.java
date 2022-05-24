@@ -1,6 +1,10 @@
 package com.ecommerce.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private EntityManager entityManager;
+
 	@Override
 	public User getUser(String userId) {
 		// TODO Auto-generated method stub
@@ -40,11 +48,53 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
 		return userDao.findAll();
+	}
 
 	public boolean userExists(String mail) {
 		// TODO Auto-generated method stub
 		
 		return userDao.existsById(mail);
+	}
+
+
+	@Transactional
+	@Override
+	public User updateUser(User user, String userEmail) {
+		User userData = userDao.findById(userEmail).get();
+
+		var userList = userDao.findAll().stream().filter(x -> x.getMail() != userEmail).collect(Collectors.toList());
+
+		for (User user2 : userList) {
+			if(user2.getMail().equals(user.getMail().toString())){
+				return null;
+			}
+		}
+
+		// entityManager.createNativeQuery("Update user_table set mail='"+user.getMail()+"', address='"+user.getAddress()+"', gender='"+user.getGender()+"' where mail='"+userEmail+"'");
+		// .setParameter(1, user.getMail())
+		// .setParameter(2, user.getAddress());
+
+		try {
+			entityManager.createNativeQuery("Update user_table set name=?, address=?, gender=?, mail=?, phone=? where mail=?")
+			.setParameter(1, user.getName())
+			.setParameter(2, user.getAddress())
+			.setParameter(3, user.getGender())
+			.setParameter(4, user.getMail())
+			.setParameter(5, user.getPhone())
+			.setParameter(6, userEmail)
+			.executeUpdate();
+		} catch (Exception e) {
+			var c = "dsd";
+		}
+
+		// userData.setAddress(user.getAddress());
+		// userData.setGender(user.getGender());
+		// userData.setName(user.getName());
+		// userData.setMail(user.getMail());
+		// userData.setPhone(user.getPhone());
+
+		// userDao.save(userData);
+		return user;
 	}
 	
 }

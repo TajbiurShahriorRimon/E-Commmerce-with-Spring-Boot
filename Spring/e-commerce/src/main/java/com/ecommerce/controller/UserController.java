@@ -81,6 +81,21 @@ public class UserController {
 		
 		@GetMapping("/allUsers")
 		public ResponseEntity<List<User>> getAllUsers(){
-			return ResponseEntity.ok(userservice.getAllUsers()); }
+			return ResponseEntity.ok(userservice.getAllUsers()); 
+		}
+
+		@PostMapping(value="/user/update/{userEmail}",consumes=MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable String userEmail) {
+			// if(!this.userservice.userExists(userEmail)) {
+			// 	user= this.userservice.addUser(user);
+			// }else {
+			// 	return new ResponseEntity<>(HttpStatus.CONFLICT);
+			// }
+			User user2 = userservice.updateUser(user, userEmail);
+			if(user2 == null){
+				return new ResponseEntity<>(HttpStatus.CONFLICT);
+			}
+			return new ResponseEntity<User>(user, HttpStatus.CREATED);
+		}
 
 	}
