@@ -20,8 +20,19 @@ function Login(){
         
     });
 
+    const [error,setError]=useState({
+        errorMessage: "",
+
+    });
+
     const handleForm=(e:any)=>{
         console.log(login);
+        if(login.mail == "" || login.password == ""){
+            setError({
+                errorMessage: "Fields cannot be empty"
+            })
+            return;
+        }
         
         
         postDataToServer(JSON.stringify(login));
@@ -85,7 +96,10 @@ function Login(){
                 //navigate("/customer/productForReview");
 
             },(error)=>{
-                    alert("Invalid Credentials");
+                    //alert("Invalid Credentials");
+                    setError({
+                        errorMessage: "Invalid Credentials"
+                    })
                }
         );
     };
@@ -97,7 +111,7 @@ function Login(){
             <Row className='justify-content-center my-5'>
                 <Col md={4}>
                 <h1  className="form-label my-2">Login</h1><br></br>
-                    <Form onSubmit={handleForm}>
+                    <Form /*onSubmit={handleForm}*/>
                             <Label className="form-label my-2" for="email">
                                 Email
                             </Label>
@@ -126,6 +140,9 @@ function Login(){
                                     setLogin({...login,password:e.target.value})
                                 }}
                             />
+                            <div className="text-danger">
+                                {error.errorMessage}
+                            </div>
                             <br></br>
                             {/*<div className="row mb-4">
                                 <div className="col d-flex justify-content-center">
@@ -140,9 +157,10 @@ function Login(){
                                 </div>
                             </div>*/}
 
-                            <Button className='my-2 w-100' type='submit' color='primary'>Login</Button><br></br><br></br>
+                            {/*<Button className='my-2 w-100' type='submit' color='primary'>Login</Button><br></br><br></br>*/}
 
                     </Form>
+                    <Button onClick={handleForm} className='my-2 w-100' type='submit' color='primary'>Login</Button><br></br><br></br>
                    
                 </Col>
                 </Row>

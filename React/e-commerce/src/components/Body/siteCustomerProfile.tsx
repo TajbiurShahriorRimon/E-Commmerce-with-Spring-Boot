@@ -80,7 +80,9 @@ class SiteCustomerProfile extends Component<any, any>{
                                 <label htmlFor="">Gender</label>
                                 <div><strong>Male</strong></div>
                             </div> <br/>
-                            <Button style={{width: 200, height: 60, float: "right"}} className="btn-info rounded-3">Change Password</Button>
+                            <Link to={'/user/changePassword'}>
+                                <Button style={{width: 200, height: 60, float: "right"}} className="btn-info rounded-3">Change Password</Button>
+                            </Link>
                         </div>
                     </div>
                 </div>

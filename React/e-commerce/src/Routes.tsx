@@ -35,6 +35,7 @@ import CustomerOrders from "./components/Pages/CustomerOrders";
 import CustomerOrderDetails from "./components/Pages/CustomerOrderDetails";
 import VendorProducts from "./components/Pages/VendorProducts";
 import UserEditProfile from "./components/Pages/UserEditProfile";
+import UserChangePass from "./components/Pages/UserChangePass";
 
 function MainRoutes(){
     return(
@@ -84,6 +85,7 @@ function MainRoutes(){
 
                     {/*User*/}
                     <Route path="/user/profileEdit" element={<UserEditProfile/>}/>
+                    <Route path="/user/changePassword" element={<UserChangePass/>}/>
 
                     {/*Logout*/}
                     <Route path="/logout" element={<Logout/>}/>
