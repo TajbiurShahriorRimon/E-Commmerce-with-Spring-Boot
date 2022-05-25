@@ -178,7 +178,7 @@ class UserPasswordChange extends Component<any, any>{
                                 alt=""
                             />*/}
                             <strong className="me-auto">Success</strong>
-                            <small>11 mins ago</small>
+                            {/*<small>11 mins ago</small>*/}
                         </Toast.Header>
                         <Toast.Body>Successfully Changed Password</Toast.Body>
                     </Toast>
