@@ -57,6 +57,14 @@ public class LoginServiceImpl implements LoginService,UserDetailsService{
 			throw new UsernameNotFoundException("Invalid credentials");
 		}
 	}
+
+	@Override
+	public Login changePassword(Login login) {
+		Login data = loginDao.findById(login.getMail()).get();
+		data.setPassword(login.getPassword());
+		loginDao.save(data);
+		return login;
+	}
 	
 	
 
@@ -69,5 +77,7 @@ public class LoginServiceImpl implements LoginService,UserDetailsService{
 //			throw new UsernameNotFoundException("The mail you provided is invalid");
 //		return login;
 //	}
+
+
 
 }
