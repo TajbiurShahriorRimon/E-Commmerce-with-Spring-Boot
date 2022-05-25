@@ -57,43 +57,56 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	@Transactional
+	// @Transactional
+	// @Override
+	// public User updateUser(User user, String userEmail) {
+	// 	User userData = userDao.findById(userEmail).get();
+
+	// 	var userList = userDao.findAll().stream().filter(x -> x.getMail() != userEmail).collect(Collectors.toList());
+
+	// 	for (User user2 : userList) {
+	// 		if(user2.getMail().equals(user.getMail().toString())){
+	// 			return null;
+	// 		}
+	// 	}
+
+	// 	// entityManager.createNativeQuery("Update user_table set mail='"+user.getMail()+"', address='"+user.getAddress()+"', gender='"+user.getGender()+"' where mail='"+userEmail+"'");
+	// 	// .setParameter(1, user.getMail())
+	// 	// .setParameter(2, user.getAddress());
+
+	// 	try {
+	// 		entityManager.createNativeQuery("Update user_table set name=?, address=?, gender=?, mail=?, phone=? where mail=?")
+	// 		.setParameter(1, user.getName())
+	// 		.setParameter(2, user.getAddress())
+	// 		.setParameter(3, user.getGender())
+	// 		.setParameter(4, user.getMail())
+	// 		.setParameter(5, user.getPhone())
+	// 		.setParameter(6, userEmail)
+	// 		.executeUpdate();
+	// 	} catch (Exception e) {
+	// 		var c = "dsd";
+	// 	}
+
+	// 	// userData.setAddress(user.getAddress());
+	// 	// userData.setGender(user.getGender());
+	// 	// userData.setName(user.getName());
+	// 	// userData.setMail(user.getMail());
+	// 	// userData.setPhone(user.getPhone());
+
+	// 	// userDao.save(userData);
+	// 	return user;
+	// }
+
 	@Override
-	public User updateUser(User user, String userEmail) {
-		User userData = userDao.findById(userEmail).get();
+	public User updateUser(User user) {
+		User userData = userDao.findById(user.getMail()).get();
 
-		var userList = userDao.findAll().stream().filter(x -> x.getMail() != userEmail).collect(Collectors.toList());
+		userData.setAddress(user.getAddress());
+		userData.setGender(user.getGender());
+		userData.setName(user.getName());
+		userData.setPhone(user.getPhone());
 
-		for (User user2 : userList) {
-			if(user2.getMail().equals(user.getMail().toString())){
-				return null;
-			}
-		}
-
-		// entityManager.createNativeQuery("Update user_table set mail='"+user.getMail()+"', address='"+user.getAddress()+"', gender='"+user.getGender()+"' where mail='"+userEmail+"'");
-		// .setParameter(1, user.getMail())
-		// .setParameter(2, user.getAddress());
-
-		try {
-			entityManager.createNativeQuery("Update user_table set name=?, address=?, gender=?, mail=?, phone=? where mail=?")
-			.setParameter(1, user.getName())
-			.setParameter(2, user.getAddress())
-			.setParameter(3, user.getGender())
-			.setParameter(4, user.getMail())
-			.setParameter(5, user.getPhone())
-			.setParameter(6, userEmail)
-			.executeUpdate();
-		} catch (Exception e) {
-			var c = "dsd";
-		}
-
-		// userData.setAddress(user.getAddress());
-		// userData.setGender(user.getGender());
-		// userData.setName(user.getName());
-		// userData.setMail(user.getMail());
-		// userData.setPhone(user.getPhone());
-
-		// userDao.save(userData);
+		userDao.save(userData);
 		return user;
 	}
 	

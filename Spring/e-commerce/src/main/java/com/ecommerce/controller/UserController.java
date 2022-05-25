@@ -82,7 +82,6 @@ public class UserController {
 		@GetMapping("/user/{email}")
 		public ResponseEntity<User> get(@PathVariable String email){
 			return ResponseEntity.ok(this.userservice.getUser(email));
-			//return email;
 		}
 		
 		@GetMapping("/allUsers")
@@ -90,17 +89,23 @@ public class UserController {
 			return ResponseEntity.ok(userservice.getAllUsers()); 
 		}
 
-		@PostMapping(value="/user/update/{userEmail}",consumes=MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable String userEmail) {
-			// if(!this.userservice.userExists(userEmail)) {
-			// 	user= this.userservice.addUser(user);
-			// }else {
-			// 	return new ResponseEntity<>(HttpStatus.CONFLICT);
-			// }
-			User user2 = userservice.updateUser(user, userEmail);
-			if(user2 == null){
-				return new ResponseEntity<>(HttpStatus.CONFLICT);
-			}
+		// @PostMapping(value="/user/update/{userEmail}",consumes=MediaType.APPLICATION_JSON_VALUE)
+		// public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable String userEmail) {
+		// 	// if(!this.userservice.userExists(userEmail)) {
+		// 	// 	user= this.userservice.addUser(user);
+		// 	// }else {
+		// 	// 	return new ResponseEntity<>(HttpStatus.CONFLICT);
+		// 	// }
+		// 	User user2 = userservice.updateUser(user, userEmail);
+		// 	if(user2 == null){
+		// 		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		// 	}
+		// 	return new ResponseEntity<User>(user, HttpStatus.CREATED);
+		// }
+
+		@PostMapping(value="/user/update",consumes=MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<User> update(@Valid @RequestBody User user) {
+			userservice.updateUser(user);
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 
