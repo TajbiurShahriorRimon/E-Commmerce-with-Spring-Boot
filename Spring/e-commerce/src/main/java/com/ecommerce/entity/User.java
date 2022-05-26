@@ -85,9 +85,7 @@ public class User {
 	public void setType() {
 		this.type="customer";
 	}
-	public void setStatus() {
-		this.status="active";
-	}
+	
 	
 	@Override
 	public String toString() {

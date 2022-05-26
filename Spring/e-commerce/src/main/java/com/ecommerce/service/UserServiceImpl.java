@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
-		user.setStatus();
+		user.setStatus("inactive");
 		userDao.save(user);
 		
 		return user;
