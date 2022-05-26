@@ -47,7 +47,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
-		return userDao.findAll();
+		var products = (List<User>) userDao.findAll()
+				.stream().filter(x -> !x.getType().equals("admin".toString())).collect(Collectors.toList());
+		return products;
 	}
 
 	public boolean userExists(String mail) {
