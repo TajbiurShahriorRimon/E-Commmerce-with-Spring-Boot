@@ -39,12 +39,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
-		return userDao.findAll();
+		return userDao.findAll();}
 
 	public boolean userExists(String mail) {
 		// TODO Auto-generated method stub
 		
 		return userDao.existsById(mail);
+	}
+
+	@Override
+	public void manageUser(String mail) {
+		
+		User entity = userDao.getById(mail);
+		if(entity.getStatus().equals("active")) {
+			entity.setStatus("inactive");
+			userDao.save(entity);
+		}else {
+			entity.setStatus("active");
+			userDao.save(entity);
+		}
 	}
 	
 }
