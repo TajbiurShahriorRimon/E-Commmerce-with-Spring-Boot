@@ -15,6 +15,10 @@ function ManageUsers(props:any){
     },[]);
   
     const [user,setUsers] = useState([]);
+
+    const [search,setSearch] = useState({
+      key:""
+    });
   
     const getAllUsers = () => {
         axios.get(`${base_url}allUsers`).then(
@@ -42,6 +46,21 @@ function ManageUsers(props:any){
   
       };
 
+      const searchUser = (key : any) => {
+        axios.get(`${base_url}searchUser/${key}`).then(
+          (response) => {
+              console.log(response.data);
+              setUsers(response.data);
+  
+          },
+          (error) => {
+  
+          }
+  
+      );
+  
+      };
+
 
 return (
     <div>
@@ -51,8 +70,13 @@ return (
                 type="search"
                 placeholder="Search By Name"
                 aria-label="Search"
+                onChange={(e)=>{
+                  setSearch({...search,key:e.target.value})
+              }}
                 />
-                <Button variant="outline-success"><ImSearch/></Button>
+                <Button onClick={() => {
+                searchUser(search.key);
+                }} variant="outline-success"><ImSearch/></Button>
         </Form>
         </div><br></br><br></br>
     <Table striped bordered hover>

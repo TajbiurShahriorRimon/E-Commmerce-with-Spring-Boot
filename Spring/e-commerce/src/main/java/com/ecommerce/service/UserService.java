@@ -20,4 +20,6 @@ public interface UserService {
 	public void manageUser(String mail);
 
 	public User updateUser(User user);
+	
+	public List<User> searchUser(String key );
 }

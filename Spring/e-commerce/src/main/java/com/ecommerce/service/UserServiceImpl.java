@@ -123,5 +123,11 @@ public class UserServiceImpl implements UserService {
 		userDao.save(userData);
 		return user;
 	}
+
+	@Override
+	public List<User> searchUser(String key) {
+
+		return userDao.search(key);
+	}
 	
 }
