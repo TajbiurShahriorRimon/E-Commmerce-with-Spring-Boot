@@ -56,6 +56,17 @@ public class UserServiceImpl implements UserService {
 		return userDao.existsById(mail);
 	}
 
+	@Override
+	public void manageUser(String mail) {
+		
+		User entity = userDao.getById(mail);
+		if(entity.getStatus().equals("active")) {
+			entity.setStatus("inactive");
+			userDao.save(entity);
+		}else {
+			entity.setStatus("active");
+			userDao.save(entity);
+		}
 
 	// @Transactional
 	// @Override

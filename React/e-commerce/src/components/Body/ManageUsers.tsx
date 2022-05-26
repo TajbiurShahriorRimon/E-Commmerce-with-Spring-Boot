@@ -30,6 +30,18 @@ function ManageUsers(props:any){
         );
       };
 
+      const manageUsers = (mail : any) => {
+        axios.put(`${base_url}changeUserStatus/${mail}`).then(
+          (response)=>{
+            alert("User status Successfully Changed");
+            window.location.reload();
+          },(error)=>{
+            alert("Failed");
+          }
+      );
+  
+      };
+
 
 return (
     <div>
@@ -65,8 +77,9 @@ return (
         <td>{value.phone}</td>
         <td>{value.status}</td>
         <td>{value.type}</td>
-        <td><Button href="#" variant="success">Edit</Button></td>
-        <td><Button href="#" variant="danger">Delete</Button></td>
+        <td><Button onClick={() => {
+          manageUsers(value.mail);
+          }} color="success">Change Status</Button></td>
       </tr>
     )
   }
