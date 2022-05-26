@@ -33,7 +33,7 @@ public class MailController {
 		
 		String mailContent="<p>Dear Customer,</p>"
 						 + "<p>Please click the link below to verify your email</p>"
-						 +"<h3><a href=\"http://localhost:3000/mail/"+mail.getVerificationCode()+"\">VERIFY</a></h3>";
+						 +"<h3><a href=\"http://localhost:3000/verifyMail/"+ mail.getMail()+"/"+mail.getVerificationCode()+"\">VERIFY</a></h3>";
 		//<a href="https://www.w3schools.com">Visit W3Schools.com!</a>
 		
 		
@@ -51,5 +51,10 @@ public class MailController {
 		System.out.println("Success");
 	}
 	
+	
+	@PostMapping(value="/verifyMail")
+	public void validateMail(@RequestBody Mail mail ) {
+		System.out.println(mail);
+	}
 	
 }

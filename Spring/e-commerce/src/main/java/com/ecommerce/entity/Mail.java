@@ -11,6 +11,8 @@ public class Mail {
 
 	@Id
 	private String mail;
+	
+	
 	private String verificationCode;
 	
 	
@@ -30,6 +32,9 @@ public class Mail {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+	@Override
+	public String toString() {
+		return "Mail [mail=" + mail + ", verificationCode=" + verificationCode + "]";
+	}
 
-	
 }
