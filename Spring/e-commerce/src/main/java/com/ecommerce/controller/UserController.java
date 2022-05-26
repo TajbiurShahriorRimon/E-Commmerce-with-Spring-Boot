@@ -93,7 +93,6 @@ public class UserController {
 		public ResponseEntity<Void> status(@PathVariable String mail){
 			this.userservice.manageUser(mail);
 			return new ResponseEntity<>(HttpStatus.OK);
-			return ResponseEntity.ok(userservice.getAllUsers()); 
 		}
 
 		// @PostMapping(value="/user/update/{userEmail}",consumes=MediaType.APPLICATION_JSON_VALUE)

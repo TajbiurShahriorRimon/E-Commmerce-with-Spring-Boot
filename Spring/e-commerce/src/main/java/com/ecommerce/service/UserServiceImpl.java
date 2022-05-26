@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService {
 		}else {
 			entity.setStatus("active");
 			userDao.save(entity);
+			}
 		}
 
 	// @Transactional
