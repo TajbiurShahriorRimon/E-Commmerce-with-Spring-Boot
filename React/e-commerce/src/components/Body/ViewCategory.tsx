@@ -17,6 +17,10 @@ function ViewCategory(props:any){
 
   const [category,setCategory] = useState([]);
 
+  const [search,setSearch] = useState({
+    key:""
+  });
+
   const getAllCategory = () => {
       axios.get(`${base_url}allCategory`).then(
           (response) => {
@@ -43,17 +47,37 @@ function ViewCategory(props:any){
 
     };
 
+    const searchCategory = (key : any) => {
+      axios.get(`${base_url}searchCategory/${key}`).then(
+        (response) => {
+            console.log(response.data);
+            setCategory(response.data);
+
+        },
+        (error) => {
+
+        }
+
+    );
+
+    };
+
 
 return (
 <div>
     <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '10vh'}}>
-    <Form className="d-flex align-content-md-center position-fixed">
+    <Form  className="d-flex align-content-md-center position-fixed">
         <FormControl
             type="search"
             placeholder="Search By Name"
             aria-label="Search"
+            onChange={(e)=>{
+              setSearch({...search,key:e.target.value})
+          }}
             />
-            <Button variant="outline-success"><ImSearch/></Button>
+            <Button onClick={() => {
+            searchCategory(search.key);
+            }} variant="outline-success"><ImSearch/></Button>
     </Form>
     </div><br></br><br></br>
 <Table striped bordered hover>
