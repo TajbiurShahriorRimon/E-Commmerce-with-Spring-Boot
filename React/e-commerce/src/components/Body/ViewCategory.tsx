@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FormControl } from 'react-bootstrap';
+import { HiInformationCircle } from 'react-icons/hi';
 import { ImSearch } from 'react-icons/im';
+import { Link } from 'react-router-dom';
 import { Button, Form, Table } from 'reactstrap';
 import base_url from '../../api/bootapi';
 
@@ -27,6 +29,18 @@ function ViewCategory(props:any){
           }
 
       );
+    };
+
+    const manageCategory = (categoryId : any) => {
+      axios.put(`${base_url}changeStatus/${categoryId}`).then(
+        (response)=>{
+          alert("Category status Successfully Changed");
+          window.location.reload();
+        },(error)=>{
+          alert("Failed");
+        }
+    );
+
     };
 
 
@@ -56,11 +70,13 @@ return (
       <tr>
         <td>{value.categoryName}</td>
         <td>{value.status}</td>
-        <td><Button href="#" variant="success">Edit</Button></td>
-        <td><Button href="#" variant="danger">Delete</Button></td>
+        <td><Button onClick={() => {
+          manageCategory(value.categoryId);
+          }} color="success">Change Status</Button></td>
       </tr>
     )
-  })         
+  }
+  )         
 }
 </tbody>
 </Table>

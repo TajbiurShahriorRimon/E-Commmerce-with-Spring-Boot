@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.dao.CategoryDao;
+import com.ecommerce.dao.ProductsDao;
 import com.ecommerce.entity.Category;
 
 @Service
@@ -15,6 +16,9 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@Autowired
+	private ProductsDao productsDao;
 
 
 	@Override
@@ -36,5 +40,20 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		return categoryDao.findAll();
 	}
+
+	@Override
+	public void manageCategory(int id) {
+		Category entity = categoryDao.getById(id);
+		if(entity.getStatus().equals("active")) {
+			entity.setStatus("inactive");
+			categoryDao.save(entity);
+		}else {
+			entity.setStatus("active");
+			categoryDao.save(entity);
+		}
+
+	}
+
+	
 
 }
