@@ -12,5 +12,8 @@ public interface CategoryService {
 	public ArrayList<Category> getAllCategory();
 	
 	public List<Category> getAllCategories();
+	
+	public void manageCategory(int id);
+
 
 }
