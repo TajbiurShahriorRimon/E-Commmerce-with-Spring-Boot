@@ -14,6 +14,8 @@ public interface CategoryService {
 	public List<Category> getAllCategories();
 	
 	public void manageCategory(int id);
+	
+	public List<Category> searchCategories(String key);
 
 
 }
