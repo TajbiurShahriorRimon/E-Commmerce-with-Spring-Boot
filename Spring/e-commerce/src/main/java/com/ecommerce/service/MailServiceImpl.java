@@ -19,4 +19,14 @@ public class MailServiceImpl implements MailService {
 		return null;
 	}
 
+	@Override
+	public Mail verifyMail(Mail mail) {
+		// TODO Auto-generated method stub
+		Mail fetchedMail=mailDao.findById(mail.getMail()).get();
+		if(fetchedMail.getVerificationCode().equals(mail.getVerificationCode())) {
+			return fetchedMail;
+		}
+		return null;
+	}
+
 }

@@ -26,18 +26,12 @@ class VerifyMail extends Component<any, any>{
 
         axios.post(`${base_url}verifyMail`,this.state.mail).then(
             (response)=>{
-                alert("Success");
+                alert(response.data.mail);
             },(error)=>{
                 
-                let res:string[]=Object.values(error.response.data);
-                let errorMsg:string="";
-
-                for(let i=0;i<res.length;i++){
-                    errorMsg+=res[i];
-                    errorMsg+="\n"
-                }
                 
-                  alert(errorMsg);
+                
+                  alert(error.response.data);
                 
                 
                 

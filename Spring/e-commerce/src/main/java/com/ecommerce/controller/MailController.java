@@ -6,6 +6,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -53,8 +55,13 @@ public class MailController {
 	
 	
 	@PostMapping(value="/verifyMail")
-	public void validateMail(@RequestBody Mail mail ) {
+	public ResponseEntity<?> validateMail(@RequestBody Mail mail ) {
 		System.out.println(mail);
+		mail=mailService.verifyMail(mail);
+		if(mail!=null) {
+			return ResponseEntity.ok(mail);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid credentials");
 	}
 	
 }
