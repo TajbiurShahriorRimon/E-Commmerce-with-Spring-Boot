@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,10 @@ public class LoginController {
 //		return "/customer/index";
 //	}
 //	
+
+	@PostMapping(value = "/changePassword/{email}")
+	public ResponseEntity<Login> chengeUserPassword(@RequestBody Login login, @PathVariable String email){
+		return new ResponseEntity<Login>(loginService.changePassword(login), HttpStatus.OK);
+	}
 
 }

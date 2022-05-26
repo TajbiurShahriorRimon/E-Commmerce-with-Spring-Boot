@@ -26,7 +26,7 @@ function UserRegistration(props:any){
         phone:"",
         address:"",
         gender:"male",
-        type:"user"
+        type:"customer"
 
     });
 
@@ -177,7 +177,7 @@ function UserRegistration(props:any){
                                 setUser({...user,gender:e.target.value})
                             }}>
                                 <option selected value="male">Male</option>
-                                <option value="femal">Female</option>
+                                <option value="female">Female</option>
                             </select>
                             <Button className='my-2 w-100' type='submit' color='primary'>Submit</Button>
                         </Form>

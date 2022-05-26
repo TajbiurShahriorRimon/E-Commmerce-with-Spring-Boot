@@ -18,4 +18,6 @@ public interface UserService {
 	public boolean userExists(String mail);
 	
 	public void manageUser(String mail);
+
+	public User updateUser(User user);
 }

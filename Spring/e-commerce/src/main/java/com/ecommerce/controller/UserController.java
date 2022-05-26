@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entity.User;
 import com.ecommerce.entity.Vendor;
+import com.ecommerce.service.CustomerService;
 import com.ecommerce.service.UserService;
 import com.ecommerce.service.VendorService;
 
@@ -30,6 +31,8 @@ public class UserController {
 	
 		@Autowired
 		private UserService userservice;
+		@Autowired
+		private CustomerService customerService;
 		
 		
 //		@GetMapping("/userHome/{userId}")
@@ -43,6 +46,9 @@ public class UserController {
 		public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
 			if(!this.userservice.userExists(user.getMail())) {
 				user= this.userservice.addUser(user);
+				if(user.getType().equals("customer")) {
+					customerService.addCustomer(user);
+				}
 			}else {
 				return new ResponseEntity<>(HttpStatus.CONFLICT);
 			}
@@ -77,7 +83,6 @@ public class UserController {
 		@GetMapping("/user/{email}")
 		public ResponseEntity<User> get(@PathVariable String email){
 			return ResponseEntity.ok(this.userservice.getUser(email));
-			//return email;
 		}
 		
 		@GetMapping("/allUsers")
@@ -88,6 +93,27 @@ public class UserController {
 		public ResponseEntity<Void> status(@PathVariable String mail){
 			this.userservice.manageUser(mail);
 			return new ResponseEntity<>(HttpStatus.OK);
+			return ResponseEntity.ok(userservice.getAllUsers()); 
+		}
+
+		// @PostMapping(value="/user/update/{userEmail}",consumes=MediaType.APPLICATION_JSON_VALUE)
+		// public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable String userEmail) {
+		// 	// if(!this.userservice.userExists(userEmail)) {
+		// 	// 	user= this.userservice.addUser(user);
+		// 	// }else {
+		// 	// 	return new ResponseEntity<>(HttpStatus.CONFLICT);
+		// 	// }
+		// 	User user2 = userservice.updateUser(user, userEmail);
+		// 	if(user2 == null){
+		// 		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		// 	}
+		// 	return new ResponseEntity<User>(user, HttpStatus.CREATED);
+		// }
+
+		@PostMapping(value="/user/update",consumes=MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<User> update(@Valid @RequestBody User user) {
+			userservice.updateUser(user);
+			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 
 	}

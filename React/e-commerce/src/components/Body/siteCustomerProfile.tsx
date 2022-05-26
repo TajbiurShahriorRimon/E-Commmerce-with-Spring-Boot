@@ -51,7 +51,9 @@ class SiteCustomerProfile extends Component<any, any>{
                             <Navbar variant="dark" className="flex-column">
                                 <h3><u>My Account <CgProfile style={{color:"blue"}}/></u></h3>
                                 <Nav.Link href=""><strong style={{color: "red"}}>My Profile</strong></Nav.Link>
-                                <Nav.Link href=""><strong style={{color: "black"}}>Edit Profile</strong></Nav.Link>
+                                <Link to={'/user/profileEdit'} style={{color: "black"}} className="nav-link">
+                                    <strong>Edit Profile</strong>
+                                </Link>
 
                                 <h3><u>My Report <CgNotes style={{color:"blue"}}/></u></h3>
                                 <Nav.Link href="/home"><strong style={{color: "black"}}>Order Report</strong></Nav.Link>
@@ -80,7 +82,9 @@ class SiteCustomerProfile extends Component<any, any>{
                                 <label htmlFor="">Gender</label>
                                 <div><strong>Male</strong></div>
                             </div> <br/>
-                            <Button style={{width: 200, height: 60, float: "right"}} className="btn-info rounded-3">Change Password</Button>
+                            <Link to={'/user/changePassword'}>
+                                <Button style={{width: 200, height: 60, float: "right"}} className="btn-info rounded-3">Change Password</Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
