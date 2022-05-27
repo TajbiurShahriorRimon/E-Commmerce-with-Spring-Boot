@@ -50,4 +50,9 @@ public class CategoryController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@GetMapping("/getCountProduct")
+	public List getCountProduct(){
+		return categoryService.countProductsByCategory();
+	}
+
 }

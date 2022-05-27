@@ -17,5 +17,7 @@ public interface CategoryService {
 	
 	public List<Category> searchCategories(String key);
 
+	public List<Object> countProductsByCategory();
+
 
 }

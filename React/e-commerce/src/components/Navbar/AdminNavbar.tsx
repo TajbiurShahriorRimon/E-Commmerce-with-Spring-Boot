@@ -41,11 +41,23 @@ export const AdminNavbar = () => {
                                     <NavDropdown title="Admin" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
                                         {/*<NavDropdown.Item href="#action/3.3">My Orders <CgBox/> </NavDropdown.Item>*/}
-                                        <div className="dropdown-item">
+                                        <div className="dropdown-item nav-link">
                                             <Link to={"/order/pending"}>
                                                 Pending Orders
                                             </Link>
                                         </div>
+                                        <div className="dropdown-item nav-link">
+                                            <Link to={"/category/countProducts"}>
+                                                Category Products Count
+                                            </Link>
+                                        </div>
+
+                                            <Link to={"/order/yearlySales"}>
+                                                <div className="dropdown-item nav-link">
+                                                    Yearly Sales
+                                                </div>
+                                            </Link>
+
                                         <NavDropdown.Item href="/aAddCategory">Add Category <CgAdd style={{color:"blue"}}/></NavDropdown.Item>
                                         <NavDropdown.Item href="/aManagecategory">View Categories <CgViewGrid style={{color:"green"}}/> </NavDropdown.Item>
                                         <NavDropdown.Divider />

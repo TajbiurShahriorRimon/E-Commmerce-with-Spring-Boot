@@ -3,6 +3,7 @@ package com.ecommerce.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -18,7 +19,6 @@ import com.ecommerce.entity.Sales;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import antlr.collections.List;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
@@ -101,6 +101,23 @@ public class OrdersServiceImpl implements OrdersService {
             return null;
         }
         return v;
+    }
+
+    @Transactional
+    @Override
+    public List<Object> yearlySales() {
+        var data = entityManager.createNativeQuery("SELECT SUM(total_price), year(STR_TO_DATE(date, '%d/%M/%Y')) AS year " +
+        "FROM orders where status = 'delivered'GROUP BY year(STR_TO_DATE(date, '%d/%M/%Y'))").getResultList();
+        return data;
+    }
+
+    @Override
+    public List<Object> monthlySales(int year) {
+        var data = entityManager.createNativeQuery("SELECT SUM(total_price), Date_Format(STR_TO_DATE(date, '%d/%M/%Y'), '%M') AS month, month(Str_To_Date(date, '%d/%M/%Y')) as monthStr "+
+         "FROM orders WHERE year(STR_TO_DATE(date, '%d/%M/%Y'))=?  GROUP BY month(STR_TO_DATE(date, '%d/%M/%Y'))")
+         .setParameter(1, year)
+         .getResultList();
+        return data;
     }
     
 }

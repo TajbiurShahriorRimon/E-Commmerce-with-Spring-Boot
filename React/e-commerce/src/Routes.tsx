@@ -36,6 +36,11 @@ import CustomerOrderDetails from "./components/Pages/CustomerOrderDetails";
 import VendorProducts from "./components/Pages/VendorProducts";
 import UserEditProfile from "./components/Pages/UserEditProfile";
 import UserChangePass from "./components/Pages/UserChangePass";
+
+import CategoryProductsCount from "./components/Pages/CategoryProductsCount";
+import YearlySales from "./components/Pages/YearlySales";
+import MonthlySales from "./components/Pages/MonthlySales";
+
 import VerifyMail from './components/Pages/VerifyMail';
 
 function MainRoutes(){
@@ -85,10 +90,15 @@ function MainRoutes(){
                     <Route path="/order/pendingSalesDetails/:orderId" element={<OrderPendingDetails/>}/>
                     <Route path="/order/customer" element={<CustomerOrders/>}/>
                     <Route path="/order/salesDetails/:orderId" element={<CustomerOrderDetails/>}/>
+                    <Route path="/order/yearlySales" element={<YearlySales/>}/>
+                    <Route path="/order/monthlySales/:year" element={<MonthlySales/>}/>
 
                     {/*User*/}
                     <Route path="/user/profileEdit" element={<UserEditProfile/>}/>
                     <Route path="/user/changePassword" element={<UserChangePass/>}/>
+
+                    {/*Category*/}
+                    <Route path="/category/countProducts" element={<CategoryProductsCount/>}/>
 
                     {/*Logout*/}
                     <Route path="/logout" element={<Logout/>}/>

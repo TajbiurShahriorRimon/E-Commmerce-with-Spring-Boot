@@ -18,4 +18,7 @@ public interface OrdersService {
     public boolean setCancelStatus(int id);
     public ArrayList<Orders> getAllOrdersCustomerById(int id);
     public ArrayList<Orders> getAll();
+
+    public List<Object> yearlySales();
+    public List<Object> monthlySales(int year);
 }
