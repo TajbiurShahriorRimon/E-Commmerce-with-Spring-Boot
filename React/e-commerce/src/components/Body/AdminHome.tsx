@@ -1,9 +1,50 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import base_url from '../../api/bootapi';
 
 
 
 const AdminHome = () => {
+
+    useEffect(()=>{
+        getActiveUsers();
+        getInActiveUsers();
+      },[]);
+
+      const [activeUser,setActiveUser] = useState({
+        user:""
+      });
+
+      const getActiveUsers = () => {
+          axios.get(`${base_url}activeUser`).then(
+              (response) => {
+                  console.log(response.data);
+                  setActiveUser({user:response.data});
+              },
+              (error) => {
+    
+              }
+    
+          );
+        };
+
+        const [inActiveUser,setInActiveUser] = useState({
+            user:""
+          });
+    
+          const getInActiveUsers = () => {
+              axios.get(`${base_url}inActiveUser`).then(
+                  (response) => {
+                      console.log(response.data);
+                      setInActiveUser({user:response.data});
+                  },
+                  (error) => {
+        
+                  }
+        
+              );
+            };
 
 
 return (
@@ -14,7 +55,7 @@ return (
                     <Card style={{ width: '18rem' }} border="primary" className="box">
                         <Card.Body>
                             <Card.Title>Active Users</Card.Title>
-                            <Card.Body>0</Card.Body>
+                            <Card.Body>{activeUser.user}</Card.Body>
                         </Card.Body>
                     </Card>
                 </div>
@@ -23,7 +64,7 @@ return (
                     <Card style={{ width: '18rem' }} border="danger" className="box">
                         <Card.Body>
                             <Card.Title>Inative Users</Card.Title>
-                            <Card.Body>0</Card.Body>
+                            <Card.Body>{inActiveUser.user}</Card.Body>
                         </Card.Body>
                     </Card>
                 </div>

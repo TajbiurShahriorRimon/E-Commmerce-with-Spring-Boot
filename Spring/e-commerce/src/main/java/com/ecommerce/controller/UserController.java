@@ -118,5 +118,13 @@ public class UserController {
 		@GetMapping(value = "/searchUser/{key}")
 		public ResponseEntity<List<User>> searchCategories(@PathVariable String key){
 			return ResponseEntity.ok(userservice.searchUser(key)); }
+		
+		@GetMapping(value = "/activeUser")
+		public ResponseEntity<Integer> activeUser(){
+			return ResponseEntity.ok(userservice.activeUser()); }
+		
+		@GetMapping(value = "/inActiveUser")
+		public ResponseEntity<Integer> inActiveUser(){
+			return ResponseEntity.ok(userservice.inActiveUser()); }
 
 	}

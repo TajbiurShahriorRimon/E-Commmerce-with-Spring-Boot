@@ -24,9 +24,6 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private EntityManager entityManager;
 
-	@Autowired
-	private EntityManager entityManager;
-
 
 	@Override
 	public Category addCategory(Category category) {

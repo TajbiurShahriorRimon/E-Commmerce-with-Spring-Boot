@@ -129,5 +129,17 @@ public class UserServiceImpl implements UserService {
 
 		return userDao.search(key);
 	}
+
+	@Override
+	public int activeUser() {
+
+		return userDao.activeUser();
+	}
+
+	@Override
+	public int inActiveUser() {
+		// TODO Auto-generated method stub
+		return userDao.inActiveUser();
+	}
 	
 }
