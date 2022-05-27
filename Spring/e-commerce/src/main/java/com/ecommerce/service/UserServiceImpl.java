@@ -129,5 +129,15 @@ public class UserServiceImpl implements UserService {
 
 		return userDao.search(key);
 	}
+
+	@Override
+	public void activateUser(String mail) {
+		// TODO Auto-generated method stub
+		User user=userDao.findById(mail).get();
+		user.setStatus("active");
+		userDao.save(user);
+		System.out.println("User activated");
+		
+	}
 	
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entity.Mail;
 import com.ecommerce.service.MailService;
+import com.ecommerce.service.UserService;
 
 @RestController
 public class MailController {
@@ -26,7 +27,8 @@ public class MailController {
 	 public JavaMailSender emailSender;
 	@Autowired
 	 public MailService mailService;
-	
+	@Autowired
+	public UserService userService;
 	
 	@PostMapping(value="/mailReg")
 	public void sendMail(@RequestBody Mail mail ) throws  UnsupportedEncodingException, MessagingException {
@@ -59,6 +61,7 @@ public class MailController {
 		System.out.println(mail);
 		mail=mailService.verifyMail(mail);
 		if(mail!=null) {
+			userService.activateUser(mail.getMail());
 			return ResponseEntity.ok(mail);
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid credentials");
