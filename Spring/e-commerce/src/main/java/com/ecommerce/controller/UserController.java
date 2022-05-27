@@ -114,5 +114,9 @@ public class UserController {
 			userservice.updateUser(user);
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
+		
+		@GetMapping(value = "/searchUser/{key}")
+		public ResponseEntity<List<User>> searchCategories(@PathVariable String key){
+			return ResponseEntity.ok(userservice.searchUser(key)); }
 
 	}

@@ -32,7 +32,7 @@ export default function TestMail(){
      //function to post data on server
      const postDataToServer=(data:any)=>{
          
-         axios.post(`${base_url}mailTest`,data,{
+         axios.post(`${base_url}mailReg`,data,{
              headers: {
                  'Content-Type': 'application/json',
                   'Accept': 'application/json'

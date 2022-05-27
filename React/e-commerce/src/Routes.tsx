@@ -36,9 +36,12 @@ import CustomerOrderDetails from "./components/Pages/CustomerOrderDetails";
 import VendorProducts from "./components/Pages/VendorProducts";
 import UserEditProfile from "./components/Pages/UserEditProfile";
 import UserChangePass from "./components/Pages/UserChangePass";
+
 import CategoryProductsCount from "./components/Pages/CategoryProductsCount";
 import YearlySales from "./components/Pages/YearlySales";
 import MonthlySales from "./components/Pages/MonthlySales";
+
+import VerifyMail from './components/Pages/VerifyMail';
 
 function MainRoutes(){
     return(
@@ -65,7 +68,9 @@ function MainRoutes(){
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/customerReg" element={<CustomerReg/>}/>
                     <Route path="/vendorReg" element={<VendorReg/>}/>
+                    <Route path="/verifyMail/:mail/:code" element={<VerifyMail/>}/>
                     <Route path="/testMail/:mail" element={<TestMail/>}/>
+
 
                     {/*Customer*/}
                     <Route path="/customer/index" element={<Customer/>}/>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.ecommerce.dao.CategoryDao;
 import com.ecommerce.dao.ProductsDao;
 import com.ecommerce.entity.Category;
+import com.ecommerce.entity.Products;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -21,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryDao categoryDao;
 	
 	@Autowired
-	private ProductsDao productsDao;
+	private EntityManager entityManager;
 
 	@Autowired
 	private EntityManager entityManager;
@@ -57,6 +58,13 @@ public class CategoryServiceImpl implements CategoryService {
 			entity.setStatus("active");
 			categoryDao.save(entity);
 		}
+
+	}
+	
+	@Override
+	public List<Category> searchCategories(String key) {
+
+		return categoryDao.search(key);
 
 	}
 

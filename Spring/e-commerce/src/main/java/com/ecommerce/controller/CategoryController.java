@@ -40,6 +40,10 @@ public class CategoryController {
 	public ResponseEntity<List<Category>> getAllCategories(){
 		return ResponseEntity.ok(categoryService.getAllCategories()); }
 	
+	@GetMapping(value = "/searchCategory/{key}")
+	public ResponseEntity<List<Category>> searchCategories(@PathVariable String key){
+		return ResponseEntity.ok(categoryService.searchCategories(key)); }
+	
 	@PutMapping("/changeStatus/{id}")
 	public ResponseEntity<Void> status(@PathVariable int id){
 		this.categoryService.manageCategory(id);

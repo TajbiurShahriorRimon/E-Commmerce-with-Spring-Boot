@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
-		user.setStatus();
+		user.setStatus("inactive");
 		userDao.save(user);
 		
 		return user;
@@ -47,7 +47,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
-		return userDao.findAll();
+		var products = (List<User>) userDao.findAll()
+				.stream().filter(x -> !x.getType().equals("admin".toString())).collect(Collectors.toList());
+		return products;
 	}
 
 	public boolean userExists(String mail) {
@@ -120,6 +122,12 @@ public class UserServiceImpl implements UserService {
 
 		userDao.save(userData);
 		return user;
+	}
+
+	@Override
+	public List<User> searchUser(String key) {
+
+		return userDao.search(key);
 	}
 	
 }
