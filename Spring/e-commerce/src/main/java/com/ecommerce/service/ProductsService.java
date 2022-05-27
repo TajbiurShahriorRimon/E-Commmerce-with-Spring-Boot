@@ -27,4 +27,6 @@ public interface ProductsService {
 	
 	public ArrayList<Products> getProductsVendor(int id);
 
+	public Products changeProductStatus(int id);
+
 }

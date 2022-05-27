@@ -4,6 +4,8 @@ import base_url from "../../api/bootapi";
 import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {HiInformationCircle} from "react-icons/hi";
+import {TiTick} from "react-icons/ti";
+import {ImCross} from "react-icons/im";
 
 class SiteVendorProducts extends Component<any, any>{
     constructor(props:any) {
@@ -17,7 +19,7 @@ class SiteVendorProducts extends Component<any, any>{
 
     async componentDidMount() {
         const resp = await axios.get(`${base_url}product/vendor/`+localStorage.getItem("userId_session"));
-        console.log(resp);
+        //console.log(resp);
         if (resp.status === 200) {
             this.setState({
                 result: resp.data,
@@ -26,7 +28,23 @@ class SiteVendorProducts extends Component<any, any>{
         }
     }
 
+    changeProductStatus = async (productId: any) => {
+        const resp = await axios.get(`${base_url}product/changeStatus/`+productId);
+        console.log(resp);
+        if (resp.status === 200) {
+            const respData = await axios.get(`${base_url}product/vendor/`+localStorage.getItem("userId_session"));
+            //console.log(respData);
+            if (respData.status === 200) {
+                this.setState({
+                    result: respData.data,
+                    loading: false,
+                })
+            }
+        }
+    }
+
     render() {
+        var userLocalStorage = localStorage.getItem("userType_session");
         var resultTable;
 
         if(this.state.loading){
@@ -40,12 +58,19 @@ class SiteVendorProducts extends Component<any, any>{
                             <Card.Img variant="top" src={"data:image/png;base64,"+item.thumbnail} style={{height: "180px", width: "100%"}}/>
                             <Card.Body>
                                 <Card.Title>{item.productName}</Card.Title>
-                                {/*<Card.Text>Lorem Ipsum Telle Amore</Card.Text>*/}
-                                {/*<Button variant="primary" href=''>Edit</Button>*/}
-                                <Link to={`/product/productDetails/`+item.productId}>
-
-                                    <HiInformationCircle style={{fontSize:"2em", float: "right"}}/>
-                                </Link>
+                                <span>
+                                <div hidden={userLocalStorage != "vendor" ? true : false}>
+                                    <button onClick={() => this.changeProductStatus(item.productId)} className="btn btn-dark">
+                                        {item.status == "active" ?
+                                            (<div><h5><TiTick/></h5>Change</div>) :
+                                            (<div><h5><ImCross/></h5>Change</div>)
+                                        }
+                                    </button>
+                                </div>
+                                    <Link to={`/product/productDetails/`+item.productId}>
+                                        <HiInformationCircle style={{fontSize:"2em", float: "right"}}/>
+                                    </Link>
+                                </span>
                             </Card.Body>
                         </Card>
                     </div>

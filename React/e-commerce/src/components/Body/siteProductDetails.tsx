@@ -20,6 +20,7 @@ class SiteProductDetails extends Component<any, any>{
             price: "",
             thumbnail: "",
             description: "",
+            status: "",
             category: { //another object
                 categoryName: "",
             },
@@ -272,7 +273,13 @@ class SiteProductDetails extends Component<any, any>{
                             </div>
                             <br/>
 
-                            <div className="row">
+                            <div className="row"
+                                 hidden={
+                                     this.state.result.status == "inactive" ? true :
+                                         localStorage.getItem("userType_session") == "customer" ? false : true
+
+                                 }
+                            >
                                 <div className="col-md-2" onClick={this.addToCart}>
                                     {this.state.cartBtn}
                                 </div>
@@ -287,7 +294,7 @@ class SiteProductDetails extends Component<any, any>{
                                             }}
                                         />*/}
                                         <div className="card-group"
-                                             hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
+
                                         >
                                             <input size={2} type="text" readOnly={true} value={this.state.unit}/>
                                             <div className="btn-group">

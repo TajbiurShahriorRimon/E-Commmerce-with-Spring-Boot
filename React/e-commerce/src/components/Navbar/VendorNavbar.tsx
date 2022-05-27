@@ -5,7 +5,7 @@ import icon from "./images/search2.svg";
 import {Card, Container, Form, FormControl, Navbar, Nav, Button, NavDropdown} from 'react-bootstrap';
 import {ImSearch} from "react-icons/im";
 import {Link, useNavigate} from "react-router-dom";
-import {CgAdd, CgProfile, CgViewGrid} from "react-icons/cg";
+import {CgAdd, CgBriefcase, CgProfile, CgViewGrid} from "react-icons/cg";
 import {HiOutlineLogout} from "react-icons/hi";
 
 function VendorNavbar(){
@@ -42,7 +42,7 @@ function VendorNavbar(){
                                     <Nav.Link href="#">Sales Report</Nav.Link>
                                     <NavDropdown title="Vendor" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
-                                        <NavDropdown.Item href="/vendor/products">My Products <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
+                                        <NavDropdown.Item href="/vendor/products">My Products <CgBriefcase style={{color:"blue"}}/></NavDropdown.Item>
                                         <div className="dropdown-item">
                                             <Link to={"/order/pending"}>
                                                 Pending Orders
