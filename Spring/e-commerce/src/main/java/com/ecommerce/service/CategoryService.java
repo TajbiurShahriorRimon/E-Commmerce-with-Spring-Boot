@@ -15,5 +15,7 @@ public interface CategoryService {
 	
 	public void manageCategory(int id);
 
+	public List<Object> countProductsByCategory();
+
 
 }

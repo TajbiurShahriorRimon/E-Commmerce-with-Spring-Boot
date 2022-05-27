@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
 	private ProductsDao productsDao;
+
+	@Autowired
+	private EntityManager entityManager;
 
 
 	@Override
@@ -52,6 +58,15 @@ public class CategoryServiceImpl implements CategoryService {
 			categoryDao.save(entity);
 		}
 
+	}
+
+	@Transactional
+	@Override
+	public List<Object> countProductsByCategory() {
+		var data = entityManager.createNativeQuery("SELECT COUNT(productsdummy2.product_id), category.category_name FROM category," +
+		 "productsdummy2 WHERE productsdummy2.category_category_id = category.category_id GROUP BY category.category_id")
+		.getResultList();
+		return data;
 	}
 
 	

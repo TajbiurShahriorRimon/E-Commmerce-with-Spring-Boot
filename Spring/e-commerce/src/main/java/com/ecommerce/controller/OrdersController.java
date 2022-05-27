@@ -60,4 +60,14 @@ public class OrdersController {
     public ResponseEntity<ArrayList<Orders>> get(){
         return new ResponseEntity<>(ordersService.getAll(), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/order/yearlySales")
+    public ResponseEntity<List> yearlyProductSales(){
+        return new ResponseEntity<List>(ordersService.yearlySales(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/order/monthlySales/{year}")
+    public ResponseEntity<List> yearlyProductSales(@PathVariable int year){
+        return new ResponseEntity<List>(ordersService.monthlySales(year), HttpStatus.OK);
+    }
 }
