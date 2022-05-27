@@ -22,4 +22,8 @@ public interface UserService {
 	public User updateUser(User user);
 	
 	public List<User> searchUser(String key );
+	
+	public int activeUser();
+	
+	public int inActiveUser();
 }
