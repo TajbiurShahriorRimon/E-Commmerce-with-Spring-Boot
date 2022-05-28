@@ -73,4 +73,9 @@ public class ProductsController {
 	public ResponseEntity<ArrayList<Products>> getProductsForVendor(@PathVariable int id /* Vendor Id */){
 		return ResponseEntity.ok(productsService.getProductsVendor(id));
 	}
+
+	@GetMapping("/product/changeStatus/{id}")
+	public ResponseEntity<Products> changeStatus(@PathVariable int id /* Product Id */){
+		return new ResponseEntity<Products>(productsService.changeProductStatus(id), HttpStatus.OK);
+	}
 }

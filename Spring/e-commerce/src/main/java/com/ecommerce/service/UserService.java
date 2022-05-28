@@ -23,5 +23,11 @@ public interface UserService {
 	
 	public List<User> searchUser(String key );
 	
+
 	public void activateUser(String mail);
+
+	public int activeUser();
+	
+	public int inActiveUser();
+
 }

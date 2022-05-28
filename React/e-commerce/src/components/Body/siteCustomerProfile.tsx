@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {CgProfile, CgNotes} from "react-icons/cg";
+import {CgProfile, CgNotes, CgBriefcase} from "react-icons/cg";
 import {Link} from "react-router-dom";
 import {Button} from "reactstrap";
 import {Nav, Navbar} from "react-bootstrap";
@@ -57,6 +57,12 @@ class SiteCustomerProfile extends Component<any, any>{
 
                                 <h3><u>My Report <CgNotes style={{color:"blue"}}/></u></h3>
                                 <Nav.Link href="/home"><strong style={{color: "black"}}>Order Report</strong></Nav.Link>
+                                {/*<div hidden={localStorage.getItem("userType_session") == "vendor" ? false : true}>
+                                    <h3><u>My Products <CgBriefcase style={{color:"green"}}/></u></h3>
+                                    <Link to={'/user/profileEdit'} style={{color: "black"}} className="nav-link">
+                                        <strong>My Active Products</strong>
+                                    </Link>
+                                </div>*/}
                             </Navbar>
                         </div>
                         <div className="col-md-4">

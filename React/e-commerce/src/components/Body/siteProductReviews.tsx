@@ -26,13 +26,18 @@ class SiteProductReviews extends Component<any, any>{
             rating: 0
         },
         reviewBtn: "",
-        reviewModal: ""
+        reviewModal: "",
+
+        resultProductImg: {
+            productName: "",
+            thumbnail: "",
+        }
     }
 
     async componentDidMount() {
         var id = window.location.pathname.split("/").pop();
         const resp = await axios.get(`${base_url}product/getReviewsAndRatings/${id}`);
-        console.log(resp);
+        //console.log(resp);
 
         if (resp.status === 200){
             if(resp.data.length > 0) {
@@ -73,7 +78,9 @@ class SiteProductReviews extends Component<any, any>{
                 if(resultData.data.length > 0){
                     this.setState({
                         reviewBtn: (
-                            <Link to={"/product/customer/giveReview/"+id}>
+                            <Link to={"/product/customer/giveReview/"+id}
+                                hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
+                            >
                                 <button className="btn-outline-info btn btn-outline-danger" style={{float: "right"}}>
                                     Give Review
                                 </button>
@@ -83,6 +90,17 @@ class SiteProductReviews extends Component<any, any>{
                 }
             }
         }
+
+        //We have to get the product Image
+        const respProduct = await axios.get(`${base_url}product/${id}`);
+        console.log(respProduct);
+        if (respProduct.status === 200){
+            this.setState({
+                resultProductImg: respProduct.data
+            })
+        }
+
+        console.log(this.state.resultProductImg)
 
     }
 
@@ -142,6 +160,8 @@ class SiteProductReviews extends Component<any, any>{
             backgroundImage: "url("+"https://inspirationhut.net/wp-content/uploads/2013/05/201.png"+")",
             backgroundSize: "cover", backgroundRepeat: 'no-repeat'
         }
+        var imagePath = "https://www.w3schools.com/html/img_girl.jpg";
+        var thumb = "data:image/png;base64,"+this.state.resultProductImg.thumbnail;
         return(
             <div style={st}>
             <div className='container'>
@@ -154,7 +174,10 @@ class SiteProductReviews extends Component<any, any>{
                                     {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                                         <React.Fragment>
                                             <TransformComponent>
-                                                <img src="https://www.w3schools.com/html/img_girl.jpg" alt="test"
+                                                <img /*src="https://www.w3schools.com/html/img_girl.jpg" alt="test"*/
+                                                    src={this.state.resultProductImg.thumbnail == null ? imagePath :
+                                                        thumb
+                                                    }
                                                      style={
                                                          {  height: 300,
                                                              width: 250

@@ -82,7 +82,7 @@ public class ProductsServiceImpl implements  ProductsService{
 	public ArrayList<Products> searchProducts(String value) {
 		// var products = (ArrayList<Products>) productsDao.findAll().stream().filter(x -> x.getProductName().contains(value)
 		//  && x.getStatus().equals("active")).collect(Collectors.toList());
-		var products = (ArrayList<Products>) entityManager.createNativeQuery("SELECT * FROM productsdummy2 WHERE product_name LIKE '%"+value+"%'").getResultList();
+		var products = (ArrayList<Products>) entityManager.createNativeQuery("SELECT * FROM productsdummy2 WHERE product_name LIKE '%"+value+"%' and status = 'active'").getResultList();
 
 		return products;
 	}
@@ -97,5 +97,17 @@ public class ProductsServiceImpl implements  ProductsService{
 		return products;
 	}
 
+	@Override
+	public Products changeProductStatus(int id) {
+		var product = productsDao.findById(id).get();
+		if(product.getStatus().equals("active")){
+			product.setStatus("inactive");
+		}
+		else{
+			product.setStatus("active");
+		}
+		productsDao.save(product);
+		return product;
+	}
 
 }
