@@ -2,6 +2,7 @@ package com.ecommerce.service;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
+import java.util.List;
 
 import com.ecommerce.entity.Products;
 import com.ecommerce.entity.ReviewAndRating;
@@ -9,7 +10,6 @@ import com.ecommerce.entity.ReviewAndRating;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.multipart.MultipartFile;
 
-import antlr.collections.List;
 
 public interface ProductsService {
 	
@@ -28,5 +28,9 @@ public interface ProductsService {
 	public ArrayList<Products> getProductsVendor(int id);
 
 	public Products changeProductStatus(int id);
+
+	public List<Object> yearlyProductSales(int id /* Product Id */);
+
+	public List<Object> monthlyProductSales(int productId, int year);
 
 }

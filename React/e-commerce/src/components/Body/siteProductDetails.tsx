@@ -307,6 +307,18 @@ class SiteProductDetails extends Component<any, any>{
                                     </span>
                                 </div>
                             </div>
+                            <div className="col-md-7"
+                                 hidden={localStorage.getItem("userType_session") == "admin" ? false : true}
+                            >
+                                <br/>
+                                <div className="row">
+                                    <div className="btn-group">
+                                        <Link to={'/product/yearlySales/'+window.location.pathname.split("/").pop()}>
+                                            <button className="btn btn-outline-success btn-dark btn-lg">Check Report</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                             <br/>
                             <div>
                                 <h2><u>Product Description</u></h2>
