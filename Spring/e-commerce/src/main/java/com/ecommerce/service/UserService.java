@@ -25,6 +25,8 @@ public interface UserService {
 	
 
 	public void activateUser(String mail);
+	
+	public boolean userIsActive(String mail);
 
 	public int activeUser();
 	

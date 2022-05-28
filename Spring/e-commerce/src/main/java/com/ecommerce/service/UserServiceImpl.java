@@ -151,5 +151,12 @@ public class UserServiceImpl implements UserService {
 		return userDao.inActiveUser();
  
 	}
+
+	@Override
+	public boolean userIsActive(String mail) {
+		// TODO Auto-generated method stub
+		return userDao.findById(mail).get().getStatus().equals("active");
+		 
+	}
 	
 }
