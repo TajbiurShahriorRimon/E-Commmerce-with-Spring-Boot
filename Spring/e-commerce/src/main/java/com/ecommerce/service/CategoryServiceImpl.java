@@ -21,7 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryDao categoryDao;
 	
-	
+	@Autowired
+	private EntityManager entityManager;
+
 
 
 	@Override
