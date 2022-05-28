@@ -18,6 +18,7 @@ import com.ecommerce.entity.Login;
 import com.ecommerce.security.JwtUtil;
 import com.ecommerce.service.LoginService;
 import com.ecommerce.service.LoginServiceImpl;
+import com.ecommerce.service.UserService;
 
 @RestController
 public class AuthenticationController {
@@ -30,29 +31,34 @@ public class AuthenticationController {
 	@Autowired
 	private JwtUtil jwtUtil;
 	
+	@Autowired
+	private UserService userService;
+	
 	@PostMapping("/login")
 	public ResponseEntity<?> generateToken(@RequestBody Login login)throws Exception{
 		
 		System.out.println(login);
 		
-		try {
+		if(userService.userIsActive(login.getMail())) {
+			try {
+				
+				this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getMail(),login.getPassword()));
+				
+			} catch (UsernameNotFoundException e) {
+				e.printStackTrace();
+				throw new Exception("Invalid credentials");
+			}
 			
-			this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getMail(),login.getPassword()));
+			UserDetails userDetails= this.loginService.loadUserByUsername(login.getMail());
+			String token=this.jwtUtil.generateToken(userDetails);
+			System.out.println("JWT "+token);
 			
-		} catch (UsernameNotFoundException e) {
-			e.printStackTrace();
-			throw new Exception("Invalid credentials");
-		}
-		
-		UserDetails userDetails= this.loginService.loadUserByUsername(login.getMail());
-		String token=this.jwtUtil.generateToken(userDetails);
-		System.out.println("JWT "+token);
-		
-		 Map<Object, Object> response = new HashMap<>();
-         response.put("token", token);
-         response.put("mail",login.getMail());
-
-         return new ResponseEntity<>(response, HttpStatus.OK);
+			 Map<Object, Object> response = new HashMap<>();
+	         response.put("token", token);
+	         response.put("mail",login.getMail());
+	
+	         return new ResponseEntity<>(response, HttpStatus.OK);
+		}else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Registration not complete");
 
 	}
 	@PostMapping("/tokenValidation")
