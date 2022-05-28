@@ -37,4 +37,10 @@ public class VendorServiceImpl implements VendorService{
 		return vendor.getId();
 	}
 
+	@Override
+	public Vendor updateVendor(Vendor vendor) {
+		vendorDao.save(vendor);
+		return vendor;
+	}
+
 }

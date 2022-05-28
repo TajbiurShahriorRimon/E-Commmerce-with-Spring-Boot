@@ -31,12 +31,14 @@ class UserUpdateForm extends Component<any, any>{
                 console.log(response);
                 if(response.status == 201){
                     this.setState({
+                        nameErr: "",
+                        addressErr: "",
+                        phoneErr: "",
                         successMessage: true
                     })
                 }
             },(error)=> {
                 if (error.response.status == 400) {
-                    alert("error");
                     this.setState({
                         nameErr: error.response.data.name,
                         addressErr: error.response.data.address,

@@ -54,6 +54,11 @@ class SiteCustomerProfile extends Component<any, any>{
                                 <Link to={'/user/profileEdit'} style={{color: "black"}} className="nav-link">
                                     <strong>Edit Profile</strong>
                                 </Link>
+                                <Link to={'/vendor/updateShop'} style={{color: "green"}} className="nav-link"
+                                      hidden={localStorage.getItem("userType_session") == "vendor" ? false : true}
+                                >
+                                    <strong>Edit My Shop</strong>
+                                </Link>
 
                                 <h3><u>My Report <CgNotes style={{color:"blue"}}/></u></h3>
                                 <Nav.Link href="/home"><strong style={{color: "black"}}>Order Report</strong></Nav.Link>

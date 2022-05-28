@@ -44,6 +44,7 @@ import MonthlySales from "./components/Pages/MonthlySales";
 import VerifyMail from './components/Pages/VerifyMail';
 import ProductYearlySales from "./components/Pages/ProductYearlySales";
 import ProductMonthlySales from "./components/Pages/ProductMonthlySales";
+import VendorEditShop from "./components/Pages/VendorEditShop";
 
 function MainRoutes(){
     return(
@@ -101,6 +102,7 @@ function MainRoutes(){
                     {/*User*/}
                     <Route path="/user/profileEdit" element={<UserEditProfile/>}/>
                     <Route path="/user/changePassword" element={<UserChangePass/>}/>
+                    <Route path="/vendor/updateShop" element={<VendorEditShop/>}/>
 
                     {/*Category*/}
                     <Route path="/category/countProducts" element={<CategoryProductsCount/>}/>

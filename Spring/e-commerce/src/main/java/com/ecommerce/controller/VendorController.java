@@ -85,4 +85,14 @@ public class VendorController {
 		return new ResponseEntity<Integer>(vendorService.getVendorIdByEmail(email), HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/vendor/get/{id}")
+	public ResponseEntity<Vendor> get(@PathVariable int id){
+		return new ResponseEntity<Vendor>(vendorService.getVendor(id), HttpStatus.OK);
+	}
+
+	@PostMapping(value="/vendor/update",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Vendor> update(@Valid @RequestBody Vendor vendor) {
+		return new ResponseEntity<Vendor>(vendorService.updateVendor(vendor), HttpStatus.CREATED);
+	}
+
 }
