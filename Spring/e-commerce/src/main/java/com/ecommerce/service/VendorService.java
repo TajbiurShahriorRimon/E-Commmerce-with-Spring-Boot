@@ -8,4 +8,5 @@ public interface VendorService {
 	public Vendor getVendor(int id);
 	public int getVendorIdByUserMail(String mail);
 	public int getVendorIdByEmail(String email);
+	public Vendor updateVendor(Vendor vendor);
 }
