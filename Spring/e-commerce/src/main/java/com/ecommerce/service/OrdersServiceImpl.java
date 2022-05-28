@@ -119,5 +119,17 @@ public class OrdersServiceImpl implements OrdersService {
          .getResultList();
         return data;
     }
+
+	@Override
+	public double todaysSale() {
+		
+		return ordersDao.todaysSale();
+	}
+
+	@Override
+	public double totalsSale() {
+		
+		return ordersDao.totalSale();
+	}
     
 }

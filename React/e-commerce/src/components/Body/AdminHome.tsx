@@ -10,6 +10,9 @@ const AdminHome = () => {
     useEffect(()=>{
         getActiveUsers();
         getInActiveUsers();
+        getTodaysSale();
+        getTotalSale();
+
       },[]);
 
       const [activeUser,setActiveUser] = useState({
@@ -46,6 +49,40 @@ const AdminHome = () => {
               );
             };
 
+            const [todaysSale,setTodaysSale] = useState({
+                value:""
+              });
+        
+              const getTodaysSale = () => {
+                  axios.get(`${base_url}todaysSale`).then(
+                      (response) => {
+                          console.log(response.data);
+                          setTodaysSale({value:response.data});
+                      },
+                      (error) => {
+            
+                      }
+            
+                  );
+                };
+
+                const [totalSale,setTotalSale] = useState({
+                    value:""
+                  });
+            
+                  const getTotalSale = () => {
+                      axios.get(`${base_url}totalSale`).then(
+                          (response) => {
+                              console.log(response.data);
+                              setTotalSale({value:response.data});
+                          },
+                          (error) => {
+                
+                          }
+                
+                      );
+                    };
+
 
 return (
         <div className='container'>
@@ -63,7 +100,7 @@ return (
                 <div className="col-lg-3 mb-5">
                     <Card style={{ width: '18rem' }} border="danger" className="box">
                         <Card.Body>
-                            <Card.Title>Inative Users</Card.Title>
+                            <Card.Title>Inactive Users</Card.Title>
                             <Card.Body>{inActiveUser.user}</Card.Body>
                         </Card.Body>
                     </Card>
@@ -73,7 +110,7 @@ return (
                     <Card style={{ width: '18rem' }} border="info" className="box">
                         <Card.Body>
                             <Card.Title>Todays Sales</Card.Title>
-                            <Card.Body>0</Card.Body>
+                            <Card.Body>{todaysSale.value}&nbsp;TK</Card.Body>
                         </Card.Body>
                     </Card>
                 </div>
@@ -82,7 +119,7 @@ return (
                     <Card style={{ width: '18rem' }} border="success" className="box">
                         <Card.Body>
                             <Card.Title>Total Sales</Card.Title>
-                            <Card.Body>0</Card.Body>
+                            <Card.Body>{totalSale.value}&nbsp;TK</Card.Body>
                         </Card.Body>
                     </Card>
                 </div>

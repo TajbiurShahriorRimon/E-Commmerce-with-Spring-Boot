@@ -70,4 +70,12 @@ public class OrdersController {
     public ResponseEntity<List> yearlyProductSales(@PathVariable int year){
         return new ResponseEntity<List>(ordersService.monthlySales(year), HttpStatus.OK);
     }
+    
+    @GetMapping(value = "/todaysSale")
+	public ResponseEntity<Double> todaysSale(){
+		return ResponseEntity.ok(ordersService.todaysSale()); }
+    
+    @GetMapping(value = "/totalSale")
+	public ResponseEntity<Double> totalSale(){
+		return ResponseEntity.ok(ordersService.totalsSale()); }
 }

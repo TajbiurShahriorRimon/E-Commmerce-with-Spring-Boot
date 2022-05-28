@@ -21,4 +21,7 @@ public interface OrdersService {
 
     public List<Object> yearlySales();
     public List<Object> monthlySales(int year);
+    
+    public double todaysSale();
+    public double totalsSale();
 }
