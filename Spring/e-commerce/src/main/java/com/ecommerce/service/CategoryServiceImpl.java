@@ -25,6 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 	private EntityManager entityManager;
 
 
+
 	@Override
 	public Category addCategory(Category category) {
 		// TODO Auto-generated method stub

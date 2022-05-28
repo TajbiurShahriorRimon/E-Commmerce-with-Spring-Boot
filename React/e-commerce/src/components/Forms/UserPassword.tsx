@@ -23,6 +23,12 @@ export default function UserPassword(){
 
         
     });
+    const [mailObj,setMail]=useState({
+        mail:"",
+        verificationCode:""
+
+        
+    });
 
 
     const handleForm=(e:any)=>{
@@ -47,7 +53,8 @@ export default function UserPassword(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                alert("Success");
+              //  alert(passwordObj.mail);
+                postMailToServer(passwordObj.mail);
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);
@@ -66,7 +73,35 @@ export default function UserPassword(){
             }
         );
     };
+//send verification link in mail
+    const postMailToServer=(data:any)=>{
+       // alert(data+" mail");
+        mailObj.mail=data
+        axios.post(`${base_url}mailReg`,mailObj,{
+            headers: {
+                'Content-Type': 'application/json',
+                 'Accept': 'application/json'
+            }}).then(
+            (response)=>{
+                alert("A confirmation link has been sent to your mail");
+            },(error)=>{
+                
+                let res:string[]=Object.values(error.response.data);
+                let errorMsg:string="";
 
+                for(let i=0;i<res.length;i++){
+                    errorMsg+=res[i];
+                    errorMsg+="\n"
+                }
+                
+                  alert(errorMsg);
+                
+                
+                
+                
+            }
+        );
+    };
 
     return(
         <div>

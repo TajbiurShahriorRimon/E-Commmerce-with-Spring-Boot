@@ -131,6 +131,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+
+	public void activateUser(String mail) {
+		// TODO Auto-generated method stub
+		User user=userDao.findById(mail).get();
+		user.setStatus("active");
+		userDao.save(user);
+		System.out.println("User activated");
+	}
+
 	public int activeUser() {
 
 		return userDao.activeUser();
@@ -140,6 +149,7 @@ public class UserServiceImpl implements UserService {
 	public int inActiveUser() {
 		// TODO Auto-generated method stub
 		return userDao.inActiveUser();
+ 
 	}
 	
 }
