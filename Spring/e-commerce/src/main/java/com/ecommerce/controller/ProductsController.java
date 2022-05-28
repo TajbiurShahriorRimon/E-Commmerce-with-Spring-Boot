@@ -1,6 +1,7 @@
 package com.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import javax.validation.Valid;
@@ -22,8 +23,6 @@ import com.ecommerce.entity.Products;
 import com.ecommerce.entity.ReviewAndRating;
 import com.ecommerce.service.ProductsService;
 import com.ecommerce.service.ReviewAndRatingService;
-
-import antlr.collections.List;
 
 
 
@@ -78,4 +77,15 @@ public class ProductsController {
 	public ResponseEntity<Products> changeStatus(@PathVariable int id /* Product Id */){
 		return new ResponseEntity<Products>(productsService.changeProductStatus(id), HttpStatus.OK);
 	}
+
+	@GetMapping(value = "/product/yearlySales/{id}")
+    public ResponseEntity<List> yearlySales(@PathVariable int id /* Product Id */){
+        return new ResponseEntity<List>(productsService.yearlyProductSales(id), HttpStatus.OK);
+    }
+
+	@GetMapping(value = "/product/monthlySales/{id}/{year}")
+    public ResponseEntity<List> productSales(@PathVariable int id /* Product Id */, @PathVariable int year){
+        return new ResponseEntity<List>(productsService.monthlyProductSales(id, year), HttpStatus.OK);
+    }
+	
 }

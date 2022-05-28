@@ -13,7 +13,13 @@ class OrderPendingSalesDetails extends Component<any, any>{
         loading: false,
         customer_name: "",
         order_date: "",
-        total_price: ""
+        total_price: "",
+
+        statusObject: {
+            order: {
+                status: ""
+            }
+        }
     }
 
     async componentDidMount() {
@@ -26,6 +32,12 @@ class OrderPendingSalesDetails extends Component<any, any>{
                 customer_name: resp.data[0].order.customer.mail.name,
                 order_date: resp.data[0].order.date,
                 total_price: resp.data[0].order.totalPrice,
+
+                statusObject: {
+                    order: {
+                        status: resp.data[0].order.status
+                    }
+                }
             })
         }
     }
@@ -80,20 +92,31 @@ class OrderPendingSalesDetails extends Component<any, any>{
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>Customer: {this.state.customer_name}</Card.Title>
+                            {/*<Card.Title>Customer: {this.state.statusObject.order.status}</Card.Title>*/}
                             <Card.Text>
                                 <strong>Total Purchase: Tk {this.state.total_price}</strong> <br/>
                             </Card.Text>
-                                <button style={{float: "right"}}
-                                    onClick={this.changeDeliveryStatus}
-                                className="btn-dark rounded-end btn"
+                                <div
+                                    hidden={
+                                        this.state.statusObject.order.status == "pending" ? false : true
+                                    }
                                 >
-                                Set to Deliver
-                                </button>
-                                <button style={{float: "right"}}
-                                        onClick={this.changeToCancelStatus}
-                                        className="btn-danger rounded-end btn"
-                                >
-                                    Cancel Delivery
+                                    <button style={{float: "right"}}
+                                            onClick={this.changeDeliveryStatus}
+                                            className="btn-dark rounded-end btn"
+                                    >
+                                        Set to Deliver
+                                    </button>
+                                    <button style={{float: "right"}}
+                                            onClick={this.changeToCancelStatus}
+                                            className="btn-danger rounded-end btn"
+                                    >
+                                        Cancel Delivery
+                                    </button>
+                                </div>
+                                <button disabled={true} className="btn-warning">
+                                    {this.state.statusObject.order.status == "pending" ? "Pending" :
+                                        this.state.statusObject.order.status == "cancelled" ? "Cancelled" : "Delivered"}
                                 </button>
                         </Card.Body>
                     </Card> <br/>

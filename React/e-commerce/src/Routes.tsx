@@ -42,6 +42,8 @@ import YearlySales from "./components/Pages/YearlySales";
 import MonthlySales from "./components/Pages/MonthlySales";
 
 import VerifyMail from './components/Pages/VerifyMail';
+import ProductYearlySales from "./components/Pages/ProductYearlySales";
+import ProductMonthlySales from "./components/Pages/ProductMonthlySales";
 
 function MainRoutes(){
     return(
@@ -84,6 +86,9 @@ function MainRoutes(){
                     <Route path="/product/search/:key" element={<ProductSearch/>}/>
                     <Route path="/shoppingCart" element={<ShoppingCart/>}/>
                     <Route path="/vendor/products" element={<VendorProducts/>}/>
+                    <Route path="/product/allReviews/:id" element={<ProductReviews/>}/>
+                    <Route path="/product/yearlySales/:key" element={<ProductYearlySales/>}/>
+                    <Route path="/product/monthlySales/:productId/:year" element={<ProductMonthlySales/>}/>
 
                     {/*Order*/}
                     <Route path="/order/pending" element={<OrderPending/>}/>

@@ -110,4 +110,27 @@ public class ProductsServiceImpl implements  ProductsService{
 		return product;
 	}
 
+	@Transactional
+	@Override
+	public java.util.List<Object> yearlyProductSales(int id) {
+		var data = entityManager.createNativeQuery("SELECT SUM(sales.price * sales.unit), year(STR_TO_DATE(date, '%d/%M/%Y')) FROM orders, sales "+
+		"WHERE sales.order_id = orders.id AND sales.product_product_id = ? "+
+		"AND orders.status = 'delivered' GROUP by year(STR_TO_DATE(orders.date, '%d/%M/%Y'))")
+		.setParameter(1, id)
+		.getResultList();
+		return data;
+	}
+
+	@Transactional
+	@Override
+	public java.util.List<Object> monthlyProductSales(int productId, int year) {
+		var data = entityManager.createNativeQuery("SELECT SUM(sales.price * sales.unit), Date_Format(STR_TO_DATE(date, '%d/%M/%Y'), '%M') AS month FROM orders, sales " +
+		"WHERE sales.order_id = orders.id AND sales.product_product_id = ? AND orders.status = 'delivered' " +
+		"AND year(STR_TO_DATE(date, '%d/%M/%Y')) = ? GROUP BY month(STR_TO_DATE(date, '%d/%M/%Y'))")
+		.setParameter(1, productId)
+		.setParameter(2, year)
+		.getResultList();
+		return data;
+	}
+
 }
