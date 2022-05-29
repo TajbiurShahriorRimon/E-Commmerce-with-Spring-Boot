@@ -33,7 +33,7 @@ public class VendorController {
 	
 	
 	@PostMapping(value="/uVendorReg",consumes=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Vendor> addVendor( @RequestBody Vendor vendor) {
+	public ResponseEntity<Vendor> addVendor(@Valid @RequestBody Vendor vendor) {
 		
 		System.out.println("Vendor");
 		System.out.println(vendor);

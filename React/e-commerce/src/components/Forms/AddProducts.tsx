@@ -182,7 +182,7 @@ function AddProduct(props:any){
         axios.post(`${base_url}addImage`,data,{
            }).then(
             (response)=>{
-                    alert(response.data);
+                    //alert(response.data);
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);

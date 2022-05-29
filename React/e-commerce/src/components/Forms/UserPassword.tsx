@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Input,Row,Form,Col,Label,Button,Container } from 'reactstrap';
 import axios from 'axios';
 import base_url from '../../api/bootapi';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 export default function UserPassword(){
 
-    
+    const navigate = useNavigate();
 
     //variable name must be same as the name used in the link in routes
     type LoginParams={
@@ -30,16 +30,68 @@ export default function UserPassword(){
         
     });
 
+    const [passwordErr, setPasswordErr] = useState({
+        passwordErr1:"",
+        confirmPasswordErr:""
+    })
+    const [testErr, setTestErr] = useState({
+        tErr:""
+    })
+
 
     const handleForm=(e:any)=>{
-        
-        if(passwordObj.password==passwordObj.confirmPassword){
-          passwordObj.mail=mail!;
-          postDataToServer(JSON.stringify(passwordObj));
-          e.preventDefault();
-        
-        }else {
-            alert("Passwords do not match");
+        var isValid = true
+
+        if(passwordObj.password == ""){
+            //alert('fsdf')
+            isValid = false;
+            setTestErr({
+                tErr: "Password cannot be empty"
+            })
+        }
+        else if (passwordObj.password.length < 5){
+            isValid = false;
+            setTestErr({
+                tErr: "Password must be at least 5 characters"
+            })
+        }
+        else {
+            setTestErr({
+                tErr: ""
+            })
+        }
+
+        if(passwordObj.confirmPassword == ""){
+            isValid = false;
+            setPasswordErr({
+                ...passwordErr,
+                confirmPasswordErr: "Confirm Password Cannot be Empty"
+            })
+        }
+        else {
+            setPasswordErr({
+                ...passwordErr,
+                confirmPasswordErr: ""
+            })
+        }
+        if(passwordObj.password != passwordObj.confirmPassword){
+            isValid = false;
+            setPasswordErr({
+                ...passwordErr,
+                confirmPasswordErr: "Password did not match the Confirm Password"
+            })
+        }
+        if(isValid == true) {
+
+            if (passwordObj.password == passwordObj.confirmPassword) {
+                passwordObj.mail = mail!;
+                postDataToServer(JSON.stringify(passwordObj));
+                e.preventDefault();
+
+            }
+            /*else {
+                alert("Passwords do not match");
+            }*/
         }
      }
 
@@ -84,6 +136,7 @@ export default function UserPassword(){
             }}).then(
             (response)=>{
                 alert("A confirmation link has been sent to your mail");
+                navigate("/login");
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);
@@ -108,7 +161,7 @@ export default function UserPassword(){
              
             <Row className='justify-content-center my-5'>
                 <Col md={4}>
-                    <Form  onSubmit={handleForm}>
+                    <Form /*onSubmit={handleForm}*/>
                         <div>
                             <Label className='form-label my-2' for="pass">
                                 Password
@@ -121,6 +174,11 @@ export default function UserPassword(){
                                 setPassword({...passwordObj,password:e.target.value})
                             }}
                             />
+                            <div className="text-danger">
+                                {/*{passwordErr.passwordErr1 == "" ? "" : passwordErr.passwordErr1}*/}
+                                {testErr.tErr == "" ? "" : testErr.tErr}
+                            </div>
+
                             <Label className='form-label my-2' for="confirmPass">
                                 Confirm Password
                             </Label>
@@ -132,9 +190,13 @@ export default function UserPassword(){
                                 setPassword({...passwordObj,confirmPassword:e.target.value})
                             }}
                             />
-                            <Button className='my-2 w-100' type='submit' color='primary'>Submit</Button>
+                            <div className="text-danger">
+                                {passwordErr.confirmPasswordErr == "" ? "" : passwordErr.confirmPasswordErr}
+                            </div>
+                            {/*<Button className='my-2 w-100' type='submit' color='primary'>Submit</Button>*/}
                         </div>
                     </Form>
+                    <Button className='my-2 w-100' type='button' onClick={handleForm} color='primary'>Submit</Button>
                    
                 </Col>
             </Row>

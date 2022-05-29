@@ -25,6 +25,10 @@ function AddCategory(props:any){
         status:"active",
     });
 
+    const [categoryErr,setCategoryErr]=useState({
+        categoryNameErr:"",
+    });
+
 
     const handleForm=(e:any)=>{
         console.log(category);
@@ -43,6 +47,9 @@ function AddCategory(props:any){
             }}).then(
             (response)=>{
                     alert("Success");
+                setCategoryErr({
+                    categoryNameErr: ""
+                })
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);
@@ -53,7 +60,10 @@ function AddCategory(props:any){
                     errorMsg+="\n"
                 }
                 
-                  alert(errorMsg);
+                  //alert(errorMsg);
+                setCategoryErr({
+                    categoryNameErr: errorMsg
+                })
             }
         );
     };
@@ -76,6 +86,9 @@ function AddCategory(props:any){
                                     setCategory({...category,categoryName:e.target.value})
                                 }}
                             />
+                            <div className="text-danger">
+                                {categoryErr.categoryNameErr == "" ? "" : categoryErr.categoryNameErr}
+                            </div>
 
                             <Label className='form-label my-2' for="status">
                                 Status
@@ -84,7 +97,7 @@ function AddCategory(props:any){
                                     setCategory({...category,status:e.target.value})
                                 }}>
                                 <option selected value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option disabled={true} value="inactive">Inactive</option>
                             </select>
 
                             
