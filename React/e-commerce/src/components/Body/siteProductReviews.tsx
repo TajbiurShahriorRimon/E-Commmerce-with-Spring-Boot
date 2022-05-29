@@ -48,45 +48,47 @@ class SiteProductReviews extends Component<any, any>{
                 })
             }
         }
+        if(localStorage.getItem("userId_session") != null) {
+            var customer_id = localStorage.getItem("userId_session") //1; //session_userId
+            var resultData = await axios.get(`${base_url}review/checkCustomerReviewForProduct/${id}/${customer_id}`)
 
-        var customer_id = localStorage.getItem("userId_session") //1; //session_userId
-        var resultData = await axios.get(`${base_url}review/checkCustomerReviewForProduct/${id}/${customer_id}`)
-
-        //The following line executes if it is found that customer has given a review
-        if(resultData.status == 200){
-            this.setState({
-                customerReview: resultData.data,
-                reviewBtn: (
-                    <button className="btn-outline-info btn btn-outline-danger" style={{float: "right"}}
-                        onClick={this.handleShow}
-                        hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
-                    >
-                        Show My Review
-                    </button>
-                )
-            })
-            //console.log("reviewStatus");
-            //console.log(this.state.customerReview.value);
-        }
-        //the customer did not give a review
-        else { //status code is 204... No Content
-            //Now it has to be checked if the customer actually bought the product and got the delivery
-            var resultData = await axios.get(`${base_url}order/checkSold/${id}/${customer_id}`);
-            console.log(resultData);
-            if(resultData.status == 200){
-                //The customer bought product but did not give a review
-                if(resultData.data.length > 0){
-                    this.setState({
-                        reviewBtn: (
-                            <Link to={"/product/customer/giveReview/"+id}
+            //The following line executes if it is found that customer has given a review
+            if (resultData.status == 200) {
+                this.setState({
+                    customerReview: resultData.data,
+                    reviewBtn: (
+                        <button className="btn-outline-info btn btn-outline-danger" style={{float: "right"}}
+                                onClick={this.handleShow}
                                 hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
-                            >
-                                <button className="btn-outline-info btn btn-outline-danger" style={{float: "right"}}>
-                                    Give Review
-                                </button>
-                            </Link>
-                        )
-                    })
+                        >
+                            Show My Review
+                        </button>
+                    )
+                })
+                //console.log("reviewStatus");
+                //console.log(this.state.customerReview.value);
+            }
+            //the customer did not give a review
+            else { //status code is 204... No Content
+                //Now it has to be checked if the customer actually bought the product and got the delivery
+                var resultData = await axios.get(`${base_url}order/checkSold/${id}/${customer_id}`);
+                console.log(resultData);
+                if (resultData.status == 200) {
+                    //The customer bought product but did not give a review
+                    if (resultData.data.length > 0) {
+                        this.setState({
+                            reviewBtn: (
+                                <Link to={"/product/customer/giveReview/" + id}
+                                      hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
+                                >
+                                    <button className="btn-outline-info btn btn-outline-danger"
+                                            style={{float: "right"}}>
+                                        Give Review
+                                    </button>
+                                </Link>
+                            )
+                        })
+                    }
                 }
             }
         }
@@ -134,7 +136,7 @@ class SiteProductReviews extends Component<any, any>{
                             <Card>
                                 <Card.Header>
                                     <strong>{item.customer.mail.name}</strong><br/>
-                                    Rating: 3.7 <br/>
+                                    Rating: {item.rating} <br/>
                                     <StarRatings
                                         rating={item.rating}
                                         starDimension="25px"

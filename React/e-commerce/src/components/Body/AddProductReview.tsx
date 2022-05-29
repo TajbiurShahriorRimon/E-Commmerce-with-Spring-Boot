@@ -40,7 +40,9 @@ class AddProductReview extends Component<any, any>{
 
     click = async (e: any) => {
         //window.location.replace("/login");
+        var isValid = true;
         if(this.state.review == ""){
+            isValid = false;
             this.setState({
                 reviewDetailsErr: "Review Description cannot be empty..."
             })
@@ -52,6 +54,7 @@ class AddProductReview extends Component<any, any>{
             })
         }
         if(this.state.initialRating == 0){
+            isValid = false;
             this.setState({
                 ratingErr: "Give a rating..."
             })
@@ -63,7 +66,8 @@ class AddProductReview extends Component<any, any>{
             })
         }
 
-        if(this.state.ratingErr == "" && this.state.reviewDetailsErr == ""){
+        if (isValid == true){
+        //if(this.state.ratingErr == "" && this.state.reviewDetailsErr == ""){
             var productId = window.location.pathname.split("/").pop();
             var starRating = (this.state.initialRating)/20;
 

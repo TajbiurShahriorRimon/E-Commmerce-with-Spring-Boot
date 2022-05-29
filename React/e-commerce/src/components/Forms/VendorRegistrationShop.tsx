@@ -36,6 +36,13 @@ export default function VendorRegistrationShop(){
         mail: userOb
     });
 
+    const [errorShop,setErrorShop]=useState({
+        registrationNumberErr: "",
+        shopPhoneErr: "",
+        shopAddressErr: "",
+        shopNameErr: ""
+    });
+
     const navigate = useNavigate();
 
     type VendorParams={
@@ -71,7 +78,7 @@ export default function VendorRegistrationShop(){
                 alert(response.data);
                 navigate(`/sLoginReg/${vendor.mail.mail}`);
             },(error)=>{
-                console.log("error");
+                //console.log("error");
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
 
@@ -80,9 +87,14 @@ export default function VendorRegistrationShop(){
                     errorMsg+="\n"
                 }
                 
-                  alert(errorMsg);
+                  //alert(errorMsg);
                 
-                
+                setErrorShop({
+                    registrationNumberErr: error.response.data.registrationNumber,
+                    shopPhoneErr: error.response.data.shopPhone,
+                    shopAddressErr: error.response.data.shopAddress,
+                    shopNameErr: error.response.data.shopName,
+                })
                 
                 
             }
@@ -107,7 +119,7 @@ export default function VendorRegistrationShop(){
                     errorMsg+="\n"
                 }
                 
-                  alert(errorMsg);
+                  //alert(errorMsg);
                 
                 
                 
@@ -134,6 +146,9 @@ export default function VendorRegistrationShop(){
                                     setVendor({...vendor,shopName:e.target.value})
                                 }}
                             />
+                            <div className="text-danger">
+                                {errorShop.shopNameErr == "" ? "" : errorShop.shopNameErr}
+                            </div>
 
                             <Label className='form-label my-2' for="shopPhone">
                                Shop Phone
@@ -148,7 +163,9 @@ export default function VendorRegistrationShop(){
                                     setVendor({...vendor,shopPhone:e.target.value})
                                 }}
                             />
-
+                            <div className="text-danger">
+                                {errorShop.shopPhoneErr == "" ? "" : errorShop.shopPhoneErr}
+                            </div>
                             
 
                             <Label className='form-label my-2' for="regNumber">
@@ -164,15 +181,21 @@ export default function VendorRegistrationShop(){
                                     setVendor({...vendor,registrationNumber:e.target.value})
                                 }}
                             />
+                            <div className="text-danger">
+                                {errorShop.registrationNumberErr == "" ? "" : errorShop.registrationNumberErr}
+                            </div>
 
                             <Label className='form-label my-2' for="shopAddress">
-                              Shop  Address
+                              Shop Address
                             </Label>
                             <textarea className="form-control styleTextarea"  id="shopAddress" 
                              onChange={(e)=>{
                                 setVendor({...vendor,shopAddress:e.target.value})
                             }}
                             ></textarea>
+                            <div className="text-danger">
+                                {errorShop.shopAddressErr == "" ? "" : errorShop.shopAddressErr}
+                            </div>
                             
                             <Button className='my-2 w-100' type='submit' color='primary'>Submit</Button>
                     </Form>

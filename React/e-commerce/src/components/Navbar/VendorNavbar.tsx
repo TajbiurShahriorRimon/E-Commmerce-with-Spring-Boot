@@ -36,18 +36,16 @@ function VendorNavbar(){
                                             <Button onClick={searchProducts} variant="outline-success"><ImSearch/></Button>
                                         </Form>
                                     </Nav>
-                                    <Nav.Link href="/vProfile">Profile</Nav.Link>
-                                    <Nav.Link href="/vShopInfo">Shop Info</Nav.Link>
-                                    <Nav.Link href="/vAddProducts">Products</Nav.Link>
-                                    <Nav.Link href="#">Sales Report</Nav.Link>
+                                    {/*<Nav.Link href="/vProfile">Profile</Nav.Link>
+                                    <Nav.Link href="/vShopInfo">Shop Info</Nav.Link>*/}
+                                    {/*<Nav.Link href="/vAddProducts/">Products</Nav.Link>*/}
+                                    <Link to={'/vAddProducts/'+localStorage.getItem("email")}>
+                                        Add Product
+                                    </Link>
+                                    {/*<Nav.Link href="#">Sales Report</Nav.Link>*/}
                                     <NavDropdown title="Vendor" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
                                         <NavDropdown.Item href="/vendor/products">My Products <CgBriefcase style={{color:"blue"}}/></NavDropdown.Item>
-                                        <div className="dropdown-item">
-                                            <Link to={"/order/pending"}>
-                                                Pending Orders
-                                            </Link>
-                                        </div>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item href="/logout">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
                                     </NavDropdown>
