@@ -57,9 +57,9 @@ class EditProduct extends Component<any, any>{
         const resp = await axios.get(`${base_url}product/${id}`); 
 
         console.log(resp.data);
-        this.setState({
-            prodouct:resp.data
-        })
+        await this.setState({
+            product:resp.data
+        });
         console.log(this.state.product);
     }
 
@@ -82,6 +82,7 @@ class EditProduct extends Component<any, any>{
                                 type="text"
                                 className='form-control'
                                 value={this.state.product.productName}
+                                disabled
                                 onChange={(e)=>{
                                     this.state.product.productName=e.target.value}}
                             >
@@ -102,7 +103,7 @@ class EditProduct extends Component<any, any>{
                                 onChange={(e)=>{
                                     this.state.product.price=e.target.value}}
                             />
-                             <label><strong>Product Name:</strong> {this.state.product.productName}</label>
+                            
                             <Label className='form-label my-2' for="description">
                                 Description
                             </Label>
@@ -112,6 +113,7 @@ class EditProduct extends Component<any, any>{
                                 placeholder="Enter Product Description"
                                 type="text"
                                 className='form-control'
+                                value={this.state.product.description}
                                 style={{width: 400, height: 100}}
                                 onChange={(e)=>{
                                     this.state.product.description=e.target.value}}
@@ -121,37 +123,31 @@ class EditProduct extends Component<any, any>{
                             <Label className='form-label my-2' for="category">
                                 Category
                             </Label>
-                            {/* <select className="form-select" aria-label="Default select example" id="category" onChange={(e)=>{
-                                    setProducts({...products,
-                                        //categoryId:e.target.value //changes made
-                                        category: {
-                                            categoryId: e.target.value
-                                        }
-                                    })
-                                }}>
-                                <option selected>Select Category</option>
-                                {
-                                    category.map((item : any) => (
-                                        <option key={item.categoryId} value={item.categoryId}>
-                                            {item.categoryName}
-                                        </option>
-                                    ))
-                                }
-                            </select>
+                            <Input 
+                                id="productName"
+                                name="productName"
+                                placeholder="Enter Product Name"
+                                type="text"
+                                className='form-control'
+                                value={this.state.product.category.categoryName}
+                                disabled
+                                onChange={(e)=>{
+                                    this.state.product.productName=e.target.value}}
+                            />
                         <Label className='form-label my-2' for="photo">
                         Thumbnail
                         </Label>
                         <div>
-                            <img src={products.photoUrl} id="photoSrc" style={{height: 200, width: 300}}/>
+                            <img src={"data:image/png;base64,"+this.state.product.thumbnail} id="photoSrc" style={{height: 200, width: 300}}/>
                             <Input
                                 accept="image/*"
                                 id="thumbnail"
                                 name="thumbnail"
                                 type="file"
                                 className='form-control'
-                                onChange={AddPhoto}
+                               // onChange={AddPhoto}
                             />
-                        </div> */}
+                        </div> 
 
                         {/*<Label className='form-label my-2' for="otherImage">
                             Other Images
@@ -164,7 +160,7 @@ class EditProduct extends Component<any, any>{
                             className='form-control'
                             multiple
                             onChange={AddOtherImages}
-                        />*/}
+                            />*/}
                             <Button className='my-2 w-100' type='submit' color='primary'>Save</Button>
                     </Form>
                    
