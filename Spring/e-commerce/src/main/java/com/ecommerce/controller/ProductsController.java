@@ -59,6 +59,15 @@ public class ProductsController {
 	}
 	
 	
+	@PostMapping(value="/updateImage/{id}")
+	public ResponseEntity<String> updateImage(@RequestParam("file") MultipartFile file,@PathVariable String id) {
+		System.out.println("Update image");
+		System.out.println(file.getOriginalFilename());
+		productsService.updateImage(file, id);
+		return new ResponseEntity("Working",HttpStatus.ACCEPTED); 
+
+	}
+	
 
 //	@GetMapping("/products")
 //	public ResponseEntity<Stream<Products>> getAllProducts(){

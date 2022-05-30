@@ -47,7 +47,9 @@ class EditProduct extends Component<any, any>{
         thumbnail: "",
         
         },
-        categories:["",""]
+        categories:["",""],
+        photoUrl:"data:image/png;base64,"
+
     }
 
    
@@ -65,7 +67,9 @@ class EditProduct extends Component<any, any>{
             product:resp.data
         });
         console.log(this.state.product);
-
+        this.setState({
+            photoUrl:this.state.photoUrl+this.state.product.thumbnail
+        })
         //get all categories from server
         const resp2 = await axios.get(`${base_url}category`); 
 
@@ -74,15 +78,77 @@ class EditProduct extends Component<any, any>{
             categories:resp2.data
         });
     }
+    updateProduct=()=>{
+        this.addProduct();
 
+        setTimeout(() => { this.addImage(this.state.product.thumbnail); }, 3000);
+    }
 
+    //save product to server
+    addProduct = ( )=> {
+        
+        axios.post(`${base_url}addProducts`,this.state.product,{
+            headers: {
+                'Content-Type': 'application/json',
+                 'Accept': 'application/json'
+            }}).then(
+            (response)=>{
+                    alert("Product updated");
+            },(error)=>{
+                
+                let res:string[]=Object.values(error.response.data);
+                let errorMsg:string="";
+                
+                for(let i=0;i<res.length;i++){
+                    errorMsg+=res[i];
+                    errorMsg+="\n"
+                }
+                
+                  alert(errorMsg);
+            }
+        );
+        //alert(this.state.unit);
+    }
+    //send image to server
+    addImage = (data: any) => {
+        axios.post(`${base_url}updateImage/${this.state.product.productId}`,data,{
+        }).then(
+         (response)=>{
+                 alert("image updated");
+         },(error)=>{
+             
+             let res:string[]=Object.values(error.response.data);
+             let errorMsg:string="";
+             
+             for(let i=0;i<res.length;i++){
+                 errorMsg+=res[i];
+                 errorMsg+="\n"
+             }
+             
+               alert(errorMsg);
+         }
+     );
+    }
+    //add image to state after it has been selected
+     addPhotoToSTate = async(e:any) => {
+        let image = e.target.files[0];
+        console.log(this.state.photoUrl)
+        console.log(URL.createObjectURL(image))
+         await this.setState({
+            
+            thumbnail:URL.createObjectURL(image),
+            photoUrl:URL.createObjectURL(image)
+        });
+        console.log(this.state.photoUrl)
+        console.log(this.state.product.thumbnail)
+    }
     render(){
         return(
             <div >
             <Container >
             <Row className='justify-content-center my-5'>
                 <Col md={4}>
-                    <Form  >
+                    <Form  onSubmit={this.updateProduct}>
                             <Label className="form-label my-2" for="name">
                                 Product Name
                             </Label>
@@ -93,8 +159,8 @@ class EditProduct extends Component<any, any>{
                                 placeholder="Enter Product Name"
                                 type="text"
                                 className='form-control'
-                                value={this.state.product.productName}
-                                disabled
+                                defaultValue={this.state.product.productName}
+                                
                                 onChange={(e)=>{
                                     this.state.product.productName=e.target.value}}
                             >
@@ -111,7 +177,7 @@ class EditProduct extends Component<any, any>{
                                 placeholder="Enter Product Price"
                                 type="text"
                                 className='form-control'
-                                value={this.state.product.price}
+                                defaultValue={this.state.product.price}
                                 onChange={(e)=>{
                                     this.state.product.price=e.target.value}}
                             />
@@ -125,7 +191,7 @@ class EditProduct extends Component<any, any>{
                                 placeholder="Enter Product Description"
                                 type="text"
                                 className='form-control'
-                                value={this.state.product.description}
+                                defaultValue={this.state.product.description}
                                 style={{width: 400, height: 100}}
                                 onChange={(e)=>{
                                     this.state.product.description=e.target.value}}
@@ -165,15 +231,16 @@ class EditProduct extends Component<any, any>{
                         <Label className='form-label my-2' for="photo">
                         Thumbnail
                         </Label> */}
+                        
                         <div>
-                            <img src={"data:image/png;base64,"+this.state.product.thumbnail} id="photoSrc" style={{height: 200, width: 300}}/>
+                            <img src={this.state.photoUrl} id="photoSrc" style={{height: 200, width: 300}}/>
                             <Input
                                 accept="image/*"
                                 id="thumbnail"
                                 name="thumbnail"
                                 type="file"
                                 className='form-control'
-                               // onChange={AddPhoto}
+                                onChange={this.addPhotoToSTate}
                             />
                         </div> 
 
