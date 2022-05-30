@@ -45,7 +45,7 @@ import VerifyMail from './components/Pages/VerifyMail';
 import ProductYearlySales from "./components/Pages/ProductYearlySales";
 import ProductMonthlySales from "./components/Pages/ProductMonthlySales";
 import VendorEditShop from "./components/Pages/VendorEditShop";
-import EditProduct from './components/Forms/EditProducts';
+import EditProduct from './components/Forms/EditProducts2';
 
 function MainRoutes(){
     return(

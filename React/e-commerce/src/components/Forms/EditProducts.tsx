@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 //import '../../App.css';
-import {Button,Form,FormGroup,Label,Container,Input,Row,Col,FormFeedback} from "reactstrap";
+import {Button,Form,FormGroup,Label,Container,Input,Row,Col,Table,FormFeedback} from "reactstrap";
 import { group } from 'console';
 import { useEffect } from 'react';
 import base_url from '../../api/bootapi';
@@ -19,16 +19,19 @@ function timeout(delay: number) {
     return new Promise( res => setTimeout(res, delay) );
 }
 
-function EditProduct(props:any){
+function EditProduct2(props:any){
 
     const[imageBase64String,setImageBase64String]=useState("");
-    
+    const [input, setInput] = useState(Math.random().toString());
     useEffect(()=>{
      //   getAllCategory();
         getProductDetails();
+  
+        
     },[]);
 
     const [category,setCategory] = useState([]);
+    const [productDetails,setProductDetails]=useState([]);
 
     const getAllCategory = () => {
         axios.get(`${base_url}category`).then(
@@ -50,6 +53,8 @@ function EditProduct(props:any){
         axios.get(`${base_url}product/${id}`).then(
             (response) => {
                 console.log(response.data);
+                products=response.data
+                console.log(products);
                 //setCategory(response.data);
 
             },
@@ -92,7 +97,7 @@ function EditProduct(props:any){
         mail:user
         
     });
-    const [products,setProducts]=useState({
+    let [products,setProducts]=useState({
         productName:"",
         price:"",
         //categoryId:"", //changes made
@@ -268,25 +273,37 @@ function EditProduct(props:any){
             }
         );
     };
+    
     return(
-        <div >
+        <div onLoad={getProductDetails}>
             <Container >
             <Row className='justify-content-center my-5'>
                 <Col md={4}>
-                    <Form onSubmit={handleForm}>
+                    <Form onSubmit={handleForm} >
                             <Label className="form-label my-2" for="name">
                                 Product Name
                             </Label>
+                            
                             <Input 
                                 id="productName"
                                 name="productName"
                                 placeholder="Enter Product Name"
                                 type="text"
                                 className='form-control'
+                                onLoad={getProductDetails}
+                                value={products.productName}
                                 onChange={(e)=>{
                                     setProducts({...products,productName:e.target.value})
                                 }}
-                            />
+                            >
+                                
+                                {
+                                    productDetails.map((item : any) => (
+                                        <label>{item.productName}</label>
+                                    ))
+                            }
+                            </Input>
+                                
 
                             <Label className='form-label my-2' for="price">
                                 Price
@@ -297,6 +314,7 @@ function EditProduct(props:any){
                                 placeholder="Enter Product Price"
                                 type="text"
                                 className='form-control'
+                                value={products.price}
                                 onChange={(e)=>{
                                     setProducts({...products,price:e.target.value})
                                 }}
@@ -373,7 +391,9 @@ function EditProduct(props:any){
             </Container>
    
         </div>
-    )
-}
-
-export default EditProduct;
+    )}
+    
+                    
+ 
+                
+export default EditProduct2;
