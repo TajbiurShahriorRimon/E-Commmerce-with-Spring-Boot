@@ -8,6 +8,7 @@ import StarRatings from 'react-star-ratings';
 import axios from "axios";
 import base_url from "../../api/bootapi";
 import {Link} from "react-router-dom";
+import { any } from "prop-types";
 
 
 
@@ -44,9 +45,12 @@ class EditProduct extends Component<any, any>{
         },
         description:"",
         thumbnail: "",
-        }
+        
+        },
+        categories:["",""]
     }
 
+   
 
     async componentDidMount() {
 
@@ -61,6 +65,14 @@ class EditProduct extends Component<any, any>{
             product:resp.data
         });
         console.log(this.state.product);
+
+        //get all categories from server
+        const resp2 = await axios.get(`${base_url}category`); 
+
+        console.log(resp2.data);
+        await this.setState({
+            categories:resp2.data
+        });
     }
 
 
@@ -123,7 +135,23 @@ class EditProduct extends Component<any, any>{
                             <Label className='form-label my-2' for="category">
                                 Category
                             </Label>
-                            <Input 
+                            <Label className='form-label my-2' for="category">
+                                Category
+                            </Label>
+                            <select className="form-select" aria-label="Default select example" id="category" 
+                            onChange={(e)=>{
+                                    this.state.product.category.categoryId=e.target.value
+                                }}>
+                                <option selected hidden>{this.state.product.category.categoryName}</option>
+                                {
+                                    this.state.categories.map((item : any) => (
+                                        <option key={item.categoryId} value={item.categoryId}>
+                                            {item.categoryName}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                            {/* <Input 
                                 id="productName"
                                 name="productName"
                                 placeholder="Enter Product Name"
@@ -136,7 +164,7 @@ class EditProduct extends Component<any, any>{
                             />
                         <Label className='form-label my-2' for="photo">
                         Thumbnail
-                        </Label>
+                        </Label> */}
                         <div>
                             <img src={"data:image/png;base64,"+this.state.product.thumbnail} id="photoSrc" style={{height: 200, width: 300}}/>
                             <Input
