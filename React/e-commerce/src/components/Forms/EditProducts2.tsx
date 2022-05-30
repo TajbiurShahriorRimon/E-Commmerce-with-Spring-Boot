@@ -48,7 +48,8 @@ class EditProduct extends Component<any, any>{
         
         },
         categories:["",""],
-        photoUrl:"data:image/png;base64,"
+        photoUrl:"data:image/png;base64,",
+        
 
     }
 
@@ -78,10 +79,10 @@ class EditProduct extends Component<any, any>{
             categories:resp2.data
         });
     }
-    updateProduct=()=>{
+    updateProduct=(e:any)=>{
+        e.preventDefault();
         this.addProduct();
-
-        setTimeout(() => { this.addImage(this.state.product.thumbnail); }, 3000);
+        
     }
 
     //save product to server
@@ -94,6 +95,13 @@ class EditProduct extends Component<any, any>{
             }}).then(
             (response)=>{
                     alert("Product updated");
+                    //save image to server
+                    console.log(this.state.product.thumbnail);
+                    const formData = new FormData();
+                    formData.append('file',this.state.product.thumbnail)
+                    console.log(formData.get('file'))
+                    this.addImage(formData);
+                    
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);
@@ -111,8 +119,8 @@ class EditProduct extends Component<any, any>{
     }
     //send image to server
     addImage = (data: any) => {
-        axios.post(`${base_url}updateImage/${this.state.product.productId}`,data,{
-        }).then(
+        
+        axios.post(`${base_url}updateImage/${this.state.product.productId}`,data).then(
          (response)=>{
                  alert("image updated");
          },(error)=>{
@@ -130,13 +138,13 @@ class EditProduct extends Component<any, any>{
      );
     }
     //add image to state after it has been selected
-     addPhotoToSTate = async(e:any) => {
+     addPhotoToSTate = (e:any) => {
         let image = e.target.files[0];
-        console.log(this.state.photoUrl)
+        
         console.log(URL.createObjectURL(image))
-         await this.setState({
+          this.setState({
             
-            thumbnail:URL.createObjectURL(image),
+            thumbnail:image,
             photoUrl:URL.createObjectURL(image)
         });
         console.log(this.state.photoUrl)
@@ -237,7 +245,7 @@ class EditProduct extends Component<any, any>{
                             <Input
                                 accept="image/*"
                                 id="thumbnail"
-                                name="thumbnail"
+                                name="file"
                                 type="file"
                                 className='form-control'
                                 onChange={this.addPhotoToSTate}
