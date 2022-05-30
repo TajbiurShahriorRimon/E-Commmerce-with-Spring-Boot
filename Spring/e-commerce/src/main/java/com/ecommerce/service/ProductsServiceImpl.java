@@ -133,4 +133,16 @@ public class ProductsServiceImpl implements  ProductsService{
 		return data;
 	}
 
+	@Override
+	public Products updateImage(MultipartFile file, String productId) {
+		// TODO Auto-generated method stub
+		try {
+			Products product=productsDao.findById(Integer.parseInt(productId)).get();
+			return productsDao.save(product.setThumbnail(file.getBytes()));
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
 }
