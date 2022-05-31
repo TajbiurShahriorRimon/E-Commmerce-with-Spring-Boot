@@ -75,7 +75,7 @@ export default function VendorRegistrationShop(){
                  'Accept': 'application/json'
             }}).then(
             (response)=>{
-                alert(response.data);
+                //alert(response.data);
                 navigate(`/sLoginReg/${vendor.mail.mail}`);
             },(error)=>{
                 //console.log("error");

@@ -54,7 +54,7 @@ class SiteCustomerOderDetails extends Component<any, any>{
             resultTable = this.state.result.map((item : any) => {
                 return(
                     <div>
-                        <div className="form-control" style={{color: "rebeccapurple", backgroundColor: "lightcoral"}}>
+                        <div className="form-control" style={{color: "rebeccapurple", backgroundColor: "ThreeDLightShadow"}}>
                             <label htmlFor="">Product Name</label>
                             <div><strong>{item.product.productName}</strong></div> <hr/>
                             <label htmlFor="">Price</label>

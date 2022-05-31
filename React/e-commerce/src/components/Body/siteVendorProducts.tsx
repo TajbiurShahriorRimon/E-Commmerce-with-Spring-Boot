@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import base_url from "../../api/bootapi";
-import {Card} from "react-bootstrap";
+import {Button, Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {HiInformationCircle} from "react-icons/hi";
 import {TiTick} from "react-icons/ti";
@@ -59,14 +59,25 @@ class SiteVendorProducts extends Component<any, any>{
                             <Card.Body>
                                 <Card.Title>{item.productName}</Card.Title>
                                 <span>
-                                <div hidden={userLocalStorage != "vendor" ? true : false}>
+                                {/*<div hidden={userLocalStorage != "vendor" ? true : false}>
                                     <button onClick={() => this.changeProductStatus(item.productId)} className="btn btn-dark">
                                         {item.status == "active" ?
                                             (<div><h5><TiTick/></h5>Change</div>) :
                                             (<div><h5><ImCross/></h5>Change</div>)
                                         }
                                     </button>
-                                </div>
+                                </div>*/}
+                                    <button onClick={() => this.changeProductStatus(item.productId)} className="btn btn-dark"
+                                        hidden={userLocalStorage != "vendor" ? true : false}
+                                    >
+                                        {item.status == "active" ?
+                                            (<div><h5><TiTick/></h5>Set Inactive</div>) :
+                                            (<div><h5><ImCross/></h5>Set Active</div>)
+                                        }
+                                    </button> &nbsp;
+                                    <Button className="btn-info" variant="outline-danger" href=''>
+                                        Edit
+                                    </Button>
                                     <Link to={`/product/productDetails/`+item.productId}>
                                         <HiInformationCircle style={{fontSize:"2em", float: "right"}}/>
                                     </Link>

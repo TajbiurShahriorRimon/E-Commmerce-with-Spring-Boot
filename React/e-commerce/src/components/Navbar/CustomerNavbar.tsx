@@ -36,9 +36,16 @@ export const CustomerNavbar = () => {
                                 <Nav.Link href="/shoppingCart"> My Cart <CgShoppingCart/></Nav.Link>
                                 <NavDropdown title="Customer" id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/customer/profile">My Account <CgProfile style={{color:"blue"}}/></NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2">My Wishlist <ImHeart/> </NavDropdown.Item>
                                     <NavDropdown.Item href="/order/customer">My Orders <CgBox/> </NavDropdown.Item>
+                                  
+                                    <div className="dropdown-item">
+                                        <Link to={"/shoppingCart"}>
+                                            My Cart <CgShoppingCart/>
+                                        </Link>
+                                    </div>
+
                                     <NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>
+
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="/logout">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
                                 </NavDropdown>
