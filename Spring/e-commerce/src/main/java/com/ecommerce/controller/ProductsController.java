@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,6 +58,17 @@ public class ProductsController {
 		return new ResponseEntity("Working",HttpStatus.ACCEPTED); 
 
 	}
+	
+	
+	@PostMapping(value="/updateImage/{id}") //{MULTIPART_FORM_DATA_VALUE})
+	public ResponseEntity<String> updateImage(@RequestParam("file") MultipartFile file,@PathVariable String id) {
+		System.out.println("Update image");
+		System.out.println(file.getOriginalFilename());
+		productsService.updateImage(file, id);
+		return new ResponseEntity("Working",HttpStatus.ACCEPTED); 
+
+	}
+	
 
 //	@GetMapping("/products")
 //	public ResponseEntity<Stream<Products>> getAllProducts(){

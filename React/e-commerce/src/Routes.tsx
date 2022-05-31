@@ -45,6 +45,7 @@ import VerifyMail from './components/Pages/VerifyMail';
 import ProductYearlySales from "./components/Pages/ProductYearlySales";
 import ProductMonthlySales from "./components/Pages/ProductMonthlySales";
 import VendorEditShop from "./components/Pages/VendorEditShop";
+import EditProduct from './components/Forms/EditProducts2';
 
 function MainRoutes(){
     return(
@@ -66,7 +67,7 @@ function MainRoutes(){
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/addCategory" element={<AddCategory/>}/>
                     <Route path="/vAddProducts/:mail" element={<VendorAddProducts/>}/>
-                    <Route path="/vEditProducts/:mail/:id" element={<VendorEditProducts/>}/>
+                    <Route path="/vEditProducts/:mail/:id" element={<EditProduct/>}/>
                     <Route path="/aAddCategory" element={<AdminAddCategories/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/customerReg" element={<CustomerReg/>}/>

@@ -23,6 +23,8 @@ public interface ProductsService {
 	
 	public Products saveImage(MultipartFile file);
 	
+	public Products updateImage(MultipartFile file, String productId);
+	
 	public ArrayList<Products> searchProducts(String value);
 	
 	public ArrayList<Products> getProductsVendor(int id);
