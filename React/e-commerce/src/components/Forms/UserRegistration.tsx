@@ -63,11 +63,11 @@ function UserRegistration(props:any){
             },(error)=>{
                 //console.log(error.response.data.mail);
                 if(error.response.status==409){
-                    //alert("A user with the same mail already exists");
-                    setErrorUser({
+                    alert("A user with the same mail already exists");
+                    /*setErrorUser({
                         ...errorUser,
                         mail: error.response.data.mail
-                    })
+                    })*/
                   }else{
                 setErrorUser({
                     mail: error.response.data.mail,

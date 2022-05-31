@@ -130,7 +130,7 @@ class SiteShoppingCart extends Component<any, any>{
             resultTable = this.state.resultData.map((item : any) => {
                 return(
                     <div>
-                        <div className="form-control" style={{color: "rebeccapurple", backgroundColor: "lightcoral"}}>
+                        <div className="form-control" style={{color: "rebeccapurple", backgroundColor: "ThreeDLightShadow"}}>
                             <label htmlFor="">Product Name</label>
                             <div><strong>{item.product_name}</strong></div> <hr/>
                             <label htmlFor="">Category</label>
