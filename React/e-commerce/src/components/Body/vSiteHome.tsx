@@ -25,17 +25,19 @@ class VendorHome extends Component<any, any> {
     state = {
         result: [],
         loading: true,
+        id: localStorage.getItem("userId_session")
     }
 
     async componentDidMount(){
-        axios.get(`${base_url}products`).then(
+        
+        console.log(this.state.id)
+        axios.get(`${base_url}product/vendor/${this.state.id}`).then(
             
             (response)=>{
                 this.setState({
                     result: response.data,
                     loading: false,
                 })
-                console.log(response.data);
             },(error)=>{
                 console.log("error");
                 let res:string[]=Object.values(error.response.data);
