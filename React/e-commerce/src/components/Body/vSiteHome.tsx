@@ -95,7 +95,11 @@ class VendorHome extends Component<any, any> {
                             <Card.Body>
                                 <Card.Title>{item.productName}</Card.Title>
                                 <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
-                                <Button variant="primary" href={`/vEditProducts/`+localStorage.getItem("email")?.toString+`/`+item.productId}>Edit</Button>
+                                <Button hidden={item.vendor.id == localStorage.getItem("userId_session") ? false : true}
+                                    variant="primary" href={`/vEditProducts/`+localStorage.getItem("email")+`/`+item.productId}
+                                >
+                                    Edit
+                                </Button>
                                 <Link to={`/product/productDetails/`+item.productId}>
 
                                     <HiInformationCircle style={{fontSize:"2em", float: "right"}}/>

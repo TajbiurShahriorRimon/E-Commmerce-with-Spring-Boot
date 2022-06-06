@@ -75,9 +75,11 @@ class SiteVendorProducts extends Component<any, any>{
                                             (<div><h5><ImCross/></h5>Set Active</div>)
                                         }
                                     </button> &nbsp;
-                                    <Button className="btn-info" variant="outline-danger" href=''>
-                                        Edit
-                                    </Button>
+                                    <Link to={'/vEditProducts/'+localStorage.getItem("email")+'/'+item.productId}>
+                                        <Button className="btn-info" variant="outline-danger">
+                                            Edit
+                                        </Button>
+                                    </Link>
                                     <Link to={`/product/productDetails/`+item.productId}>
                                         <HiInformationCircle style={{fontSize:"2em", float: "right"}}/>
                                     </Link>

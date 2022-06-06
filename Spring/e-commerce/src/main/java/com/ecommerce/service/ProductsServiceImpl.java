@@ -48,7 +48,14 @@ public class ProductsServiceImpl implements  ProductsService{
 
 	@Override
 	public Products getProductById(int id){
-		return productsDao.findById(id).get();
+		//return productsDao.findById(id).get();
+		try {
+			Products product = productsDao.findById(id).get();
+		} catch (Exception e) {
+			return null;
+		}
+		Products product = productsDao.findById(id).get();
+		return product;
 	}
 
 	@Override
@@ -124,7 +131,8 @@ public class ProductsServiceImpl implements  ProductsService{
 	@Transactional
 	@Override
 	public java.util.List<Object> monthlyProductSales(int productId, int year) {
-		var data = entityManager.createNativeQuery("SELECT SUM(sales.price * sales.unit), Date_Format(STR_TO_DATE(date, '%d/%M/%Y'), '%M') AS month FROM orders, sales " +
+		var data = entityManager.createNativeQuery("SELECT SUM(sales.price * sales.unit), Date_Format(STR_TO_DATE(date, '%d/%M/%Y'), '%M') AS month, "+ 
+		"month(Str_To_Date(date, '%d/%M/%Y')) as monthStr FROM orders, sales " +
 		"WHERE sales.order_id = orders.id AND sales.product_product_id = ? AND orders.status = 'delivered' " +
 		"AND year(STR_TO_DATE(date, '%d/%M/%Y')) = ? GROUP BY month(STR_TO_DATE(date, '%d/%M/%Y'))")
 		.setParameter(1, productId)
@@ -143,6 +151,67 @@ public class ProductsServiceImpl implements  ProductsService{
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+
+	@Transactional
+	@Override
+	public Object[][] dailyProductSalesByYearMonth(int year, int month, int productId) {
+		var numOfDays = entityManager.createNativeQuery("SELECT DAY(LAST_DAY(STR_TO_DATE(date, '%d/%M/%Y'))) FROM orders "+
+        "WHERE year(STR_TO_DATE(date, '%d/%M/%Y')) = ? AND month(STR_TO_DATE(date, '%d/%M/%Y')) = ? ")
+        .setParameter(1, year)
+        .setParameter(2, month)
+        .getResultList();
+        int lastDay = 0;
+        for (Object object : numOfDays) {
+            lastDay = (int) object;
+            break;
+        }
+        int lastDayOfMonth = lastDay;
+
+		var data = entityManager.createNativeQuery("SELECT SUM(sales.price * sales.unit), day(STR_TO_DATE(date, '%d/%M/%Y')) AS day "+
+		"FROM orders, sales WHERE sales.order_id = orders.id "+
+		"AND sales.product_product_id = ? AND orders.status = 'delivered' AND year(STR_TO_DATE(date, '%d/%M/%Y')) = ? "+
+		"and month(STR_TO_DATE(date, '%d/%M/%Y')) = ? GROUP BY day(STR_TO_DATE(date, '%d/%M/%Y'))")
+        .setParameter(1, productId)
+        .setParameter(2, year)
+        .setParameter(3, month)
+        .getResultList();
+
+        Object [][] ara = new Object[lastDayOfMonth][2];
+
+        int j = 0;
+
+        for(int i = 0; i < lastDayOfMonth; i++){
+            if(j < data.size()){
+                Object[] s = (Object[]) data.get(j);
+                if(s[1].equals(i+1)){
+                    ara[i][0] = (double) s[0];
+                    ara[i][1] = (int) s[1];
+                    j++;
+                }
+                else{
+                    ara[i][0] = 0;
+                    ara[i][1] = i+1;
+                }
+            }
+            // try {
+            //     Object l = (Double) s[0];
+            // } catch (Exception e) {
+            //     int u = 0;
+            // }
+            
+            //Object m = (int) s[1];
+            // if(s[1].equals(i+1)){
+            //     ara[i][0] = (double) s[0];
+            //     ara[i][1] = (int) s[1];
+            //     j++;
+            // }
+            else{
+                ara[i][0] = 0;
+                ara[i][1] = i+1;
+            }
+        }
+        return ara;
 	}
 
 }

@@ -35,4 +35,6 @@ public interface ProductsService {
 
 	public List<Object> monthlyProductSales(int productId, int year);
 
+	public Object[][] dailyProductSalesByYearMonth(int year, int month, int productId);
+
 }

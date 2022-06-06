@@ -74,7 +74,11 @@ class SiteMonthlySales extends Component<any, any>{
             table = this.state.result.map((item) => {
                 return(
                     <tr>
-                        <th className="text-center"><Link to={'/order/dailySales/'+item[2]}>{item[1]}</Link></th>
+                        <th className="text-center">
+                            <Link to={'/order/dailySales/'+window.location.pathname.split("/").pop()+'/'+item[2]}>
+                                {item[1]}
+                            </Link>
+                        </th>
                         <th className="text-center">{item[0]}</th>
                     </tr>
                 )
@@ -98,7 +102,7 @@ class SiteMonthlySales extends Component<any, any>{
                         <table className="table">
                             <thead>
                             <tr>
-                                <td className="text-center">Year</td>
+                                <td className="text-center">Month</td>
                                 <td className="text-center">Amount</td>
                             </tr>
                             </thead>
