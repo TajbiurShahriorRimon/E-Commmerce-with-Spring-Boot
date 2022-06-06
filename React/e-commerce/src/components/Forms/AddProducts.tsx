@@ -33,9 +33,8 @@ function AddProduct(props:any){
     const getAllCategory = () => {
         axios.get(`${base_url}category`).then(
             (response) => {
-                console.log(response.data);
+                //console.log(response.data);
                 setCategory(response.data);
-
             },
             (error) => {
 
@@ -75,7 +74,7 @@ function AddProduct(props:any){
     });
     const [products,setProducts]=useState({
         productName:"",
-        price:"",
+        price: "",
         //categoryId:"", //changes made
         category: {
             categoryId: ""
@@ -86,6 +85,23 @@ function AddProduct(props:any){
         thumbnail: "", //used to set the photo blob path of the selected photo
         otherImage : [] //for multiple selected photo
     });
+
+    const [prodNameErr, setProdNameErr] = useState({
+        productNameErr: "",
+    })
+    const [prodPriceErr, setProdPriceErr] = useState({
+        priceErr: "",
+    })
+    const [descErr, setDescErr] = useState({
+        descriptionErr: "",
+    })
+    const [prodCategoryErr, setProdCategoryErr] = useState({
+        categoryErr: "",
+    })
+    const [photoErr, setPhotoErr] = useState({
+        thumbnailErr: "",
+    })
+
     const AddPhoto = (e:any) => {
         let reader= new FileReader();
         let image = e.target.files[0];
@@ -95,7 +111,7 @@ function AddProduct(props:any){
             reader.onload=()=>{
                 let base64:any= reader.result;
                 setImageBase64String(base64)
-                console.log(imageBase64String)
+                //console.log(imageBase64String)
             };
             reader.onerror=function(error){
                 console.log(error)
@@ -117,38 +133,116 @@ function AddProduct(props:any){
             otherImage: images
         });
     }
-    
-    
 
     const handleForm= (e:any)=>{
-        console.log(products);
-        const formData = new FormData();
-         formData.append('file',products.thumbnail)
-        // console.log(products.thumbnail)
-        // postDataToServer(JSON.stringify(products));
-        products.thumbnail=""
-        console.log(products.thumbnail)
-        products.vendor=vendorOb;
-        getUserFromServer(mail);
-        
-        setTimeout(() => {  getVendorFromServer(user.mail); }, 2000);
-        //posting data to server
-        //posting product
-        setTimeout(() => { products.vendor =vendorOb; }, 3000);
-        
-        setTimeout(() => {  postDataToServer(JSON.stringify(products)); }, 3000);
-        
-        setTimeout(() => {  postImageToServer(formData); }, 5000);
-        
-        
-        
+        e.preventDefault();
+        var isValid = true;
+        if(products.productName == ""){
+            isValid = false;
+            setProdNameErr({
+                productNameErr: "name must not be empty"
+            })
+        }
+        else {
+            setProdNameErr({
+                productNameErr: ""
+            })
+        }
+
+        if(products.price == ""){
+            isValid = false;
+            setProdPriceErr({
+                priceErr: "price must not be empty"
+            })
+        }
+        else if(!products.price.match(/^-?[0-9]*[.][0-9]+$/) && !products.price.match(/^[0-9]+$/)){
+            isValid = false;
+            setProdPriceErr({
+                priceErr: "only (positive) value is allowed"
+            })
+        }
+        else if(+products.price < 0){
+            isValid = false;
+            setProdPriceErr({
+                priceErr: "(positive) value is allowed"
+            })
+        }
+        else {
+            setProdPriceErr({
+                priceErr: ""
+            })
+        }
+
+        if(products.description == ""){
+            isValid = false;
+            setDescErr({
+                descriptionErr: "description must not be empty"
+            })
+        }
+        else {
+            setDescErr({
+                descriptionErr: ""
+            })
+        }
+
+        if(products.category.categoryId == "" || +products.category.categoryId == 0){
+            isValid = false;
+            setProdCategoryErr({
+                categoryErr: "select a category"
+            })
+        }
+        else {
+            setProdCategoryErr({
+                categoryErr: ""
+            })
+        }
+
+        if(products.thumbnail == ""){
+            isValid = false;
+            setPhotoErr({
+                thumbnailErr: "select a photo for thumbnail"
+            })
+        }
+        else {
+            setPhotoErr({
+                thumbnailErr: ""
+            })
+        }
+
+        if(isValid == true) {
+            //console.log(products);
+            const formData = new FormData();
+            formData.append('file', products.thumbnail)
+            // console.log(products.thumbnail)
+            // postDataToServer(JSON.stringify(products));
+            products.thumbnail = ""
+            //console.log(products.thumbnail)
+            products.vendor = vendorOb;
+            getUserFromServer(localStorage.getItem("email")); //getUserFromServer(mail); //changes made params_localStorage
+
+            setTimeout(() => {
+                getVendorFromServer(user.mail);
+            }, 2000);
+            //posting data to server
+            //posting product
+            setTimeout(() => {
+                products.vendor = vendorOb;
+            }, 3000);
+
+            setTimeout(() => {
+                postDataToServer(JSON.stringify(products));
+            }, 3000);
+
+            setTimeout(() => {
+                postImageToServer(formData);
+            }, 5000);
+        }
          
         e.preventDefault();
     }
 
     //function to post data on server
     const postDataToServer=(data:any)=>{
-        console.log(data);
         axios.post(`${base_url}addProducts`,data,{
             headers: {
                 'Content-Type': 'application/json',
@@ -157,7 +251,7 @@ function AddProduct(props:any){
             (response)=>{
                     alert("Success");
             },(error)=>{
-                
+
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
                 
@@ -178,7 +272,7 @@ function AddProduct(props:any){
     //     }
     // }
     const postImageToServer=(data:any)=>{
-        console.log("Image");
+        //console.log("Image");
         axios.post(`${base_url}addImage`,data,{
            }).then(
             (response)=>{
@@ -199,7 +293,7 @@ function AddProduct(props:any){
     };
 
     const getUserFromServer=(data:any)=>{
-        
+        //alert(data)
         axios.post(`${base_url}getUser`,data,{
             headers: {
                 'Content-Type': 'application/json',
@@ -208,7 +302,7 @@ function AddProduct(props:any){
             (response)=>{
                    
                     user =response.data
-                    console.log(user.mail);
+                    //console.log(user.mail);
             },(error)=>{
                 
                 let res:string[]=Object.values(error.response.data);
@@ -225,7 +319,7 @@ function AddProduct(props:any){
     };
 
     const  getVendorFromServer=(data:any)=>{
-        console.log(data);
+        //alert(data);
         axios.post(`${base_url}getVendorIdByUserMail`,data,{
             headers: {
                 'Content-Type': 'application/json',
@@ -254,7 +348,7 @@ function AddProduct(props:any){
             <Container >
             <Row className='justify-content-center my-5'>
                 <Col md={4}>
-                    <Form onSubmit={handleForm}>
+                    <Form /*onSubmit={handleForm}*/>
                             <Label className="form-label my-2" for="name">
                                 Product Name
                             </Label>
@@ -268,6 +362,9 @@ function AddProduct(props:any){
                                     setProducts({...products,productName:e.target.value})
                                 }}
                             />
+                            <div className="text-danger">
+                                {prodNameErr.productNameErr == "" ? "" : prodNameErr.productNameErr}
+                            </div>
 
                             <Label className='form-label my-2' for="price">
                                 Price
@@ -282,6 +379,9 @@ function AddProduct(props:any){
                                     setProducts({...products,price:e.target.value})
                                 }}
                             />
+                            <div className="text-danger">
+                                {prodPriceErr.priceErr == "" ? "" : prodPriceErr.priceErr}
+                            </div>
 
                             <Label className='form-label my-2' for="description">
                                 Description
@@ -297,6 +397,9 @@ function AddProduct(props:any){
                                     setProducts({...products,description:e.target.value})
                                 }}
                             />
+                            <div className="text-danger">
+                                {descErr.descriptionErr == "" ? "" : descErr.descriptionErr}
+                            </div>
 
                             <Label className='form-label my-2' for="category">
                                 Category
@@ -309,7 +412,18 @@ function AddProduct(props:any){
                                         }
                                     })
                                 }}>
-                                <option selected>Select Category</option>
+                                <option key={0} selected disabled={true}
+                                        onChange={(e)=>{
+                                            setProducts({...products,
+                                                //categoryId:e.target.value //changes made
+                                                category: {
+                                                    categoryId: "0"
+                                                }
+                                            })
+                                        }}
+                                >
+                                    Select Category
+                                </option>
                                 {
                                     category.map((item : any) => (
                                         <option key={item.categoryId} value={item.categoryId}>
@@ -318,7 +432,11 @@ function AddProduct(props:any){
                                     ))
                                 }
                             </select>
-                        <Label className='form-label my-2' for="photo">
+                        <div className="text-danger">
+                            {prodCategoryErr.categoryErr == "" ? "" : prodCategoryErr.categoryErr}
+                        </div>
+
+                        <Label className='form-label my-2' for="thumbnail">
                         Thumbnail
                         </Label>
                         <div>
@@ -331,6 +449,9 @@ function AddProduct(props:any){
                                 className='form-control'
                                 onChange={AddPhoto}
                             />
+                        </div>
+                        <div className="text-danger">
+                            {photoErr.thumbnailErr == "" ? "" : photoErr.thumbnailErr}
                         </div>
 
                         {/*<Label className='form-label my-2' for="otherImage">
@@ -345,8 +466,9 @@ function AddProduct(props:any){
                             multiple
                             onChange={AddOtherImages}
                         />*/}
-                            <Button className='my-2 w-100' type='submit' color='primary'>Save</Button>
+                            {/*<Button className='my-2 w-100' type='submit' color='primary'>Save</Button>*/}
                     </Form>
+                    <Button onClick={handleForm} className='my-2 w-100' type='button' color='primary'>Save</Button>
                    
                 </Col>
                 </Row>

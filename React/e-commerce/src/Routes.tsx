@@ -46,6 +46,9 @@ import ProductYearlySales from "./components/Pages/ProductYearlySales";
 import ProductMonthlySales from "./components/Pages/ProductMonthlySales";
 import VendorEditShop from "./components/Pages/VendorEditShop";
 import EditProduct from './components/Forms/EditProducts2';
+import ProductEdit from "./components/Pages/ProductEdit";
+import DailySales from "./components/Pages/DailySales";
+import ProductDailySales from "./components/Pages/ProductDailySales";
 
 function MainRoutes(){
     return(
@@ -67,7 +70,7 @@ function MainRoutes(){
                     <Route path="/addProducts" element={<AddProducts/>}/>
                     <Route path="/addCategory" element={<AddCategory/>}/>
                     <Route path="/vAddProducts/:mail" element={<VendorAddProducts/>}/>
-                    <Route path="/vEditProducts/:mail/:id" element={<EditProduct/>}/>
+                    <Route path="/vEditProducts/:mail/:id" element={<ProductEdit/>}/>
                     <Route path="/aAddCategory" element={<AdminAddCategories/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/customerReg" element={<CustomerReg/>}/>
@@ -91,6 +94,7 @@ function MainRoutes(){
                     <Route path="/product/allReviews/:id" element={<ProductReviews/>}/>
                     <Route path="/product/yearlySales/:key" element={<ProductYearlySales/>}/>
                     <Route path="/product/monthlySales/:productId/:year" element={<ProductMonthlySales/>}/>
+                    <Route path="/product/dailySales/:year/:month/:productId" element={<ProductDailySales/>}/>
 
                     {/*Order*/}
                     <Route path="/order/pending" element={<OrderPending/>}/>
@@ -99,6 +103,7 @@ function MainRoutes(){
                     <Route path="/order/salesDetails/:orderId" element={<CustomerOrderDetails/>}/>
                     <Route path="/order/yearlySales" element={<YearlySales/>}/>
                     <Route path="/order/monthlySales/:year" element={<MonthlySales/>}/>
+                    <Route path="/order/dailySales/:year/:month" element={<DailySales/>}/>
 
                     {/*User*/}
                     <Route path="/user/profileEdit" element={<UserEditProfile/>}/>

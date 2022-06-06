@@ -49,21 +49,34 @@ class EditProduct extends Component<any, any>{
         },
         categories:["",""],
         photoUrl:"data:image/png;base64,",
-        
 
+        categoryId: "",
+
+
+        priceErr: "",
+        descriptionErr: ""
     }
 
    
 
     async componentDidMount() {
-
-        console.log("2222");
+        //console.log("2222");
         let params:string[] = window.location.pathname.split("/");
         let id=params.pop()!;
 
-        const resp = await axios.get(`${base_url}product/${id}`); 
+        const resp = await axios.get(`${base_url}product/${id}`)
 
         console.log(resp.data);
+        /*if(resp.status != 200){
+            alert('not found')
+            window.location.href = "/login"
+        }*/
+
+        if(resp.data.vendor.id != localStorage.getItem("userId_session")){
+            alert('wrong product');
+            window.location.href = "/login";
+        }
+
         await this.setState({
             product:resp.data
         });
@@ -78,11 +91,57 @@ class EditProduct extends Component<any, any>{
         await this.setState({
             categories:resp2.data
         });
+
+        this.setState({
+            categoryId: this.state.product.category.categoryId
+        })
     }
     updateProduct=(e:any)=>{
         e.preventDefault();
-        this.addProduct();
-        
+        var isValid = true
+        if(this.state.product.price == ""){
+            isValid = false;
+            this.setState({
+                priceErr: "price cannot be empty"
+            })
+        }
+        else if (!this.state.product.price.toString().match(/^-?[0-9]*[.][0-9]+$/) &&
+            !this.state.product.price.toString().match(/^[0-9]+$/))
+        {
+            isValid = false;
+            this.setState({
+                priceErr: "only (positive) value is allowed"
+            })
+        }
+        else if(+this.state.product.price < 0){
+            isValid = false;
+            this.setState({
+                priceErr: "(positive) value is allowed"
+            })
+        }
+        else {
+            this.setState({
+                priceErr: ""
+            })
+        }
+
+        if(this.state.product.description == ""){
+            //alert('dfdfd');
+            isValid = false;
+            this.setState({
+                descriptionErr: "description cannot be empty"
+            })
+        }
+        else {
+            this.setState({
+                descriptionErr: ""
+            })
+        }
+
+        if(isValid == true){
+            this.addProduct();
+        }
+
     }
 
     //save product to server
@@ -103,7 +162,6 @@ class EditProduct extends Component<any, any>{
                     this.addImage(formData);
                     
             },(error)=>{
-                
                 let res:string[]=Object.values(error.response.data);
                 let errorMsg:string="";
                 
@@ -112,7 +170,7 @@ class EditProduct extends Component<any, any>{
                     errorMsg+="\n"
                 }
                 
-                  alert(errorMsg);
+                  //alert(errorMsg);
             }
         );
         //alert(this.state.unit);
@@ -133,10 +191,11 @@ class EditProduct extends Component<any, any>{
                  errorMsg+="\n"
              }
              
-               alert(errorMsg);
+               //alert(errorMsg);
          }
      );
     }
+
     //add image to state after it has been selected
      addPhotoToSTate = (e:any) => {
         let image = e.target.files[0];
@@ -156,7 +215,7 @@ class EditProduct extends Component<any, any>{
             <Container >
             <Row className='justify-content-center my-5'>
                 <Col md={4}>
-                    <Form  onSubmit={this.updateProduct}>
+                    <Form  /*onSubmit={this.updateProduct}*/>
                             <Label className="form-label my-2" for="name">
                                 Product Name
                             </Label>
@@ -168,11 +227,10 @@ class EditProduct extends Component<any, any>{
                                 type="text"
                                 className='form-control'
                                 defaultValue={this.state.product.productName}
-                                
+                                disabled={true}
                                 onChange={(e)=>{
                                     this.state.product.productName=e.target.value}}
                             >
-                               
                             </Input>
                                 
 
@@ -185,10 +243,34 @@ class EditProduct extends Component<any, any>{
                                 placeholder="Enter Product Price"
                                 type="text"
                                 className='form-control'
-                                defaultValue={this.state.product.price}
+                                value={this.state.product.price}
+                                /*onChange={(e)=>{
+                                    this.state.product.price=e.target.value}}*/
                                 onChange={(e)=>{
-                                    this.state.product.price=e.target.value}}
+                                    /*this.setState({
+                                        product: this.state.product
+                                    })
+                                    this.setState({
+                                        product:{
+                                            price: e.target.value,
+                                            /!*productName: this.state.product.productName,
+                                            description: this.state.product.description*!/
+                                        }
+                                    })*/
+                                    //e.preventDefault();
+                                    this.setState({
+                                        product:{
+                                            ...this.state.product,
+                                            price: e.target.value
+                                        }
+                                    })
+                                    this.state.product.price = e.target.value
+                                    //alert(this.state.product.price)
+                                }}
                             />
+                            <div className="text-danger">
+                                {this.state.priceErr}
+                            </div>
                             
                             <Label className='form-label my-2' for="description">
                                 Description
@@ -197,34 +279,68 @@ class EditProduct extends Component<any, any>{
                                 id="description"
                                 name="description"
                                 placeholder="Enter Product Description"
-                                type="text"
-                                className='form-control'
-                                defaultValue={this.state.product.description}
+                                type="textarea"
+                                /*className='form-control'*/
+                                value={this.state.product.description}
                                 style={{width: 400, height: 100}}
                                 onChange={(e)=>{
-                                    this.state.product.description=e.target.value}}
-                                
+                                    //e.preventDefault();
+                                    //this.state.product.description=e.target.value
+                                    /*this.setState({
+                                        product:{
+                                            description: e.target.value,
+                                            /!*productName: this.state.product.productName,
+                                            price: this.state.product.price*!/
+
+                                            /!*category: {
+                                                categoryId: this.state.product.category.categoryId
+                                            }*!/
+                                        }
+                                    })
+                                    this.setState({
+                                        product: this.state.product
+                                    })*/
+                                    this.setState({
+                                        product:{
+                                            ...this.state.product,
+                                            description: e.target.value
+                                        }
+                                    })
+                                    this.state.product.description = e.target.value
+                                    //alert(this.state.product.description)
+                                }}
+
                             />
+                            <div className="text-danger">
+                                {this.state.descriptionErr}
+                            </div>
 
                             <Label className='form-label my-2' for="category">
                                 Category
                             </Label>
-                            <Label className='form-label my-2' for="category">
-                                Category
-                            </Label>
-                            <select className="form-select" aria-label="Default select example" id="category" 
+                            <select className="form-select" aria-label="Default select example" id="category"
                             onChange={(e)=>{
+                                this.setState({
+                                    product:{
+                                        ...this.state.product,
+                                    }
+                                })
                                     this.state.product.category.categoryId=e.target.value
                                 }}>
-                                <option selected hidden>{this.state.product.category.categoryName}</option>
+                                {/*<option selected hidden>{this.state.product.category.categoryName}</option>*/}
                                 {
                                     this.state.categories.map((item : any) => (
-                                        <option key={item.categoryId} value={item.categoryId}>
+                                        <option
+                                            selected={item.categoryId ==
+                                                        this.state.categoryId ? true : false}
+                                            key={item.categoryId} value={item.categoryId}
+                                        >
                                             {item.categoryName}
                                         </option>
                                     ))
                                 }
                             </select>
+                        <br/>
                             {/* <Input 
                                 id="productName"
                                 name="productName"
@@ -242,30 +358,18 @@ class EditProduct extends Component<any, any>{
                         
                         <div>
                             <img src={this.state.photoUrl} id="photoSrc" style={{height: 200, width: 300}}/>
-                            <Input
+                            {/*<Input
                                 accept="image/*"
                                 id="thumbnail"
                                 name="file"
                                 type="file"
                                 className='form-control'
                                 onChange={this.addPhotoToSTate}
-                            />
-                        </div> 
-
-                        {/*<Label className='form-label my-2' for="otherImage">
-                            Other Images
-                        </Label>
-                        <Input
-                            accept="image/*"
-                            id="otherImage"
-                            name="otherImage"
-                            type="file"
-                            className='form-control'
-                            multiple
-                            onChange={AddOtherImages}
                             />*/}
-                            <Button className='my-2 w-100' type='submit' color='primary'>Save</Button>
+                        </div>
+                            {/*<Button className='my-2 w-100' type='submit' color='primary'>Save</Button>*/}
                     </Form>
+                    <Button onClick={this.updateProduct} className='my-2 w-100' type='button' color='primary'>Save</Button>
                    
                 </Col>
                 </Row>

@@ -78,4 +78,9 @@ public class OrdersController {
     @GetMapping(value = "/totalSale")
 	public ResponseEntity<Double> totalSale(){
 		return ResponseEntity.ok(ordersService.totalsSale()); }
+
+    @GetMapping(value = "/order/dailySales/{year}/{month}")
+    public ResponseEntity<Object[][]> dailySales(@PathVariable int year, @PathVariable int month){
+        return new ResponseEntity<Object[][]>(ordersService.dailySalesByYearMonth(year, month), HttpStatus.OK);
+    }
 }

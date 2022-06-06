@@ -114,7 +114,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Object> monthlySales(int year) {
         var data = entityManager.createNativeQuery("SELECT SUM(total_price), Date_Format(STR_TO_DATE(date, '%d/%M/%Y'), '%M') AS month, month(Str_To_Date(date, '%d/%M/%Y')) as monthStr "+
-         "FROM orders WHERE year(STR_TO_DATE(date, '%d/%M/%Y'))=?  GROUP BY month(STR_TO_DATE(date, '%d/%M/%Y'))")
+         "FROM orders WHERE year(STR_TO_DATE(date, '%d/%M/%Y'))=? and status = 'delivered' GROUP BY month(STR_TO_DATE(date, '%d/%M/%Y'))")
          .setParameter(1, year)
          .getResultList();
         return data;
@@ -131,5 +131,64 @@ public class OrdersServiceImpl implements OrdersService {
 		
 		return ordersDao.totalSale();
 	}
+
+    @Transactional
+    @Override
+    public Object[][] dailySalesByYearMonth(int year, int month) {
+        var numOfDays = entityManager.createNativeQuery("SELECT DAY(LAST_DAY(STR_TO_DATE(date, '%d/%M/%Y'))) FROM orders "+
+        "WHERE year(STR_TO_DATE(date, '%d/%M/%Y')) = ? AND month(STR_TO_DATE(date, '%d/%M/%Y')) = ? ")
+        .setParameter(1, year)
+        .setParameter(2, month)
+        .getResultList();
+        int lastDay = 0;
+        for (Object object : numOfDays) {
+            lastDay = (int) object;
+            break;
+        }
+        int lastDayOfMonth = lastDay;
+
+        var data = entityManager.createNativeQuery("SELECT sum(total_price), day(STR_TO_DATE(date, '%d/%M/%Y')) FROM orders "+
+        "WHERE status = 'delivered' AND year(STR_TO_DATE(date, '%d/%M/%Y')) = ? "+
+        "AND month(STR_TO_DATE(date, '%d/%M/%Y')) = ? GROUP BY day(STR_TO_DATE(date, '%d/%M/%Y'))")
+        .setParameter(1, year)
+        .setParameter(2, month)
+        .getResultList();
+
+        Object [][] ara = new Object[lastDayOfMonth][2];
+
+        int j = 0;
+
+        for(int i = 0; i < lastDayOfMonth; i++){
+            if(j < data.size()){
+                Object[] s = (Object[]) data.get(j);
+                if(s[1].equals(i+1)){
+                    ara[i][0] = (double) s[0];
+                    ara[i][1] = (int) s[1];
+                    j++;
+                }
+                else{
+                    ara[i][0] = 0;
+                    ara[i][1] = i+1;
+                }
+            }
+            // try {
+            //     Object l = (Double) s[0];
+            // } catch (Exception e) {
+            //     int u = 0;
+            // }
+            
+            //Object m = (int) s[1];
+            // if(s[1].equals(i+1)){
+            //     ara[i][0] = (double) s[0];
+            //     ara[i][1] = (int) s[1];
+            //     j++;
+            // }
+            else{
+                ara[i][0] = 0;
+                ara[i][1] = i+1;
+            }
+        }
+        return ara;
+    }
     
 }

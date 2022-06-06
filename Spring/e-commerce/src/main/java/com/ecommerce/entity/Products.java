@@ -33,7 +33,7 @@ public class Products {
 	private String status;
 	@Lob
 	private byte[] thumbnail;
-	@NotNull
+	@NotNull(message = "price cannot be empty")
 	private double price;
 	@NotEmpty
 	private String description;

@@ -1,20 +1,23 @@
+import CanvasJSReact from "../canvasJS/assets/canvasjs.react";
 import React, {Component} from "react";
 import axios from "axios";
 import base_url from "../../api/bootapi";
-import {Link} from "react-router-dom";
 import {Tab, Tabs} from "react-bootstrap";
-import CanvasJSReact from "../canvasJS/assets/canvasjs.react";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class SiteProductYearlySales extends Component<any, any>{
+class SiteProductDailySales extends Component<any, any>{
     state = {
         result: [],
         loading: true,
     }
 
     async componentDidMount() {
-        const resp = await axios.get(`${base_url}product/yearlySales/`+window.location.pathname.split("/").pop());
+        var year = window.location.href.split('/').slice(-3)[0];
+        var month = window.location.href.split('/').slice(-2)[0];
+        var prod_id = window.location.href.split('/').slice(-1)[0]
+        //alert(window.location.pathname.split("/").pop());
+        const resp = await axios.get(`${base_url}product/dailySales/`+year+'/'+month+'/'+prod_id);
         console.log(resp);
 
         if (resp.status === 200){
@@ -30,7 +33,7 @@ class SiteProductYearlySales extends Component<any, any>{
 
         var barChart = {
             title: {
-                text: "Monthly Sales"
+                text: "Daily Sales"
             },
             animationEnabled: true,
             theme: "light2",
@@ -42,10 +45,24 @@ class SiteProductYearlySales extends Component<any, any>{
             }]
         }
 
+        var lineChart = {
+            title: {
+                text: "Daily Sales"
+            },
+            animationEnabled: true,
+            theme: "light1",
+            backgroundColor: "#F5DEB3",
+            data: [{
+                type: "line",
+                dataPoints: this.state.result.map((item: any) => {
+                    return {label: item[1], y: item[0]}
+                })
+            }]
+        }
 
         var pieChart = {
             title: {
-                text: "Monthly Sales"
+                text: "Daily Sales"
             },
             animationEnabled: true,
             theme: "dark2",
@@ -73,10 +90,7 @@ class SiteProductYearlySales extends Component<any, any>{
             table = this.state.result.map((item) => {
                 return(
                     <tr>
-                        <th className="text-center">
-                        <Link to={'/product/monthlySales/'+window.location.pathname.split("/").pop()+'/'+item[1]}>
-                            {item[1]}
-                        </Link></th>
+                        <th className="text-center">{item[1]}</th>
                         <th className="text-center">{item[0]}</th>
                     </tr>
                 )
@@ -93,6 +107,7 @@ class SiteProductYearlySales extends Component<any, any>{
 
                 <Tabs defaultActiveKey="chart" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="chart" title="Chart">
+                        <CanvasJSChart options={lineChart} />
                         <CanvasJSChart options={barChart} />
                         <CanvasJSChart options={pieChart}/>
                     </Tab>
@@ -100,7 +115,7 @@ class SiteProductYearlySales extends Component<any, any>{
                         <table className="table">
                             <thead>
                             <tr>
-                                <td className="text-center">Year</td>
+                                <td className="text-center">Day</td>
                                 <td className="text-center">Amount</td>
                             </tr>
                             </thead>
@@ -116,4 +131,4 @@ class SiteProductYearlySales extends Component<any, any>{
     }
 }
 
-export default SiteProductYearlySales;
+export default SiteProductDailySales;

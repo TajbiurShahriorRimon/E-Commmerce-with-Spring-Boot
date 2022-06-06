@@ -77,6 +77,10 @@ public class ProductsController {
 
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Products> getProduct(@PathVariable int id){
+		var data = productsService.getProductById(id);
+		if(data == null){
+			return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+		}
 		return ResponseEntity.ok(productsService.getProductById(id));
 	}
 
@@ -98,6 +102,12 @@ public class ProductsController {
 	@GetMapping(value = "/product/monthlySales/{id}/{year}")
     public ResponseEntity<List> productSales(@PathVariable int id /* Product Id */, @PathVariable int year){
         return new ResponseEntity<List>(productsService.monthlyProductSales(id, year), HttpStatus.OK);
+    }
+
+	@GetMapping(value = "/product/dailySales/{year}/{month}/{productId}")
+    public ResponseEntity<Object[][]> dailySales(@PathVariable int year, @PathVariable int month, @PathVariable int productId){
+        int v = 12;
+        return new ResponseEntity<Object[][]>(productsService.dailyProductSalesByYearMonth(year, month, productId), HttpStatus.OK);
     }
 	
 }

@@ -24,4 +24,6 @@ public interface OrdersService {
     
     public double todaysSale();
     public double totalsSale();
+
+    public Object[][] dailySalesByYearMonth(int year, int month);
 }
