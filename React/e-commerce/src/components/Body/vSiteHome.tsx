@@ -31,8 +31,9 @@ class VendorHome extends Component<any, any> {
     async componentDidMount(){
         
         console.log(this.state.id)
-        axios.get(`${base_url}product/vendor/${this.state.id}`).then(
-            
+        //axios.get(`${base_url}product/vendor/${this.state.id}`).then(
+        axios.get(`${base_url}products`).then(
+
             (response)=>{
                 this.setState({
                     result: response.data,

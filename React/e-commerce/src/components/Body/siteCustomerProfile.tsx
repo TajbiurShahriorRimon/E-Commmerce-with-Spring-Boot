@@ -60,8 +60,8 @@ class SiteCustomerProfile extends Component<any, any>{
                                     <strong>Edit My Shop</strong>
                                 </Link>
 
-                                <h3><u>My Report <CgNotes style={{color:"blue"}}/></u></h3>
-                                <Nav.Link href="/home"><strong style={{color: "black"}}>Order Report</strong></Nav.Link>
+                                {/*<h3><u>My Report <CgNotes style={{color:"blue"}}/></u></h3>
+                                <Nav.Link href="/home"><strong style={{color: "black"}}>Order Report</strong></Nav.Link>*/}
                                 {/*<div hidden={localStorage.getItem("userType_session") == "vendor" ? false : true}>
                                     <h3><u>My Products <CgBriefcase style={{color:"green"}}/></u></h3>
                                     <Link to={'/user/profileEdit'} style={{color: "black"}} className="nav-link">
