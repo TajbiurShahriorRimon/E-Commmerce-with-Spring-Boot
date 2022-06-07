@@ -16,6 +16,7 @@ class SiteCustomerProfile extends Component<any, any>{
         address: "",
         name: "",
         phone: "",
+        gender: "",
         loading: true,
     }
 
@@ -28,6 +29,7 @@ class SiteCustomerProfile extends Component<any, any>{
                 mail: resp.data.mail,
                 address: resp.data.address,
                 phone: resp.data.phone,
+                gender: resp.data.gender,
                 loading: false,
             })
             console.log(this.state.mail);
@@ -91,7 +93,7 @@ class SiteCustomerProfile extends Component<any, any>{
                             </div> <br/>
                             <div className="form-control">
                                 <label htmlFor="">Gender</label>
-                                <div><strong>Male</strong></div>
+                                <div><strong>{this.state.gender == "male" ? "Male" : "Female"}</strong></div>
                             </div> <br/>
                             <Link to={'/user/changePassword'}>
                                 <Button style={{width: 200, height: 60, float: "right"}} className="btn-info rounded-3">Change Password</Button>

@@ -97,7 +97,7 @@ class VendorHome extends Component<any, any> {
                             <Card.Img variant="top" src={"data:image/png;base64,"+item.thumbnail} style={{height: "180px", width: "100%"}}/>
                             <Card.Body>
                                 <Card.Title>{item.productName}</Card.Title>
-                                <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                {/*<Card.Text>Lorem Ipsum Telle Amore</Card.Text>*/}
                                 <Button hidden={item.vendor.id == localStorage.getItem("userId_session") ? false : true}
                                     variant="primary" href={`/vEditProducts/`+localStorage.getItem("email")+`/`+item.productId}
                                 >

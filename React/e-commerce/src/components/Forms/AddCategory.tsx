@@ -90,7 +90,7 @@ function AddCategory(props:any){
                                 {categoryErr.categoryNameErr == "" ? "" : categoryErr.categoryNameErr}
                             </div>
 
-                            <Label className='form-label my-2' for="status">
+                            {/*<Label className='form-label my-2' for="status">
                                 Status
                             </Label>
                             <select className="form-select" aria-label="Default select example" id="status" onChange={(e)=>{
@@ -98,7 +98,7 @@ function AddCategory(props:any){
                                 }}>
                                 <option selected value="active">Active</option>
                                 <option disabled={true} value="inactive">Inactive</option>
-                            </select>
+                            </select>*/}
 
                             
                             <Button className='my-2 w-100' type='submit' color='primary'>Save</Button>

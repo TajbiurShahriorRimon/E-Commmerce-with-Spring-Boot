@@ -154,6 +154,7 @@ class EditProduct extends Component<any, any>{
             }}).then(
             (response)=>{
                     alert("Product updated");
+                    window.location.href = "/vHome";
                     //save image to server
                     console.log(this.state.product.thumbnail);
                     const formData = new FormData();
@@ -210,6 +211,32 @@ class EditProduct extends Component<any, any>{
         console.log(this.state.product.thumbnail)
     }
     render(){
+        var categoryList;
+        if (this.state.product.category.status == "active"){
+            //alert('haha');
+            categoryList = this.state.categories.map((item : any) => (
+                <option
+                    selected={item.categoryId ==
+                    this.state.categoryId ? true : false}
+                    key={item.categoryId} value={item.categoryId}
+                >
+                    {item.categoryName}
+                </option>
+            ))
+        }
+        else {
+            //alert("dsds");
+            categoryList =
+
+                /*<option selected hidden>{this.state.product.category.categoryName}</option>*/
+                this.state.categories.map((item : any) => (
+                    <option
+                        key={item.categoryId} value={item.categoryId}
+                    >
+                        {item.categoryName}
+                    </option>
+                ))
+        }
         return(
             <div >
             <Container >
@@ -320,6 +347,7 @@ class EditProduct extends Component<any, any>{
                             </Label>
                             <select className="form-select" aria-label="Default select example" id="category"
                             onChange={(e)=>{
+                                e.preventDefault();
                                 this.setState({
                                     product:{
                                         ...this.state.product,
@@ -328,7 +356,7 @@ class EditProduct extends Component<any, any>{
                                     this.state.product.category.categoryId=e.target.value
                                 }}>
                                 {/*<option selected hidden>{this.state.product.category.categoryName}</option>*/}
-                                {
+                                {/*{
                                     this.state.categories.map((item : any) => (
                                         <option
                                             selected={item.categoryId ==
@@ -338,6 +366,55 @@ class EditProduct extends Component<any, any>{
                                             {item.categoryName}
                                         </option>
                                     ))
+                                }*/}
+                                {/*{
+                                    this.state.product.category.status == "inactive" ?
+                                        <option selected={true}
+                                                key={this.state.product.category.categoryId}
+                                                value={this.state.product.category.categoryId}
+                                        >
+                                            {this.state.product.category.categoryName}
+                                        </option> : this.state.categories.map((item : any) => (
+                                            <option
+                                                selected={item.categoryId ==
+                                                this.state.categoryId ? true : false}
+                                                key={item.categoryId} value={item.categoryId}
+                                            >
+                                                {item.categoryName}
+                                            </option>
+                                        ))
+                                }*/}
+                                <option selected={this.state.product.category.status == "inactive" ? true : false}
+                                        disabled={this.state.product.category.status == "active" ? true : false}
+                                        key={this.state.categoryId}
+                                        value={this.state.categoryId}
+                                >
+                                    {this.state.product.category.status == "inactive" ? this.state.product.category.categoryName :
+                                        "Select..."}
+                                </option>
+                                {this.state.product.category.status == "inactive" ? this.state.categories.map((item : any) => (
+                                        <option
+                                            selected={item.categoryId ==
+                                            this.state.categoryId ? true : false}
+                                            key={item.categoryId} value={item.categoryId}
+                                        >
+                                            {item.categoryName}
+                                        </option>
+                                    )) : ""
+                                }
+
+                                {/*for active category*/}
+                                {
+                                    this.state.product.category.status == "active" ?
+                                        this.state.categories.map((item : any) => (
+                                            <option
+                                                selected={item.categoryId ==
+                                                this.state.categoryId ? true : false}
+                                                key={item.categoryId} value={item.categoryId}
+                                            >
+                                                {item.categoryName}
+                                            </option>
+                                        )) : ""
                                 }
                             </select>
                         <br/>
