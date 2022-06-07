@@ -5,6 +5,7 @@ import {HiInformationCircle} from "react-icons/hi";
 import axios from "axios";
 import {ImHeart} from "react-icons/im";
 
+
 class CustomerHome extends Component<any, any>{
     constructor(props:any) {
         super(props);
@@ -57,7 +58,7 @@ class CustomerHome extends Component<any, any>{
                             <Card.Img variant="top" src={"data:image/png;base64,"+item.thumbnail} style={{height: "180px", width: "100%"}}/>
                             <Card.Body>
                                 <Card.Title>{item.productName}</Card.Title>
-                                <Card.Text>Lorem Ipsum Telle Amore</Card.Text>
+                                {/*<Card.Text>Lorem Ipsum Telle Amore</Card.Text>*/}
                                 {/*<Button variant="primary" href=''>Edit</Button>*/}
                                 <Link to={`/product/productDetails/`+item.productId}>
 
@@ -78,13 +79,13 @@ class CustomerHome extends Component<any, any>{
                             <img
                                 className="d-block w-100"
                                 /*src="holder.js/800x400?text=First slide&bg=373940"*/
-                                src="https://www.w3schools.com/html/img_girl.jpg"
+                                src={require('./images/Professional-E-Commerce-Shoes-Banner-Design.jpg')}
                                 style={{height: "365px", width: "100%"}}
                                 alt="First slide"
                             />
                             <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                <h3>Choose you new Sports Shoe for Eid!!!</h3>
+                                <p>Fitness!! Sports!! Jogging and many MORE</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
@@ -97,22 +98,21 @@ class CustomerHome extends Component<any, any>{
                             />
 
                             <Carousel.Caption>
-                                <h3>Second slide label</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <h3>Winter Sale</h3>
+                                <p>Winter is here. So do the winter cloths!</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
                                 className="d-block w-100"
-                                /*src="holder.js/800x400?text=Third slide&bg=20232a"*/
-                                src="https://www.w3schools.com/html/img_girl.jpg"
+                                src={require('./images/headphone.png')}
                                 style={{height: "365px", width: "100%"}}
                                 alt="Third slide"
                             />
 
                             <Carousel.Caption>
-                                <h3>Third slide label</h3>
-                                <p>Praesent commodore cursus magna, vel scelerisque nisl consectetur.</p>
+                                <h3>Gaming Headphone!!!</h3>
+                                <p>Get 35% OFF and get you new gaming headphone!!!</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>

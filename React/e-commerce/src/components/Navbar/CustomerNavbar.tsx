@@ -44,7 +44,7 @@ export const CustomerNavbar = () => {
                                         </Link>
                                     </div>
 
-                                    <NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>
+                                    {/*<NavDropdown.Item href="#action/3.3">My Reviews <MdReviews/> </NavDropdown.Item>*/}
 
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="/logout">Log Out <HiOutlineLogout style={{color:"red"}}/></NavDropdown.Item>
