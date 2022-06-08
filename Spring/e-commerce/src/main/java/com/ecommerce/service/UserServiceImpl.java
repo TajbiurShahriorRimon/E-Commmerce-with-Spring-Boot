@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
 		//user.setStatus("inactive");
-		user.setStatus("active");
+		user.setStatus("inactive");
 		userDao.save(user);
 		
 		return user;
