@@ -4,6 +4,7 @@ import { Rating } from 'react-simple-star-rating';
 import {Link} from "react-router-dom";
 import axios from "axios";
 import base_url from "../../api/bootapi";
+import un_auth from "../../unAuthRedirect/unAuth";
 
 class AddProductReview extends Component<any, any>{
     state = {
@@ -22,7 +23,21 @@ class AddProductReview extends Component<any, any>{
             product: {
                 productId: window.location.pathname.split("/").pop()
             }
-        }
+        },
+
+        result: {
+            productName: "",
+            price: "",
+            thumbnail: "",
+            description: "",
+            status: "",
+            category: { //another object
+                categoryName: "",
+            },
+            vendor: {
+                shopName: "",
+            }
+        },
     }
 
     addRating = (rate: number) => {
@@ -83,6 +98,55 @@ class AddProductReview extends Component<any, any>{
         }
     }
 
+    async componentDidMount() {
+        var prod_id = window.location.pathname.split("/").pop();
+        if(localStorage.getItem("userId_session") != null) {
+            var customer_id = localStorage.getItem("userId_session") //1; //session_userId
+            var resultData = await axios.get(`${base_url}review/checkCustomerReviewForProduct/${prod_id}/${customer_id}`)
+
+            //The following line executes if it is found that customer has given a review
+            if (resultData.status == 200) {
+                window.location.href = un_auth;
+            }
+            //the customer did not give a review
+            else { //status code is 204... No Content
+                //Now it has to be checked if the customer actually bought the product and got the delivery
+                var resultData = await axios.get(`${base_url}order/checkSold/${prod_id}/${customer_id}`);
+                console.log(resultData);
+                if (resultData.status == 200) {
+                    //The customer bought product but did not give a review
+                    /*if (resultData.data.length > 0) {
+                        this.setState({
+                            reviewBtn: (
+                                <Link to={"/product/customer/giveReview/" + id}
+                                      hidden={localStorage.getItem("userType_session") == "customer" ? false : true}
+                                >
+                                    <button className="btn-outline-info btn btn-outline-danger"
+                                            style={{float: "right"}}>
+                                        Give Review
+                                    </button>
+                                </Link>
+                            )
+                        })
+                    }*/
+                }
+            }
+        }
+
+        const resp = await axios.get(`${base_url}product/${prod_id}`);
+        console.log(resp);
+        if (resp.status === 200) {
+            this.setState({
+                result: resp.data,
+                loading: false,
+            })
+        }
+        //if the product does not exists then redirect to login page
+        else if(resp.status == 204){
+            window.location.href = un_auth;
+        }
+    }
+
     /*handleText = (e: any) => {
         //e.preventDefault();
         this.setState({
@@ -91,6 +155,8 @@ class AddProductReview extends Component<any, any>{
     }*/
 
     render() {
+        const imagePath = "https://www.w3schools.com/html/img_girl.jpg";
+        var thumb = "data:image/png;base64,"+this.state.result.thumbnail;
         return(
             <div className="container">
                 <div className="row">
@@ -101,7 +167,7 @@ class AddProductReview extends Component<any, any>{
                             <div className="row">
                                 <div className="col-md-1">
                                     <div className="form-group">
-                                        <img src="https://www.w3schools.com/html/img_girl.jpg" alt="test"
+                                        <img src={this.state.result.thumbnail == null ? imagePath : thumb}
                                              style={
                                                  {  height: 70,
                                                      width: 50
@@ -111,8 +177,8 @@ class AddProductReview extends Component<any, any>{
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <label htmlFor="">Jeans Chino Cut</label>
-                                    <br/> <Badge>Jeans</Badge>
+                                    <label htmlFor="">{this.state.result.productName}</label>
+                                    <br/> <Badge>{this.state.result.category.categoryName}</Badge>
                                 </div>
                                 <div className="col-md-4">
                                     <br/>

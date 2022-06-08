@@ -67,10 +67,9 @@ class EditProduct extends Component<any, any>{
         const resp = await axios.get(`${base_url}product/${id}`)
 
         console.log(resp.data);
-        /*if(resp.status != 200){
-            alert('not found')
+        if(resp.status == 204){
             window.location.href = "/login"
-        }*/
+        }
 
         if(resp.data.vendor.id != localStorage.getItem("userId_session")){
             alert('wrong product');
