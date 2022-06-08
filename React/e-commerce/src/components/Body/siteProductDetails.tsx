@@ -8,6 +8,7 @@ import StarRatings from 'react-star-ratings';
 import axios from "axios";
 import base_url from "../../api/bootapi";
 import {Link} from "react-router-dom";
+import un_auth from "../../unAuthRedirect/unAuth";
 
 class SiteProductDetails extends Component<any, any>{
     constructor(props : any) {
@@ -79,6 +80,11 @@ class SiteProductDetails extends Component<any, any>{
                 loading: false,
                 urlParameter: id
             })
+        }
+        //if the product does not exists then redirect to login page
+        else if(resp.status == 204){
+            alert("No product Found")
+            window.location.href = un_auth;
         }
 
         //Now we have to set the rating star

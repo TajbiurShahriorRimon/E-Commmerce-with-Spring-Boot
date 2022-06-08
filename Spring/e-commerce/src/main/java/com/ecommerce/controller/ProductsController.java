@@ -79,7 +79,8 @@ public class ProductsController {
 	public ResponseEntity<Products> getProduct(@PathVariable int id){
 		var data = productsService.getProductById(id);
 		if(data == null){
-			return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+			//return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(data, HttpStatus.NO_CONTENT);
 		}
 		return ResponseEntity.ok(productsService.getProductById(id));
 	}
