@@ -99,7 +99,7 @@ Spring Too Suite 4 has been used for working on Spring
 
   ![14](https://user-images.githubusercontent.com/60335321/224422444-b4963430-0c4e-4894-9871-27b5cc6a4a1c.png)
 
-15. <ins>Products by Category:</ins>
+15. <ins>Products by Category (Admin feature):</ins>
 
   ![15](https://user-images.githubusercontent.com/60335321/224422619-81715ab7-40bb-412a-8dd5-e8764c35444a.png)
 
