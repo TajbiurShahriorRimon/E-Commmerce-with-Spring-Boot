@@ -41,7 +41,7 @@ Spring Too Suite 4 has been used for working on Spring
 2. JWT token is generated and used for authentication 
 3. Gmail smtp has been used to send account verification links in mail
 
-##[To watch the video clip](https://tajbiurshahriorrimon.github.io/profile_site/)
+## [To watch the video clip](https://tajbiurshahriorrimon.github.io/profile_site/)
 
 ## Screenshots
 1.  <ins>Login Page:</ins>
